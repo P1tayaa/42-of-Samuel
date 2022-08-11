@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memset.c                                           :+:      :+:    :+:   */
+/*   ft_putendl.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/11 02:29:31 by marvin            #+#    #+#             */
-/*   Updated: 2022/08/11 02:29:31 by marvin           ###   ########.fr       */
+/*   Created: 2022/08/11 21:51:13 by sboulain          #+#    #+#             */
+/*   Updated: 2022/08/11 21:51:13 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "libft.h"
 
-void *ft_memset(void *s, int c, size_t n)
+void ft_putendl(char const *s)
 {
-	while (n != 0)
-	{
-		*(int *)s = c;
-		n--;
-	}
-	return (s);
+    ft_putstr(s);
+    ft_putchar('\n');
 }

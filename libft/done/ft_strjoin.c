@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/11 21:35:50 by sboulain          #+#    #+#             */
-/*   Updated: 2022/08/11 21:35:50 by sboulain         ###   ########.fr       */
+/*   Created: 2022/08/11 22:27:38 by sboulain          #+#    #+#             */
+/*   Updated: 2022/08/11 22:27:38 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t ft_strlen(const char *s)
+char * ft_strjoin(char const *s1, char const *s2)
 {
-    int i;
+	int size;
+	char    *str;
 
-    i = 0;
-    while (s[i] != '\0')
-        i++;
-    i--;
-    return (i);
+	size = ft_strlen(s1) + ft_strlen(s2);
+	str = ft_strnew(size);
+	ft_strcpy(str, s1);
+	ft_strcpy(&str[ft_strlen(s1) + 1], s2);
+	return (str);
 }

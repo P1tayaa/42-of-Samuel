@@ -1,13 +1,7 @@
 
-int ft_strlen(char *str)
-{
-    int i;
-    while (str[i] != '\0')
-        i++;
-    return (i);
-}
+#include "libft.h"
 
-char *strcat(char *dest, const char *src)
+char *ft_strcat(char *dest, const char *src)
 {
     int i;
     int j;
@@ -22,17 +16,3 @@ char *strcat(char *dest, const char *src)
     dest[j + i] = '\0';
     return (dest);
 }
-
-// #include <unistd.h>
-
-// int main(void)
-// {
-//     char    src[] = "test";
-//     char    dest[50] = "this is a ";
-
-//     write(1, dest, ft_strlen(dest));
-//     write(1, "\n", 1);
-//     strcat(dest, src);
-//     write(1, dest, ft_strlen(dest));
-//     return (0);
-// }
