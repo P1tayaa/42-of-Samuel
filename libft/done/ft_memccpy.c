@@ -1,5 +1,6 @@
 // #include <stdlib.h>
 // #include <unistd.h>
+#include <libft.h>
 
 void *memccpy(void *dest, const void *src, int c, size_t n)
 {
