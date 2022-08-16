@@ -60,35 +60,52 @@ char ** ft_strsplit(char const *s, char c)
 		// ft_putendl("");
 		// ft_putnbr(i);
 		// ft_putendl("");
-		if ((s[i] == c && s[i + 1] != c) || (s[i + 1] == '\0'))
-		{
-			number_of_char = 0;
-		}
 		if (((s[i] == c && s[i + 1] != c) || (s[i + 1] == '\0')) &&  i != 0)
-		{
+		{	
+			// ft_putstr("array_string[");
+			// ft_putnbr(counter_of_c);
+			// ft_putstr("][");
+			// ft_putnbr(number_of_char);
+			// ft_putstr("] = s[");
+			// ft_putnbr(i);
+			// ft_putendl("];");
 			array_string[counter_of_c][number_of_char] = '\0';
 			counter_of_c++;
 		}
-		if (s[i - 1] == c && s[i] == c)
+		if ((s[i] == c && s[i + 1] != c) || (s[i + 1] == '\0'))
 		{
-			number_of_char = 0;
+			number_of_char = -1;
 		}
+		// if (s[i - 1] == c && s[i] == c)
+		// {
+		// 	number_of_char = -1;
+		// }
 		if(s[i] != c)
 		{
-			ft_putnbr(number_of_char);
+			// ft_putstr("array_string[");
+			// ft_putnbr(counter_of_c);
+			// ft_putstr("][");
+			// ft_putnbr(number_of_char);
+			// ft_putstr("] = s[");
+			// ft_putnbr(i);
+			// ft_putendl("];");
+
 			array_string[counter_of_c][number_of_char] = s[i];
+			number_of_char++;
 		}
-		number_of_char++;
 		i++;
 	}
-	// ft_putstr("test");
+	array_string[counter_of_c][number_of_char] = '\0';
 
 	i = 0;
-	while (i != 7)
-	{
-		printf("%s\n", array_string[i]);
-		i++;
-	}
+	ft_putendl("test");
+
+	// while (i != 3)
+	// {
+	// 	ft_putendl("");
+	// 	ft_putendl(array_string[i]);
+	// 	i++;
+	// }
 
 	return (array_string);
 }
