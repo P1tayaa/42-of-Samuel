@@ -69,7 +69,7 @@ void test_puts_string(void)
 	ft_putendl("\n\nTEST putstr, putnbr, putendl");
 
 	ft_putstr("it shoud works since we are students of \0");
-	ft_putnbr(421);
+	ft_putnbr(42);
 	ft_putendl("");
 }
 
@@ -93,21 +93,35 @@ void test_strjoin(void)
 int main(void)
 {
 
-	test_itoa();
+	// test_itoa();
 
-	test_bzero();
+	// test_bzero();
 
-	test_strdup();
+	// test_strdup();
 
-	test_strcpy();
+	// test_strcpy();
 	
-	test_strcat();
+	// test_strcat();
 
-	test_puts_string();
+	// test_puts_string();
 
-	test_strnew();
+	// test_strnew();
 
-	test_strjoin();
+	// test_strjoin();
 
+	char **array_string;
+	char s[50] = "eaagt aeea gae eag aegera gage aeefa aw";
+	int i;
+
+	array_string = ft_strsplit(s, ' ');
+	i = 0;
+	// while (i != 7)
+	// {
+	// 	ft_putstr(array_string[i]);
+	// 	i++;
+	// }
+
+	free(array_string);
 	return (0);
+
 }

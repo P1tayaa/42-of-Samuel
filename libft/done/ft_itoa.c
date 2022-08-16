@@ -41,21 +41,20 @@ char    *ft_itoa(int n)
 	int     i;
 	int     isneg;
 
-	number = (char *)malloc(12 * sizeof(char));
 	i = 0;
 	isneg = 0;
 	if (n == -2147483648)
-	{
-		number = "-2147483648";
-		return (number);
-	}
+		return ("-2147483648");
+	if (n == 0)
+		return ("0");
+	number = (char *)malloc(12 * sizeof(char));
 	if (n < 0)
 	{
 		n = -n;
 		number[0] = '-';
 		isneg = 1;
 		i++;
-	}
+	}	
 	while(n != 0)
 	{
 		number[i] = '0' + (n % 10);
