@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 21:35:31 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/05 19:00:37 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/05 21:20:15 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,27 +146,8 @@ void test_isall(void)
 #include <stdlib.h>
 #include <string.h>
 
-int main(void)
+void test_memcpy(void)
 {
-
-	// test_itoa();
-
-	// test_bzero();
-
-	// test_strdup();
-
-	// test_strcpy();
-	
-	// test_strcat();
-
-	// test_puts_string();
-
-	// test_strnew();
-
-	// test_strjoin();
-
-	// test_isall();
-
 	int array [] = { 54, 85, 20, 63, 21 };
     int * copy = NULL;
     int length = sizeof( int ) * 5;
@@ -182,8 +163,39 @@ int main(void)
     printf( "\n" );
         
     free( copy );
-    
-    return EXIT_SUCCESS;
 
+}
+
+void test_atoi(void)
+{
+	ft_putendl("\n\nTEST atoi");
+	printf("%d\n", ft_atoi("-2147483648\0"));
+}
+
+int main(void)
+{
+
+	test_itoa();
+
+	test_bzero();
+
+	test_strdup();
+
+	test_strcpy();
+	
+	test_strcat();
+
+	test_puts_string();
+
+	test_strnew();
+
+	test_strjoin();
+
+	test_isall();
+
+	test_memcpy();
+
+	test_atoi();
+	
 	return (0);
 }
