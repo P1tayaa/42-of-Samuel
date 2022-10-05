@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 21:35:31 by sboulain          #+#    #+#             */
-/*   Updated: 2022/08/11 21:35:31 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/05 19:00:37 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,62 @@ void test_strjoin(void)
 	ft_putstr(str);
 }
 
+void test_isall(void)
+{
+	ft_putendl("\n\nTEST isall");
+	ft_putendl("(isdigit) should be true");
+	ft_putnbr(ft_isdigit('6'));
+	ft_putendl("");
+	ft_putendl("(isdigit) should be false");
+	ft_putnbr(ft_isdigit('a'));
+
+	ft_putendl("\n");
+	ft_putendl("(isupper) should be true");
+	ft_putnbr(ft_isupper('A'));
+	ft_putendl("");
+	ft_putendl("(isupper) should be false");
+	ft_putnbr(ft_isupper('a'));
+
+	ft_putendl("\n");
+	ft_putendl("(islower) should be true");
+	ft_putnbr(ft_islower('a'));
+	ft_putendl("");
+	ft_putendl("(islower) should be false");
+	ft_putnbr(ft_islower('A'));
+
+	ft_putendl("\n");
+	ft_putendl("(isalpha) should be true");
+	ft_putnbr(ft_isalpha('f'));
+	ft_putendl("");
+	ft_putendl("(isalpha) should be false");
+	ft_putnbr(ft_isalpha('5'));
+
+	ft_putendl("\n");
+	ft_putendl("(isalnum) should be true");
+	ft_putnbr(ft_isalnum('a'));
+	ft_putendl("");
+	ft_putendl("(isalnum) should be false");
+	ft_putnbr(ft_isalnum(' '));
+
+	ft_putendl("\n");
+	ft_putendl("(isascii) should be true");
+	ft_putnbr(ft_isascii(65));
+	ft_putendl("");
+	ft_putendl("(isascii) should be false");
+	ft_putnbr(ft_isascii(458));
+
+	ft_putendl("\n");
+	ft_putendl("(isprint) should be true");
+	ft_putnbr(ft_isprint(65));
+	ft_putendl("");
+	ft_putendl("(isprint) should be false");
+	ft_putnbr(ft_isprint(458));
+}
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 int main(void)
 {
 
@@ -109,19 +165,25 @@ int main(void)
 
 	// test_strjoin();
 
-	char **array_string;
-	char s[50] = "eaagt aeea gae eag aegera gage aeefa aw";
-	int i;
+	// test_isall();
 
-	array_string = ft_strsplit(s, ' ');
-	i = 0;
-	// while (i != 7)
-	// {
-	// 	ft_putstr(array_string[i]);
-	// 	i++;
-	// }
+	int array [] = { 54, 85, 20, 63, 21 };
+    int * copy = NULL;
+    int length = sizeof( int ) * 5;
+       
+    /* Memory allocation and copy */
+    copy = (int *) malloc( length );
+    ft_memcpy( copy, array, length );
+        
+    /* Display the copied values */
+    for( length=0; length<5; length++ ) {
+        printf( "%d ", copy[ length ] );
+    }
+    printf( "\n" );
+        
+    free( copy );
+    
+    return EXIT_SUCCESS;
 
-	free(array_string);
 	return (0);
-
 }

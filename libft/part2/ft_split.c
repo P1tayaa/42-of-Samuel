@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strsplit.c                                      :+:      :+:    :+:   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 22:36:55 by sboulain          #+#    #+#             */
-/*   Updated: 2022/08/11 22:36:55 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/05 18:28:50 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-char ** ft_strsplit(char const *s, char c)
+char ** ft_split(char const *s, char c)
 {
 	int i;
 	char **array_string;

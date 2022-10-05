@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 21:35:50 by sboulain          #+#    #+#             */
-/*   Updated: 2022/08/11 21:35:50 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/05 18:50:22 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,5 @@ size_t ft_strlen(const char *s)
     while (s[i] != '\0')
         i++;
     i--;
-    return (i);
+    return ((size_t)i);
 }

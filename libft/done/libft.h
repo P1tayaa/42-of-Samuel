@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 19:47:21 by sboulain          #+#    #+#             */
-/*   Updated: 2022/08/11 19:47:21 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/05 18:59:46 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,21 @@
 # define LIBFT_H
 #include <stddef.h>
 
-size_t  ft_strlen(const char *s);
+size_t	ft_strlen(const char *s);
+
+int ft_isdigit(int c);
+
+int ft_isupper(int c);
+
+int ft_islower(int c);
+
+int ft_isalpha(int c);
+
+int ft_isalnum(int c);
+
+int ft_isascii(int c);
+
+int ft_isprint(int c);
 
 char	*ft_itoa(int n);
 
@@ -28,18 +42,22 @@ char	*ft_strcpy(char *dest, const char *src);
 
 char	*ft_strdup(const char *s);
 
-void ft_putchar(char c);
+void    ft_putchar(char c);
 
-void ft_putstr(char const *s);
+void    ft_putstr(char const *s);
 
-void ft_putnbr(int n);
+void    ft_putnbr(int n);
 
-void ft_putendl(char const *s);
+void    ft_putendl(char const *s);
 
-char * ft_strnew(size_t size);
+char    *ft_strnew(size_t size);
 
-char * ft_strjoin(char const *s1, char const *s2);
+char    *ft_strjoin(char const *s1, char const *s2);
 
-char ** ft_strsplit(char const *s, char c);
+// char ** ft_split(char const *s, char c)
+
+void *ft_memccpy(void *pdest, const void *psrc, int c, size_t n);
+
+void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n);
 
 #endif
