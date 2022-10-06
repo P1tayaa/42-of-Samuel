@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 21:35:31 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/06 11:18:07 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/06 11:41:57 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,6 +173,36 @@ void test_atoi(void)
 	ft_putnbr(ft_atoi("-2147483648"));
 }
 
+void test_tolower_and_roupper(void)
+{
+	ft_putendl("\n\nTEST tolower and roupper");
+	ft_putstr("This should be a A: ");
+	ft_putchar(ft_tolower('A'));
+	ft_putendl("");
+
+	ft_putstr("This should be a a: ");
+	ft_putchar(ft_roupper('a'));
+	ft_putendl("");
+}
+
+void	test_calloc(void)
+{
+	int	*phrase;
+	int	i;
+
+	ft_putendl("\n\nTEST calloc");
+	phrase = (int *) ft_calloc(5, sizeof(int));
+	i = 0;
+	while(i < 5)
+	{
+		ft_putnbr(phrase[i]);
+		if (i != 4)
+			ft_putstr(", ");
+		i++;
+	}
+	free(phrase);
+}
+
 int main(void)
 {
 
@@ -197,6 +227,10 @@ int main(void)
 	test_memcpy();
 
 	test_atoi();
+
+	test_tolower_and_roupper();
+
+	test_calloc();
 	
 	return (0);
 }

@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memccpy.c                                       :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/05 18:46:43 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/06 11:28:43 by sboulain         ###   ########.fr       */
+/*   Created: 2022/10/06 11:27:25 by sboulain          #+#    #+#             */
+/*   Updated: 2022/10/06 11:58:04 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
-void *ft_memccpy(void *dest, const void *src, int c, size_t n)
+void	*ft_calloc(size_t count, size_t size)
 {
-	int		i;
+	void	*memory_alocated;
 	
-	i = 0;
-	while (n != 0)
-	{
-		*(char *) (dest + i) =  *(char *) (src + i);
-		i++;
-		if (*(char *) (src + i - 1) == c)
-		{
-			return ((void *)&dest[i]);
-		}
-		n--;
-	}
-	return 0;
+	memory_alocated = (void *)malloc(count * size);
+	if (!memory_alocated)
+		return (NULL);
+	ft_bzero(memory_alocated, count * size);
+	return (memory_alocated);
 }

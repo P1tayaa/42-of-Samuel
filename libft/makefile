@@ -1,11 +1,12 @@
 all:
-	gcc -Wextra -Werror -Wall -c ./done/ft_strlen.c
-	ar rc libft.a ./ft_strlen.o
+	gcc -Wextra -Werror -Wall -c ./done/*.c
+	ar rc libft.a ./*.o
 clean:
-	rm ./ft_strlen.o
+	rm ./*.o
 fclean: clean
 	rm libft.a
 TestPC:
 	gcc ./done/*.c
+	./a.out
 re: fclean all
 libft.a: all

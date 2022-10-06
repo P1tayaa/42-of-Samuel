@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 22:14:48 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/05 20:53:57 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/06 12:02:56 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 char * ft_strnew(size_t size)
 {
-	int 	i;
+	size_t 	i;
 	char	*str;
 
 	if (size <= 0)

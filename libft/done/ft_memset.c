@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 02:29:31 by marvin            #+#    #+#             */
-/*   Updated: 2022/10/05 17:55:54 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/06 12:09:42 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,16 @@
 
 void *ft_memset(void *b, int c, size_t n)
 {
+	size_t i;
+	unsigned char *ptr;
+
+	ptr = b;
+	i = 0;
 	while (n != 0)
 	{
-		*(char *)b = c;
+		(ptr)[i] = c;
 		n--;
+		i++;
 	}
 	return (b);
 }

@@ -6,13 +6,13 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 18:30:22 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/05 19:12:32 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/06 11:28:40 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
     int		i;
 	
