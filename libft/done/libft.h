@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 19:47:21 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/05 21:16:05 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/06 11:11:16 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,9 @@ void *ft_memccpy(void *pdest, const void *psrc, int c, size_t n);
 void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n);
 
 int ft_atoi(const char *str);
+
+int	ft_tolower(int c);
+
+int	ft_roupper(int c);
 
 #endif

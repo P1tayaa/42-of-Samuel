@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 21:35:31 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/05 21:20:15 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/06 11:18:07 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,15 +152,16 @@ void test_memcpy(void)
     int * copy = NULL;
     int length = sizeof( int ) * 5;
        
+	ft_putendl("\n\nTEST memcpy");
     /* Memory allocation and copy */
     copy = (int *) malloc( length );
     ft_memcpy( copy, array, length );
         
     /* Display the copied values */
     for( length=0; length<5; length++ ) {
-        printf( "%d ", copy[ length ] );
+        ft_putnbr(copy[ length ] );
+		ft_putstr(" ");
     }
-    printf( "\n" );
         
     free( copy );
 
@@ -169,7 +170,7 @@ void test_memcpy(void)
 void test_atoi(void)
 {
 	ft_putendl("\n\nTEST atoi");
-	printf("%d\n", ft_atoi("-2147483648\0"));
+	ft_putnbr(ft_atoi("-2147483648"));
 }
 
 int main(void)

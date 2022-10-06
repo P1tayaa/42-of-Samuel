@@ -1,30 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcat.c                                        :+:      :+:    :+:   */
+/*   ft_roupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/06 11:08:21 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/06 11:08:22 by sboulain         ###   ########.fr       */
+/*   Created: 2022/10/06 11:09:46 by sboulain          #+#    #+#             */
+/*   Updated: 2022/10/06 11:13:07 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "libft.h"
 
-char *ft_strcat(char *dest, const char *src)
+int	ft_roupper(int c)
 {
-    int i;
-    int j;
-
-    j = ft_strlen(dest);
-    i = 0;
-    while (src[i] != '\0')
-    {
-        dest[j + i] = src[i];
-        i++;
-    }
-    dest[j + i] = '\0';
-    return (dest);
+	if (ft_isupper(c))
+		c = c - 40;
+	return (c);
 }
