@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 21:35:31 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/06 11:41:57 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/06 13:42:55 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,6 +203,42 @@ void	test_calloc(void)
 	free(phrase);
 }
 
+void test_memmove(void)
+{
+
+	ft_putendl("\n\nTEST memmove");
+	// On crée une zone de mémoire de 10 entiers et contenant
+    // que neuf valeurs. La dixième est non utilisée (0).
+    int data[] = { 20, 30, 40, 50, 60, 70, 80, 90, 100, 0 };
+	int i;
+
+    // On affiche le contenu de la collection
+    while(i < 10) {
+        ft_putnbr(data[i]);
+		ft_putstr(", ");
+		i++;
+    }
+	ft_putendl( "" );  // Un retour à la ligne
+
+    // On décale les éléménts dans la collection ...
+    void * source = (void *) data;
+    void * destination = (void *) ( data + 1 );
+    size_t size = 10 * sizeof( int );
+    ft_memmove( destination, source, size );
+
+    // ... pour y insérer une nouvelle valeur en tête
+    data[0] = 10;
+
+    // On affiche le contenu de la collection
+	while(i < 10) {
+
+        ft_putnbr(data[i]);
+		ft_putstr(", ");
+		i++;
+    }
+    ft_putendl( "" );  // Un retour à la ligne
+}
+
 int main(void)
 {
 
@@ -231,6 +267,10 @@ int main(void)
 	test_tolower_and_roupper();
 
 	test_calloc();
+
+	test_memmove();
 	
+	ft_putendl("");
+
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 19:47:21 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/06 11:36:07 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/06 13:54:19 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,11 @@ int	ft_tolower(int c);
 int	ft_roupper(int c);
 
 void	*ft_calloc(size_t count, size_t size);
+
+void	*ft_memmove(void *dst, const void *src, size_t len);
+
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+
+size_t	strlcat(char * restrict dst, const char * restrict src, size_t dstsize);
 
 #endif
