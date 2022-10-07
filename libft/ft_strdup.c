@@ -1,40 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/06 11:59:11 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/06 13:34:13 by sboulain         ###   ########.fr       */
+/*   Created: 2022/08/11 21:35:35 by sboulain          #+#    #+#             */
+/*   Updated: 2022/10/07 22:16:52 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+char *ft_strdup(const char *s)
 {
-	size_t i;
-
-	if (!dst || !src)
-		return (NULL);
-	if (dst < src)
-	{
-		i = 0;
-		while (i < len)
-		{
-			*((char *)(dst + i)) = *((char *)(src + i));
-			i++;
-		}
-	}
-	else
-	{
-		i = len;
-		while (i != -1)
-		{
-			*((char *)(dst + i)) = *((char *)(src + i));
-			i--;
-		}
-	}
-	return (dst);
+    char *dupstr;
+    int i;
+    if(ft_strlen(s) == 0)
+        return(NULL);
+    dupstr = (char *)malloc(ft_strlen(s) * sizeof(char));
+    i = 0;
+    while(s[i] != '\0')
+    {
+        dupstr[i] = s[i];
+        i++;
+    }
+    dupstr[i] = '\0';
+    return (dupstr);
 }

@@ -1,18 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_islower.c                                       :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/05 17:54:01 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/05 18:02:36 by sboulain         ###   ########.fr       */
+/*   Created: 2022/10/07 17:14:09 by sboulain          #+#    #+#             */
+/*   Updated: 2022/10/07 21:45:16 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_islower(int c)
+char	*ft_strchr(const char *s, int c)
 {
-    return (c >= 'a' && c <= 'z');
+	int i;
+	char	*str;
+
+	str = (char *)s;
+	i = 0;
+	while ((unsigned long) i < ft_strlen(s) + 1)
+	{
+		if (str[i] == (char) c)
+			return(&(str[i]));
+		i++;
+	}
+	return (NULL);
 }

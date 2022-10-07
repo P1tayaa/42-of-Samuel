@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 19:47:21 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/06 13:54:19 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/07 21:38:20 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,12 @@ void	*ft_memmove(void *dst, const void *src, size_t len);
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 
-size_t	strlcat(char * restrict dst, const char * restrict src, size_t dstsize);
+size_t	ft_strlcat(char * restrict dst, const char * restrict src, size_t dstsize);
+
+char	*ft_strchr(const char *s, int c);
+
+char	*ft_strrchr(const char *s, int c);
+
+void	*ft_memchr(const void *s, int c, size_t n);
 
 #endif

@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_islower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/06 13:51:25 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/06 13:54:13 by sboulain         ###   ########.fr       */
+/*   Created: 2022/10/05 17:54:01 by sboulain          #+#    #+#             */
+/*   Updated: 2022/10/07 22:24:26 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	strlcat(char * restrict dst, const char * restrict src, size_t dstsize)
+int ft_islower(int c)
 {
-	ft_strlcpy(&dst[ft_strlen(dst)], src, dstsize - ft_strlen(dst))
-	return (dstsize);
+    return (c >= 'a' && c <= 'z');
 }
