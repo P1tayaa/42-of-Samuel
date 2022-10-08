@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_roupper.c                                       :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 11:09:46 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/06 11:13:07 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/08 19:21:43 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_roupper(int c)
+int	ft_toupper(int c)
 {
-	if (ft_isupper(c))
-		c = c - 40;
+	if (ft_islower(c))
+		c = c - 32;
 	return (c);
 }

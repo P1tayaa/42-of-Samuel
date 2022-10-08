@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:54:14 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/05 18:02:30 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/08 16:36:06 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,7 @@
 
 int ft_isprint(int c)
 {
-    return (c >= 40 && c <= 140);
+    //wunder why this does not work
+    // return ((c >= 40 && c <= 77) || (c >= 100 && c <= 176));
+    return (c >= 32 && c <= 126);
 }

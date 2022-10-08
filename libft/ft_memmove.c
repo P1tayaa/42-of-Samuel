@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 11:59:11 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/07 18:30:26 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/08 19:57:31 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,26 @@
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	size_t i;
+	int i;
 
 	if (!dst || !src)
 		return (NULL);
-	if (dst < src)
+	if (dst > src)
 	{
-		i = 0;
-		while (i < len)
+		i = (int)(len - 1);
+		while (i >= 0)
 		{
-			*((char *)(dst + i)) = *((char *)(src + i));
-			i++;
+			*(char *)(dst + i) = *(char *)(src + i);
+			i--;
 		}
 	}
 	else
 	{
-		i = len;
-		while (i >= 0)
+		i = 0;
+		while (i < (int)len)
 		{
-			*((char *)(dst + i)) = *((char *)(src + i));
-			i--;
+			*(char *)(dst + i) = *(char *)(src + i);
+			i++;
 		}
 	}
 	return (dst);

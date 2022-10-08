@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 19:47:21 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/07 21:38:20 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/08 19:21:58 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int ft_atoi(const char *str);
 
 int	ft_tolower(int c);
 
-int	ft_roupper(int c);
+int	ft_toupper(int c);
 
 void	*ft_calloc(size_t count, size_t size);
 

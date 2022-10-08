@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 11:02:57 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/06 11:13:12 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/08 16:47:16 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_tolower(int c)
 {
-	if (ft_islower(c))
-		c = c + 40;
+	if (ft_isupper(c))
+		c = c + 32;
 	return (c);
 }

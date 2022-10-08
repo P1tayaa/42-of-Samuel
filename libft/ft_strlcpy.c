@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 13:43:25 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/07 16:40:05 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/08 17:21:39 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,16 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	size_t i;
 
 	i = 0;
-	while (i < dstsize)
-	{
-		dst[i] = src[i];
-		i++;
-	}
 	if (dstsize != 0)
+	{
+		while ( src[i] && (i < dstsize - 1))
+		{
+			dst[i] = src[i];
+			i++;
+		}
 		dst[i] = '\0';
-	return(dstsize);
+	}
+	while(src[i])
+			i++;
+	return(i);
 }

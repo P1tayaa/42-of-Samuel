@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 19:23:21 by sboulain          #+#    #+#             */
-/*   Updated: 2022/08/11 19:23:21 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/08 20:44:56 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,10 @@ char    *ft_strrev_skip1(char * str, int isneg)
 	int     j;
 	char    temp;
 
+	i = 0;
 	if (isneg == 1)
 		i = 1;
-	if (isneg == 0)
-		i = 0;
-	j = ft_strlen(str);
+	j = ft_strlen(str) - 1;
 	while (j - i > 0)
 	{
 		temp = str[i];
@@ -35,6 +34,21 @@ char    *ft_strrev_skip1(char * str, int isneg)
 	return (str);
 }
 
+int how_many_char(int n)
+{
+	int i;
+
+	i = 0;
+	while(n != 0)
+	{
+		n = n / 10;
+		i++;
+	}
+	ft_putstr("number of char : ");
+	ft_putnbr(i);
+	return (i);
+}
+
 char    *ft_itoa(int n)
 {
 	char    *number;
@@ -42,19 +56,25 @@ char    *ft_itoa(int n)
 	int     isneg;
 
 	i = 0;
-	isneg = 0;
-	if (n == -2147483648)
-		return ("-2147483648");
-	if (n == 0)
-		return ("0");
-	number = (char *)malloc(12 * sizeof(char));
+	isneg = how_many_char(n);
 	if (n < 0)
 	{
 		n = -n;
-		number[0] = '-';
-		isneg = 1;
+		isneg++;
 		i++;
-	}	
+	}
+	number = (char *)malloc(isneg * sizeof(char));
+	if (!number)
+		return (NULL);
+	if (n == -2147483648)
+	{
+		number = "-2147483648";
+		return (number);
+	}
+	if (n == 0)
+		number[i] = '0';
+	if(isneg)
+		number[0] = '-';
 	while(n != 0)
 	{
 		number[i] = '0' + (n % 10);
