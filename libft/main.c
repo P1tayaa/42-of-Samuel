@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 21:35:31 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/08 20:27:39 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/10 13:21:25 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@
 void test_itoa(void)
 {
 	printf("TEST itoa\n");
-	int i = -2147483648;
-	printf("%s", ft_itoa(i));
+	int i = 47483648;
+	char	*str = ft_itoa(-2147483648);
+	printf("%s", str);
+	free(str);
 }
 
 void test_bzero(void)
@@ -170,7 +172,7 @@ void test_memcpy(void)
 void test_atoi(void)
 {
 	ft_putendl("\n\nTEST atoi");
-	ft_putnbr(ft_atoi("-2147483648"));
+	ft_putnbr(ft_atoi("0"));
 }
 
 void test_tolower_and_roupper(void)
@@ -261,7 +263,7 @@ void test_strchr_and_strrchr(void)
 	ft_putstr("original str is :");
 	ft_putendl(str);
 	ft_putstr("strchr str is :");
-	ft_putendl(ft_strchr(str, 'c'));
+	ft_putendl(ft_strchr(str, '\0'));
 	ft_putstr("strrchr str is :");
 	ft_putendl(ft_strrchr(str, 'c'));
 }

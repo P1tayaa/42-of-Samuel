@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 17:14:09 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/07 21:45:16 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/10 12:40:04 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_strchr(const char *s, int c)
 
 	str = (char *)s;
 	i = 0;
-	while ((unsigned long) i < ft_strlen(s) + 1)
+	while ((unsigned long)i < ft_strlen(s) + 1)
 	{
 		if (str[i] == (char) c)
 			return(&(str[i]));
