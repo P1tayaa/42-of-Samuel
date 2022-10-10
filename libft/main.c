@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 21:35:31 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/10 13:21:25 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/10 18:39:36 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void test_strjoin(void)
 {
 	char	*str;
 	ft_putendl("\n\nTEST strjoin");
-	str = ft_strjoin("2 + 2 =", " 4");
+	str = ft_strjoin("", "");
 	ft_putstr(str);
 }
 
@@ -172,7 +172,7 @@ void test_memcpy(void)
 void test_atoi(void)
 {
 	ft_putendl("\n\nTEST atoi");
-	ft_putnbr(ft_atoi("0"));
+	ft_putnbr(ft_atoi("\t\v\f\r\n \f-06050"));
 }
 
 void test_tolower_and_roupper(void)

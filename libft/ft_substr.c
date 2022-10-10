@@ -1,40 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/06 11:59:11 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/10 16:34:25 by sboulain         ###   ########.fr       */
+/*   Created: 2022/10/10 14:25:57 by sboulain          #+#    #+#             */
+/*   Updated: 2022/10/10 21:13:16 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	int i;
+	char			*str;
+	unsigned int	i;
+	unsigned int	j;
 
-	if (!dst && !src)
+	str = ft_strnew(len + 1);
+	if (!str || start >= ft_strlen(s))
 		return (NULL);
-	if (dst > src)
+	i = start;
+	j = 0;
+	while (j < (unsigned int) len && s[i])
 	{
-		i = (int)(len - 1);
-		while (i >= 0)
-		{
-			*(char *)(dst + i) = *(char *)(src + i);
-			i--;
-		}
+		str[j] = s[i];
+		i++;
+		j++;
 	}
-	else
-	{
-		i = 0;
-		while (i < (int)len)
-		{
-			*(char *)(dst + i) = *(char *)(src + i);
-			i++;
-		}
-	}
-	return (dst);
+	str[j] = '\0';
+	return (str);
 }

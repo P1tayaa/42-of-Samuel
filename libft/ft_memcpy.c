@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 18:30:22 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/08 19:20:52 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/10 16:47:24 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
     size_t	i;
 	
-	if(dst)
+	if(dst || src)
 	{
 		i = 0;
 		while (i < n)
 		{
-			*(char *) (dst + i) =  *(char *) (src + i);
+			((char *) dst) [i] =  ((char *) src)[i];
 			i++;
 		}
 	}

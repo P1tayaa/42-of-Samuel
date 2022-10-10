@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 21:35:35 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/08 20:32:39 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/10 16:23:14 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ char *ft_strdup(const char *s)
 	char	*dupstr;
 	int		i;
 	
-	if(!s)
-		return(NULL);
 	dupstr = (char *)malloc((ft_strlen(s) + 1) * sizeof(char));
 	if(!dupstr)
 		return(NULL);

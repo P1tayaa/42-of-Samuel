@@ -6,12 +6,11 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 21:50:17 by sboulain          #+#    #+#             */
-/*   Updated: 2022/08/11 21:50:17 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/10 16:04:44 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 void ft_putnbr(int n)
 {
