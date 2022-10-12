@@ -6,14 +6,14 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 21:46:11 by sboulain          #+#    #+#             */
-/*   Updated: 2022/08/11 21:46:11 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/12 15:54:59 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <unistd.h>
 
-void ft_putchar(char c)
+void	ft_putchar(char c)
 {
-    write(1, &c, 1);
+	write(1, &c, 1);
 }

@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 14:30:56 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/10 21:13:28 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/12 11:04:59 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-char	*ft_strtrim(char const *s1, char const *set)
+char*	ft_strtrim(char const *s1, char const *set)
 {
 	char			*str;
 	unsigned long	i;
@@ -91,10 +91,10 @@ char	*ft_strtrim(char const *s1, char const *set)
 		return (str);
 	}
 	i = 0;
-	while(i != (unsigned long) frontRemove)
+	while (i != (unsigned long) frontRemove)
 		i++;
 	j = 0;
-	while(i < ft_strlen(s1) - backRemove)
+	while (i < ft_strlen(s1) - backRemove)
 	{
 		str[j] = s1[i];
 		j++;

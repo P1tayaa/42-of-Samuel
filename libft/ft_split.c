@@ -1,40 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/06 11:59:11 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/12 11:37:10 by sboulain         ###   ########.fr       */
+/*   Created: 2022/08/11 22:36:55 by sboulain          #+#    #+#             */
+/*   Updated: 2022/10/12 21:23:08 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
+#include <stdio.h>
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+char	**ft_split(char const *s, char c)
 {
-	int	i;
+	
+	return (array_string);
+}
 
-	if (!dst && !src)
-		return (NULL);
-	if (dst > src)
+int	main(void)
+{
+	char	**strs;
+	char	*str;
+	char	charslip;
+	int		i;
+
+	str = "ohaefhoaefaf hoaefioaf   oawiahfoef oaeh ofaw";
+	strs = ft_split(str, ' ');
+	i = 0;
+	ft_putendl("eesgge");
+	while (i < 7)
 	{
-		i = (int)(len - 1);
-		while (i >= 0)
-		{
-			((char *)dst)[i] = ((char *)src)[i];
-			i--;
-		}
+		ft_putstr(strs[i]);
+		i++;
 	}
-	else
-	{
-		i = 0;
-		while (i < (int)len)
-		{
-			((char *)dst)[i] = ((char *)src)[i];
-			i++;
-		}
-	}
-	return (dst);
+	free(strs);
 }
