@@ -12,6 +12,7 @@
 
 #ifndef LIBFT_H
 # define LIBFT_H
+
 #include <stddef.h>
 
 size_t	ft_strlen(const char *s);
@@ -52,7 +53,7 @@ void	ft_putendl(char const *s);
 
 char	*ft_strnew(size_t size);
 
-char ** ft_split(char const *s, char c);
+char **ft_split(char const *s, char c);
 
 void	*ft_memccpy(void *pdest, const void *psrc, int c, size_t n);
 
@@ -102,5 +103,17 @@ void	ft_putnbr_fd(int n, int fd);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
+
+char	**ft_split(char const *s, char c);
+
+typedef struct s_list
+{
+	void			*content;
+	struct s_list	*next;
+}					t_list;
+
+t_list	*ft_lstnew(void *content);
+
+
 
 #endif

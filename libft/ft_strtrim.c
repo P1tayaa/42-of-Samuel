@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 14:30:56 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/12 11:04:59 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/13 18:12:33 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char*	ft_strtrim(char const *s1, char const *set)
 	while (i < ft_strlen(s1))
 	{
 		j = 0;
-		while(j < ft_strlen(set))
+		while (j < ft_strlen(set))
 		{
 			if (s1[i] == set[j])
 			{
@@ -85,11 +85,11 @@ char*	ft_strtrim(char const *s1, char const *set)
 	str = ft_strnew(ft_strlen(s1) - frontRemove - backRemove + 1);
 	if (!str)
 		return (NULL);
-	if (frontRemove + backRemove == ft_strlen(s1))
-	{
-		str[0] = '\0';
-		return (str);
-	}
+	// if (frontRemove + backRemove == ft_strlen(s1))
+	// {
+	// 	str[0] = '\0';
+	// 	return (str);
+	// }
 	i = 0;
 	while (i != (unsigned long) frontRemove)
 		i++;
