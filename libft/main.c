@@ -1,14 +1,14 @@
-// /* ************************************************************************** */
-// /*                                                                            */
-// /*                                                        :::      ::::::::   */
-// /*   main.c                                             :+:      :+:    :+:   */
-// /*                                                    +:+ +:+         +:+     */
-// /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
-// /*                                                +#+#+#+#+#+   +#+           */
-// /*   Created: 2022/08/11 21:35:31 by sboulain          #+#    #+#             */
-// /*   Updated: 2022/10/12 17:27:17 by sboulain         ###   ########.fr       */
-// /*                                                                            */
-// /* ************************************************************************** */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/11 21:35:31 by sboulain          #+#    #+#             */
+/*   Updated: 2022/10/14 18:25:06 by sboulain         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 // #include <stdio.h>
 // #include <unistd.h>
@@ -153,18 +153,18 @@
 // 	int array [] = { 54, 85, 20, 63, 21 };
 //     int * copy = NULL;
 //     int length = sizeof( int ) * 5;
-       
+
 // 	ft_putendl("\n\nTEST memcpy");
 //     /* Memory allocation and copy */
 //     copy = (int *) malloc( length );
 //     ft_memcpy( copy, array, length );
-        
+
 //     /* Display the copied values */
 //     for( length=0; length<5; length++ ) {
 //         ft_putnbr(copy[ length ] );
 // 		ft_putstr(" ");
 //     }
-        
+
 //     free( copy );
 
 // }
@@ -227,7 +227,7 @@
 //     void * destination = (void *) ( data + 1 );
 //     size_t size = 10 * sizeof( int );
 //     ft_memmove( destination, source, size );
-    
+
 // 	// ... pour y insérer une nouvelle valeur en tête
 //     data[0] = 10;
 // 	i = 0;

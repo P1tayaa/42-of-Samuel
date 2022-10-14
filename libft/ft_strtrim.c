@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 14:30:56 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/13 19:13:05 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/14 18:47:20 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,11 @@ char*	ft_strtrim(char const *s1, char const *set)
 	i = 0;
 	if (!s1)
 		return(NULL);
+	if (!set || set[0] == '\0')
+		return(ft_strdup(s1));
 	if (s1[0] == '\0' && set[0] == '\0')
 	{
-		str = ft_strnew(1);
-		if (!str)
-			return (NULL);
-		// str[0] = '\0';
-		return (str);
+		return (ft_strdup(""));
 	}
 	while (i < ft_strlen(s1))
 	{
@@ -76,20 +74,11 @@ char*	ft_strtrim(char const *s1, char const *set)
 	//all good so far
 	if (frontRemove == ft_strlen(s1))
 	{
-		str = ft_strnew(1);
-		if (!str)
-			return (NULL);
-		// str[0] = '\0';
-		return (str);
+		return (ft_strdup(""));
 	}
-	str = ft_strnew(ft_strlen(s1) - frontRemove - backRemove + 1);
+	str = ft_calloc(ft_strlen(s1) - frontRemove - backRemove + 1, 1);
 	if (!str)
 		return (NULL);
-	// if (frontRemove + backRemove == ft_strlen(s1))
-	// {
-	// 	str[0] = '\0';
-	// 	return (str);
-	// }
 	i = 0;
 	while (i != (unsigned long) frontRemove)
 		i++;
@@ -110,7 +99,7 @@ char*	ft_strtrim(char const *s1, char const *set)
 // 	char set[] = "";
 // 	char *str2;
 
-// 	str2 = ft_strtrim(str1, set);
+// 	str2 = ft_strtrim(" . abcd", " ");
 // 	printf("%s\n", str2);
 // 	free (str2);
 // }
