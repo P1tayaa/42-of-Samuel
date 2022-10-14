@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 15:53:24 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/12 16:38:56 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/14 18:15:42 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	ft_putnbr_fd_second(int n, int fd)
 		ft_putchar_fd((n % 10) + '0', fd);
 	}
 }
-
 
 void	ft_putnbr_fd(int n, int fd)
 {

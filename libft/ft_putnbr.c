@@ -6,13 +6,13 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 21:50:17 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/10 16:04:44 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/14 18:04:09 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_putnbr(int n)
+void	ft_putnbr(int n)
 {
-    ft_putstr(ft_itoa(n));
+	ft_putstr(ft_itoa(n));
 }

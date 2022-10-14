@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 02:29:31 by marvin            #+#    #+#             */
-/*   Updated: 2022/10/06 12:09:42 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/14 18:03:35 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 // #include <string.h>
 
-void *ft_memset(void *b, int c, size_t n)
+void	*ft_memset(void *b, int c, size_t n)
 {
-	size_t i;
-	unsigned char *ptr;
+	size_t			i;
+	unsigned char	*ptr;
 
 	ptr = b;
 	i = 0;
@@ -33,7 +33,7 @@ void *ft_memset(void *b, int c, size_t n)
 
 // int main(void)
 // {
-// 	int c = 66;
+// 	int c = 66;q
 // 	int b = 6;
 // 	ft_memset(&b, 66, 4);
 // 	printf("%d\n", b);

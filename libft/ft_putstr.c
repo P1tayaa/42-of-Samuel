@@ -6,13 +6,13 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 21:48:54 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/10 21:13:10 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/14 18:15:29 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_putstr(char const *s)
+void	ft_putstr(char const *s)
 {
 	int	i;
 

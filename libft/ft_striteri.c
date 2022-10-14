@@ -6,11 +6,11 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 17:17:40 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/12 17:22:48 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/14 18:09:46 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
+#include "libft.h"
 
 void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {

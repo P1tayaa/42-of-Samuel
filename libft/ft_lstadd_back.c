@@ -1,16 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdel.c                                        :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/11 22:24:56 by sboulain          #+#    #+#             */
-/*   Updated: 2022/08/11 22:24:56 by sboulain         ###   ########.fr       */
+/*   Created: 2022/10/14 16:39:37 by sboulain          #+#    #+#             */
+/*   Updated: 2022/10/14 18:00:13 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void ft_strdel(char **as);
+#include "libft.h"
+
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-    
+	if (lst)
+	{
+		if (*lst)
+		{
+			if ((*lst)-> next)
+				ft_lstadd_back (&((*lst)-> next), new);
+			else
+				(*lst)-> next = new;
+		}
+		else
+			*lst = new;
+	}
 }
