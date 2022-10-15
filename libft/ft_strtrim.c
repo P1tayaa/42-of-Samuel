@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 14:30:56 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/14 18:47:20 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/15 20:42:33 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,11 @@ char*	ft_strtrim(char const *s1, char const *set)
 	backRemove = 0;
 	i = 0;
 	if (!s1)
-		return(NULL);
+		return (NULL);
 	if (!set || set[0] == '\0')
-		return(ft_strdup(s1));
+		return (ft_strdup(s1));
 	if (s1[0] == '\0' && set[0] == '\0')
-	{
-		return (ft_strdup(""));
-	}
+		return (ft_strdup("\0"));
 	while (i < ft_strlen(s1))
 	{
 		j = 0;
@@ -73,9 +71,7 @@ char*	ft_strtrim(char const *s1, char const *set)
 	}
 	//all good so far
 	if (frontRemove == ft_strlen(s1))
-	{
-		return (ft_strdup(""));
-	}
+		return (ft_strdup("\0"));
 	str = ft_calloc(ft_strlen(s1) - frontRemove - backRemove + 1, 1);
 	if (!str)
 		return (NULL);
@@ -89,7 +85,7 @@ char*	ft_strtrim(char const *s1, char const *set)
 		j++;
 		i++;
 	}
-	str[i] = '\0';
+	str[j] = '\0';
 	return (str);
 }
 
