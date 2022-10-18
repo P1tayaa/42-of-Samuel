@@ -6,11 +6,18 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 14:25:57 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/15 19:22:21 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/17 22:10:45 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+void	do_stuffs(char *str, char const *s, unsigned int *i, unsigned int *j)
+{
+		str[*j] = s[*i];
+		*i = *i + 1;
+		*j = *j + 1;
+}
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
@@ -34,11 +41,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	i = start;
 	j = 0;
 	while (j < (unsigned int) len)
-	{
-		str[j] = s[i];
-		i++;
-		j++;
-	}
+		do_stuffs(str, s, &i, &j);
 	str[j] = '\0';
 	return (str);
 }
