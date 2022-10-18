@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/17 22:34:27 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/18 19:09:06 by sboulain         ###   ########.fr       */
+/*   Created: 2022/10/18 23:30:51 by sboulain          #+#    #+#             */
+/*   Updated: 2022/10/18 23:32:15 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdio.h>
+#ifndef GET_NEXT_LINE.H
+# define GET_NEXT_LINE.H
+#endif
 
-int	main(void)
-{
-	printf("%'d", -2147483647);
-}
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1000
+# endif
 
-// int	ft_printf(const char *str, ...)
-// {
-	
-// }
