@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/18 23:30:51 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/24 17:48:28 by sboulain         ###   ########.fr       */
+/*   Created: 2022/10/12 16:44:40 by sboulain          #+#    #+#             */
+/*   Updated: 2022/10/14 18:10:34 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef GET_NEXT_LINE_H
-#  define GET_NEXT_LINE_H
+#include "libft.h"
 
-# endif
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+{
+	size_t	i;
+	char	*str;
 
-
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 20
-
-#endif
-
+	str = ft_strdup(s);
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (s[i] != '\0')
+	{
+		str[i] = (*f)(i, str[i]);
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
+}

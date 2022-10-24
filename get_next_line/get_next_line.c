@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 19:19:44 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/21 21:22:08 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/24 18:10:58 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ char	*strjoin_an_malloc(char *s1, char *s2)
 char	*get_next_line(int fd)
 {
 	char			*char_reading;
-	char			*char_read;
+	static char		*char_read;
 	char			*return_line;
 	size_t			number_char_read;
 	int				number_of_line_looking;
@@ -119,7 +119,7 @@ char	*get_next_line(int fd)
 	while(number_char_read != 0)
 	{
 		// read(fd, char_read, BUFFER_SIZE);
-		number_char_read = read(fd, char_reading, BUFFER_SIZE) != 0;
+		number_char_read = read(fd, char_reading, BUFFER_SIZE);
 		char_read = strjoin_an_malloc(char_read, char_reading);
 		if(find_new_line(char_read, number_of_line_looking))
 		{

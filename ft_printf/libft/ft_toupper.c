@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/18 23:30:51 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/24 17:48:28 by sboulain         ###   ########.fr       */
+/*   Created: 2022/10/06 11:09:46 by sboulain          #+#    #+#             */
+/*   Updated: 2022/10/14 18:11:19 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef GET_NEXT_LINE_H
-#  define GET_NEXT_LINE_H
+#include "libft.h"
 
-# endif
-
-
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 20
-
-#endif
-
+int	ft_toupper(int c)
+{
+	if (ft_islower(c))
+		c = c - 32;
+	return (c);
+}

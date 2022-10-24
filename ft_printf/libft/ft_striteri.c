@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/18 23:30:51 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/24 17:48:28 by sboulain         ###   ########.fr       */
+/*   Created: 2022/10/12 17:17:40 by sboulain          #+#    #+#             */
+/*   Updated: 2022/10/14 18:09:46 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef GET_NEXT_LINE_H
-#  define GET_NEXT_LINE_H
+#include "libft.h"
 
-# endif
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
+{
+	int	i;
 
-
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 20
-
-#endif
-
+	i = 0;
+	while (s[i] != '\0')
+	{
+		(*f)(i, &s[i]);
+		i++;
+	}
+}

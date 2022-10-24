@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/18 23:30:51 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/24 17:48:28 by sboulain         ###   ########.fr       */
+/*   Created: 2022/10/06 11:27:25 by sboulain          #+#    #+#             */
+/*   Updated: 2022/10/17 18:32:22 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef GET_NEXT_LINE_H
-#  define GET_NEXT_LINE_H
+#include "libft.h"
+#include <stdlib.h>
 
-# endif
+void	*ft_calloc(size_t count, size_t size)
+{
+	void	*memory_alocated;
 
-
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 20
-
-#endif
-
+	memory_alocated = (void *)malloc(count * size);
+	if (!memory_alocated)
+		return (NULL);
+	ft_bzero(memory_alocated, count * size);
+	return (memory_alocated);
+}

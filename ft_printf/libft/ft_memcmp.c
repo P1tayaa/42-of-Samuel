@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/18 23:30:51 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/24 17:48:28 by sboulain         ###   ########.fr       */
+/*   Created: 2022/10/10 16:03:38 by sboulain          #+#    #+#             */
+/*   Updated: 2022/10/14 18:17:37 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef GET_NEXT_LINE_H
-#  define GET_NEXT_LINE_H
+#include "libft.h"
 
-# endif
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
+{
+	size_t	i;
 
-
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 20
-
-#endif
-
+	i = 0;
+	while (i < n)
+	{
+		if (((unsigned char *)s1)[i] != ((unsigned char *)s2)[i])
+			return (((unsigned char *)s1)[i] - ((unsigned char *)s2)[i]);
+		i++;
+	}
+	return (0);
+}

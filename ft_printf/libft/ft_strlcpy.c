@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/18 23:30:51 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/24 17:48:28 by sboulain         ###   ########.fr       */
+/*   Created: 2022/10/06 13:43:25 by sboulain          #+#    #+#             */
+/*   Updated: 2022/10/17 21:59:38 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef GET_NEXT_LINE_H
-#  define GET_NEXT_LINE_H
+#include "libft.h"
 
-# endif
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+{
+	size_t	i;
 
-
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 20
-
-#endif
-
+	i = 0;
+	if (dstsize != 0)
+	{
+		while (src[i] && (i < dstsize - 1))
+		{
+			dst[i] = src[i];
+			i++;
+		}
+		dst[i] = '\0';
+	}
+	while (src[i])
+			i++;
+	return (i);
+}

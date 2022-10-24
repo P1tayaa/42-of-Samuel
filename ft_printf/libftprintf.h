@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   libftprintf.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/18 23:30:51 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/24 17:48:28 by sboulain         ###   ########.fr       */
+/*   Created: 2022/10/21 23:20:50 by sboulain          #+#    #+#             */
+/*   Updated: 2022/10/24 20:04:59 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef GET_NEXT_LINE_H
-#  define GET_NEXT_LINE_H
+#ifndef LIBFTPRINTF_H
+# define LIBFTPRINTF_H
 
-# endif
+void	ft_putchar(char c);
 
+void	ft_putstr(char const *s);
 
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 20
+int    ft_printf(const char *input, ...);
 
 #endif
-
