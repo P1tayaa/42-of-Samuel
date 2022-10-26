@@ -6,14 +6,13 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 20:01:32 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/24 20:02:59 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/26 17:32:32 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
 
-int main(void)
-{
-	ft_printf("1234%%__%u\n", 6464646464461);
-	// ft_printf()
-}
+// int main(void)
+// {
+// 	ft_printf("1234%%__%u\n", 6464646464461);
+// 	// ft_printf()
+// }
