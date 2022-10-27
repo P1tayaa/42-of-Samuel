@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 22:36:55 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/27 12:49:49 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/27 19:22:35 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-char	**malloc_error_free(char **strs)
+char	**malloc_error_free(char **strs, unsigned int size_c)
 {
 	size_t	i;
 
 	i = 0;
-	while (strs[i])
+	while (i < size_c)
 	{
 		free(strs[i]);
 		i++;
@@ -50,7 +50,7 @@ unsigned int	get_work_count(char const *s, char c)
 		}
 		i++;
 	}
-	if (s[i - 1] != c)
+	if (s[i - 1] != c && i != 0)
 		number_of_words++;
 	return (number_of_words);
 }
@@ -97,7 +97,7 @@ char	**ft_split(char const *s, char c)
 			break ;
 		array_string[size_c] = (char *)malloc(index_end_word(s, c, i) + 1);
 		if (!array_string[size_c])
-			return (malloc_error_free(array_string));
+			return (malloc_error_free(array_string, size_c));
 		ft_strlcpy(array_string[size_c], &s[i], index_end_word(s, c, i) + 1);
 		do_stuff(&size_c, s, &c, &i);
 	}

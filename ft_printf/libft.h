@@ -43,9 +43,9 @@ char	*ft_strcpy(char *dest, const char *src);
 
 char	*ft_strdup(const char *s);
 
-void	ft_putchar(char c);
+int		ft_putchar(char c);
 
-void	ft_putstr(char const *s);
+int		ft_putstr(char const *s);
 
 void	ft_putnbr(int n);
 
@@ -104,6 +104,8 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 
 char	**ft_split(char const *s, char c);
+
+char	*ft_strrev(char *str);
 
 typedef struct s_list
 {

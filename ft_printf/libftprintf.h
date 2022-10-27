@@ -6,12 +6,13 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 23:20:50 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/27 13:18:34 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/27 19:52:16 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFTPRINTF_H
 # define LIBFTPRINTF_H
+# include <stdarg.h>
 
 int	ft_atoi_base(int number, int base, int isfirst, char lettle);
 

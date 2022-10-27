@@ -1,5 +1,5 @@
 
-SRCS			= ft_printf.c ft_printf_utils.c
+SRCS			= get_next_line.c
 
 OBJS			= $(SRCS:%.c=%.o)
 
@@ -7,21 +7,19 @@ CC				= gcc
 
 CFLAGS			= -Wall -Werror -Wextra -I.
 
-NAME			= libftprintf.a
+NAME			= get_next_line.a
 
 all:			$(NAME)
 
 $(NAME):
-				make -C ./libft
-				cp ./libft/libft.a ./libftprintf.a
-				$(CC) $(CFLAGS) -c $(SRCS)
+				$(CC) $(CFLAGS) -c -o $(OBJS) $(SRCS)
 				ar -rs $(NAME) $(OBJS)
 				@echo   :white_check_mark:Done!
 clean:
-				@rm -f $(OBJS) && make clean -C ./libft
+				@rm -f $(OBJS)
 
 fclean:			clean
-				@rm -f $(NAME) && make fclean -C ./libft
+				@rm -f $(NAME)
 
 re:				fclean $(NAME)
 
