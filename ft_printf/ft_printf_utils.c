@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 13:17:11 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/27 23:07:14 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/28 17:28:54 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,25 +105,25 @@ int	manage_print(char const *input, size_t *i, va_list arg)
 	int		numer_of_char_print;
 	char	*string;
 
-	*i = *i + 1;
+	*i = *i + 2;
 	numer_of_char_print = 0;
-	if (input[*i] == 'c')
+	if (input[*i - 1] == 'c')
 		return (ft_putchar(va_arg(arg, int)));
-	if (input[*i] == 's')
+	if (input[*i - 1] == 's')
 	{
 		string = va_arg(arg, char *);
 		if (string == NULL)
 			string = "(null)";
 		return (ft_putstr(string));
 	}
-	if (input[*i] == 'p')
+	if (input[*i - 1] == 'p')
 		return (ft_atoull_base(va_arg(arg,
 					unsigned long long), 16, 1, 'a'));
-	if (input[*i] == 'i' || input[*i] == 'd')
+	if (input[*i - 1] == 'i' || input[*i - 1] == 'd')
 		return (ft_itoa_base(va_arg(arg, int), 10, 1, 'A'));
-	if (input[*i] == 'u')
+	if (input[*i - 1] == 'u')
 		return (ft_atoui_base(va_arg(arg, unsigned int), 10, 1, 'A'));
-	if (input[*i] == 'X' || input[*i] == 'x')
-		return (ft_atoui_base(va_arg(arg, int), 16, 1, input[*i] - 23));
+	if (input[*i - 1] == 'X' || input[*i - 1] == 'x')
+		return (ft_atoui_base(va_arg(arg, int), 16, 1, input[*i - 1] - 23));
 	return (-1);
 }

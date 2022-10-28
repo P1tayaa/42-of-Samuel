@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 20:29:18 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/27 22:34:35 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/28 18:13:50 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,6 @@ char	*ft_strrev(char *str)
 		str[j] = temp;
 		i++;
 		j--:
+		}
+			return (str);
 	}
-	
-}

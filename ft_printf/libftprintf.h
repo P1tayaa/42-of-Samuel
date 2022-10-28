@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 23:20:50 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/27 19:52:16 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/28 18:06:25 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int	ft_atoull_base(unsigned long long number, unsigned long long base,
 
 int	manage_print(char const *input, size_t *i, va_list arg);
 
-int	get_purcentage_signs(char const *input, va_list arg);
+int	get_purcentage_signs(char const *input, va_list arg,
+		int numer_of_char_print, size_t i);
 
 int	ft_printf(const char *input, ...);
 
