@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 23:30:51 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/28 18:19:43 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/30 15:46:52 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 #  include <stddef.h>
 #  include <stdlib.h>
 #  include <unistd.h>
-# endif
+
+char	*get_next_line(int fd);
+#endif
 
 
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 20
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 20
 
 #endif
 

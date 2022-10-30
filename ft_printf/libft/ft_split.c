@@ -6,13 +6,12 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 22:36:55 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/18 23:34:53 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/30 12:15:34 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
-#include <stdio.h>
 
 char	**malloc_error_free(char **strs)
 {

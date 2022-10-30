@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 19:19:44 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/28 19:59:41 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/10/30 16:15:32 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,7 @@ char	*find_new_line(char * buffer, int number_line, size_t number_char_read, int
 		{
 			if (number_line == 0)
 				return(buffer);
-			// printf("%d %d\n", number_line, current_number_line);
 			if(current_number_line + 1 == number_line){
-				// printf("%d %d\n", number_line, current_number_line);
-				
 				return(start_current_line_pointer);
 				}
 			current_number_line++;
@@ -104,7 +101,6 @@ char	*strjoin_an_malloc(char *s1, char *s2)
 	if (s1)
 		free(s1);
 	str[size_of_s1] = '\0';
-	// printf("%s\n",str);
 	return (str);
 }
 
@@ -112,8 +108,8 @@ char	*strjoin_an_malloc(char *s1, char *s2)
 char	*get_next_line(int fd)
 {
 	char			*char_reading;
-	static char		*char_read;
-	size_t			number_char_read;
+	static char		*char_read = NULL;
+	int			number_char_read;
 	static int		number_of_line_looking = 0;
 	static int		didfinish = 0;
 	
@@ -121,19 +117,13 @@ char	*get_next_line(int fd)
 	
 	char_reading = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	i = 1;
-	// printf("runing");
 	number_char_read = read(fd, char_reading, BUFFER_SIZE);
 	if (number_char_read > 0)
 		didfinish = 0;
 	while(number_char_read > 0 && didfinish != 1)
 	{
-		// read(fd, char_read, BUFFER_SIZE);
 		char_reading[number_char_read] = '\0';
-		// if (number_char_read == 0 && find_new_line(char_read, number_of_line_looking, number_char_read, &didfinish) == NULL)
-		// 	break ;
-		// printf("%u\n\n", number_char_read);
 		char_read = strjoin_an_malloc(char_read, char_reading);
-		// printf("%s %d\n", char_read, number_of_line_looking);
 		if(find_new_line(char_read, number_of_line_looking, number_char_read, &didfinish) != NULL)
 		{
 			didfinish = 0;
@@ -142,40 +132,47 @@ char	*get_next_line(int fd)
 			return (copy_line(find_new_line(char_read, number_of_line_looking - 1, number_char_read, &didfinish)));
 		}
 		number_char_read = read(fd, char_reading, BUFFER_SIZE);
-		// return (NULL);
 	}
-	if(find_new_line(char_read, number_of_line_looking, number_char_read, &didfinish) != NULL)
-	{
-		didfinish = 0;
-		free(char_reading);
-		number_of_line_looking++;
-		return (copy_line(find_new_line(char_read, number_of_line_looking - 1, number_char_read, &didfinish)));
-	}
+	if (number_char_read != -1 && char_read != NULL)
+		if(find_new_line(char_read, number_of_line_looking, number_char_read, &didfinish) != NULL)
+		{
+			didfinish = 0;
+			free(char_reading);
+			number_of_line_looking++;
+			return (copy_line(find_new_line(char_read, number_of_line_looking - 1, number_char_read, &didfinish)));
+		}
+	free(char_reading);
 	// write(1, char_read, 10);
 	return (NULL);
 }
 
 
-// #include <fcntl.h>
+#include <fcntl.h>
+#include <stdio.h>
 
-// int main()
-// {
-// 	int fd;
-// 	char *str;
+int main()
+{
+	int fd;
+	char *str;
+	size_t i;
 	
-// 	fd = open("./file" , O_RDONLY);
-// 	// str = get_next_line(fd);
-// 	while (1 == 1)
-// 	{
-// 		str = get_next_line(fd);
-// 		if (str != NULL)
-// 		{
-// 			printf("%s", str);
-// 			free(str);
-// 		}
-// 	}
-// 	close(fd);
-// 	// system("leaks a.out");
-// 	return (0);
+	fd = open("./file" , O_RDONLY);
+	str = get_next_line(fd);
+	printf("%s", str);
+	free(str);
+	i  = 0;
+	while (i < 3)
+	{
+		str = get_next_line(fd);
+		if (str != NULL)
+		{
+			printf("%s", str);
+			free(str);
+		}
+		i++;
+	}
+	close(fd);
+	// system("leaks a.out");
+	return (0);
 
-// }
+}
