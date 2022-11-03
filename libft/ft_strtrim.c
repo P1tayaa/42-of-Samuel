@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 14:30:56 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/17 22:18:48 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/11/02 17:54:57 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-size_t	front_count(char const *s1,	char const *set, int did_find_front)
+static size_t	front_count(char const *s1,	char const *set, int did_find_front)
 {
 	unsigned long	i;
 	unsigned long	j;
@@ -43,7 +43,7 @@ size_t	front_count(char const *s1,	char const *set, int did_find_front)
 	return (front_remove);
 }
 
-size_t	back_count(char const *s1, char const *set, int did_find_back)
+static size_t	back_count(char const *s1, char const *set, int did_find_back)
 {
 	unsigned long	j;
 	unsigned long	i;
@@ -71,7 +71,7 @@ size_t	back_count(char const *s1, char const *set, int did_find_back)
 	return (back_remove);
 }
 
-char	*copy_to_string(char *str, char const *s1,
+static char	*copy_to_string(char *str, char const *s1,
 	unsigned long i, size_t back_remove)
 {
 	unsigned int	j;

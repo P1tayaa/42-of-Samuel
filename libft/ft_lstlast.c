@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 16:33:33 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/28 19:35:50 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/11/02 15:30:31 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_list	*ft_lstlast(t_list *lst)
 {
-	t_list *curent_list;
+	t_list	*curent_list;
 
 	if (lst == NULL)
 		return (NULL);

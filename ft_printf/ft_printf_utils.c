@@ -6,14 +6,14 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 13:17:11 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/28 17:28:54 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/11/02 18:01:45 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "libftprintf.h"
 
-int	ft_atoi_base_take_care_of_neg(int *number, int *numer_of_char_print)
+static int	ft_atoi_base_take_care_of_neg(int *number, int *numer_of_char_print)
 {
 	if (ft_putchar('-') == -1)
 		return (-1);
@@ -22,7 +22,7 @@ int	ft_atoi_base_take_care_of_neg(int *number, int *numer_of_char_print)
 	return (1);
 }
 
-int	ft_itoa_base(int number, int base, int isfirst, char lettle)
+static int	ft_itoa_base(int number, int base, int isfirst, char lettle)
 {
 	int	numer_of_char_print;
 	int	temp_num;
@@ -51,7 +51,7 @@ int	ft_itoa_base(int number, int base, int isfirst, char lettle)
 	return (numer_of_char_print + 1);
 }
 
-int	ft_atoui_base(unsigned int number, unsigned int base,
+static int	ft_atoui_base(unsigned int number, unsigned int base,
 	int isfirst, char lettle)
 {	
 	int	numer_of_char_print;
@@ -74,7 +74,7 @@ int	ft_atoui_base(unsigned int number, unsigned int base,
 	return (numer_of_char_print + 1);
 }
 
-int	ft_atoull_base(unsigned long long number, unsigned long long base,
+static int	ft_atoull_base(unsigned long long number, unsigned long long base,
 	int isfirst, char lettle)
 {	
 	int	numer_of_char_print;

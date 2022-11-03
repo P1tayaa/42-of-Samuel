@@ -6,13 +6,14 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 14:25:57 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/20 21:13:33 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/11/02 17:58:40 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	do_stuffs(char *str, char const *s, unsigned int *i, unsigned int *j)
+static void
+	do_stuffs(char *str, char const *s, unsigned int *i, unsigned int *j)
 {
 		str[*j] = s[*i];
 		*i = *i + 1;

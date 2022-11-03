@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 22:36:55 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/27 19:22:35 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/11/02 17:55:24 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-char	**malloc_error_free(char **strs, unsigned int size_c)
+static char	**malloc_error_free(char **strs, unsigned int size_c)
 {
 	size_t	i;
 
@@ -28,7 +28,7 @@ char	**malloc_error_free(char **strs, unsigned int size_c)
 	return (NULL);
 }
 
-unsigned int	get_work_count(char const *s, char c)
+static unsigned int	get_work_count(char const *s, char c)
 {
 	size_t			i;
 	unsigned int	number_of_words;
@@ -55,7 +55,7 @@ unsigned int	get_work_count(char const *s, char c)
 	return (number_of_words);
 }
 
-size_t	index_end_word(char const *s, char c, size_t i)
+static size_t	index_end_word(char const *s, char c, size_t i)
 {
 	size_t	starting_i;
 
@@ -69,7 +69,8 @@ size_t	index_end_word(char const *s, char c, size_t i)
 	return (i - starting_i);
 }
 
-void	do_stuff(unsigned int *size_count, char const *s, char *c, size_t *i)
+static void
+	do_stuff(unsigned int *size_count, char const *s, char *c, size_t *i)
 {
 	while (s[*i] != *c && s[*i])
 				*i = *i + 1;

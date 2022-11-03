@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 22:34:27 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/28 18:05:25 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/11/02 18:00:45 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <unistd.h>
 #include <stdarg.h>
 
-int	get_purcentage_signs(char const *input, va_list arg,
+static int	get_purcentage_signs(char const *input, va_list arg,
 	int numer_of_char_print, size_t i)
 {
 	int		is_bad;
@@ -45,7 +45,7 @@ int	get_purcentage_signs(char const *input, va_list arg,
 	return (numer_of_char_print);
 }
 
-int	start_get_purcentage_signs(char const *input, va_list arg)
+static int	start_get_purcentage_signs(char const *input, va_list arg)
 {
 	return (get_purcentage_signs(input, arg, 0, 0));
 }
@@ -63,8 +63,8 @@ int	ft_printf(const char *input, ...)
 
 // int main(void)
 // {
-// 	int p = 568487;
+// 	int p = 11355162;
 // 	void *pp = &p;
-// 	ft_printf("1234%%__%u\n", p);
-// 	printf("1234%%__%u\n", p);
+// 	ft_printf("1234%%__%X\n", p);
+// 	printf("1234%%__%X\n", p);
 // }

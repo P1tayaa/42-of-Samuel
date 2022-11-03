@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 19:15:32 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/27 19:27:22 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/11/02 15:35:34 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	size_t	j;
 	char	*haystack_free;
 
-	haystack_free = (char *)haystack;
 	i = 0;
-	if (!needle || needle[0] == '\0')
+	if (needle[0] == '\0')
 		return ((char *)haystack);
+	haystack_free = (char *)haystack;
 	while (haystack[i] != '\0' && i < len)
 	{
 		j = 0;

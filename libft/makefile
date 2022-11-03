@@ -12,20 +12,24 @@ OBJS_BONUS		= $(SRCS_BONUS:%.c=%.o)
 CC				= gcc
 CFLAGS			= -Wall -Werror -Wextra -I.
 
+ifdef WITH_BONUS
+REG_OBJS = $(OBJS) $(OBJS_BONUS)
+else
+REG_OBJS = $(OBJS)
+endif
+
 NAME			= libft.a
 all:			$(NAME)
-$(NAME):		$(OBJS)
-				ar -crs $(NAME) $(OBJS)
-				@echo   :white_check_mark:Done!
+$(NAME):		$(REG_OBJS)
+				@ar -crs $(NAME) $(REG_OBJS)
 clean:
+				@rm -f $(OBJS_BONUS)
 				@rm -f $(OBJS)
 fclean:			clean
 				@rm -f $(NAME)
-				@echo   Cleaned!
 re:             fclean $(NAME)
 
-bonus: 			$(NAME) $(OBJS_BONUS)
-				ar -crs $(NAME) $(OBJS_BONUS)
-				@echo   Done! Bonus
+bonus: 			
+				@make WITH_BONUS=1 all
 
 .PHONY:			all clean fclean re

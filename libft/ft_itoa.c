@@ -6,14 +6,14 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 19:23:21 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/13 17:48:25 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/11/02 17:53:24 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-char	*ft_strrev_skip1(char *str, int isneg)
+static char	*ft_strrev_skip1(char *str, int isneg)
 {
 	int		i;
 	int		j;
@@ -34,7 +34,7 @@ char	*ft_strrev_skip1(char *str, int isneg)
 	return (str);
 }
 
-char	*if_min_int(void)
+static char	*if_min_int(void)
 {
 	char	*number;
 
@@ -56,7 +56,7 @@ char	*if_min_int(void)
 	return (number);
 }
 
-int	how_many_char(int n)
+static int	how_many_char(int n)
 {
 	int	i;
 
@@ -73,7 +73,7 @@ int	how_many_char(int n)
 	return (i);
 }
 
-void	change_value_of_number(int n, char *number, int isneg, int *i)
+static void	change_value_of_number(int n, char *number, int isneg, int *i)
 {
 	if (n == 0)
 	{
