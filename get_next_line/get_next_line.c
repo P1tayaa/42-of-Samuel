@@ -6,22 +6,20 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 19:19:44 by sboulain          #+#    #+#             */
-/*   Updated: 2022/11/03 19:40:17 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/11/04 20:55:36 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*copy_line(const char *s)
+char	*copy_line(const char *s, int i)
 {
 	char	*dupstr;
-	int		i;
 	int		did_new_line;
 
-	did_new_line = 0;
 	if (!s)
 		return (NULL);
-	i = 0;
+	did_new_line = 0;
 	while (s[i] != '\n' && s[i] != '\0')
 		i++;
 	if (s[i] == '\n')
@@ -43,10 +41,11 @@ char	*copy_line(const char *s)
 	return (dupstr);
 }
 
-char	*find_new_line(char *buffer, int number_line, size_t number_char_read, int *didfinish)
+char	*find_new_line(
+		char *buffer, int number_line, size_t nb_char_read, int *finish)
 {
 	size_t	i;
-	int 	current_number_line;
+	int		current_number_line;
 	char	*start_current_line_pointer;
 
 	i = 0;
@@ -56,19 +55,16 @@ char	*find_new_line(char *buffer, int number_line, size_t number_char_read, int 
 	{
 		if (buffer[i] == '\n')
 		{
-			if (number_line == 0)
-				return(buffer);
-			if(current_number_line == number_line){
-				return(start_current_line_pointer);
-				}
+			if (current_number_line == number_line)
+				return (start_current_line_pointer);
 			current_number_line++;
 			start_current_line_pointer = &buffer[i + 1];
 		}
 		i++;
 	}
-	if (buffer[i] == '\0' && number_char_read == 0 && *didfinish != 1)
+	if (buffer[i] == '\0' && nb_char_read == 0 && *finish != 1)
 	{
-		*didfinish = 1;
+		*finish = 1;
 		return (start_current_line_pointer);
 	}
 	return (NULL);
@@ -118,18 +114,58 @@ char	*strjoin_an_malloc(char *s1, char *s2)
 	return (str);
 }
 
+char	*get_right_line(char *char_reading,
+	int nb_ln_looking, char *char_read, int nb_char_read)
+{
+	char	*return_val;
+	int		finish;
+
+	finish = 0;
+	free(char_reading);
+	nb_ln_looking++;
+	return_val = copy_line
+		(find_new_line(char_read, nb_ln_looking - 1, nb_char_read, &finish), 0);
+	if (return_val == NULL)
+	{
+		free (char_read);
+		return (NULL);
+	}
+	return (return_val);
+}
+
+int	fd_open_close_fix(int fd, char *char_reading,
+	char *char_read, int *nb_char_read)
+{
+	size_t	i;
+
+	if (!char_read)
+		return (1);
+	if (!char_reading)
+		return (1);
+	i = 0;
+	while (char_reading[i] != '\0' && char_read[i] != '\0')
+	{
+		if (char_reading[i] != char_read[i])
+			return (1);
+		i++;
+	}
+	free (char_reading);
+	char_reading = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!char_reading)
+		return (0);
+	*nb_char_read = read(fd, char_reading, BUFFER_SIZE);
+	return (fd_open_close_fix(fd, char_reading, char_read, nb_char_read));
+}
 
 char	*get_next_line(int fd)
 {
 	char			*char_reading;
 	static char		*char_read = NULL;
-	int				number_char_read;
-	static int		number_of_line_looking = 0;
-	static int		didfinish = 0;
-	
-	unsigned long	i;
-	
-	if(fd < 0)
+	int				nb_char_read;
+	static int		nb_ln_looking = 0;
+	static int		finish = 0;
+
+	if (fd < 0)
 		return (NULL);
 	char_reading = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!char_reading)
@@ -138,38 +174,37 @@ char	*get_next_line(int fd)
 			free (char_read);
 		return (NULL);
 	}
-	i = 1;
-	number_char_read = read(fd, char_reading, BUFFER_SIZE);
-	if (number_char_read > 0)
-		didfinish = 0;
-	while(number_char_read > 0 && didfinish != 1)
+	nb_char_read = read(fd, char_reading, BUFFER_SIZE);
+	// if (fd_open_close_fix(fd, char_reading, char_read, &nb_char_read) != 1)
+	// {
+	// 	if (char_read)
+	// 		free (char_read);
+	// 	return (NULL);
+	// }
+	if (nb_char_read > 0)
+		finish = 0;
+	while (nb_char_read > 0 && finish != 1)
 	{
-		char_reading[number_char_read] = '\0';
+		char_reading[nb_char_read] = '\0';
 		char_read = strjoin_an_malloc(char_read, char_reading);
 		if (!char_read)
 		{
 			free(char_reading);
 			return (NULL);
 		}
-		if(find_new_line(char_read, number_of_line_looking, number_char_read, &didfinish) != NULL)
-		{
-			didfinish = 0;
-			free(char_reading);
-			number_of_line_looking++;
-			return (copy_line(find_new_line(char_read, number_of_line_looking - 1, number_char_read, &didfinish)));
-		}
-		number_char_read = read(fd, char_reading, BUFFER_SIZE);
+		if (!find_new_line(char_read, nb_ln_looking, nb_char_read, &finish))
+			return (get_right_line(char_reading, nb_ln_looking,
+					char_read, nb_char_read));
+		nb_char_read = read(fd, char_reading, BUFFER_SIZE);
 	}
-	if (number_char_read != -1 && char_read != NULL)
-		if(find_new_line(char_read, number_of_line_looking, number_char_read, &didfinish) != NULL)
-		{
-			didfinish = 0;
-			free(char_reading);
-			number_of_line_looking++;
-			return (copy_line(find_new_line(char_read, number_of_line_looking - 1, number_char_read, &didfinish)));
-		}
-	free(char_reading);
-	// write(1, char_read, 10);
+	if (nb_char_read != -1 && char_read != NULL)
+		if (!find_new_line(char_read, nb_ln_looking, nb_char_read, &finish))
+			return (get_right_line(char_reading, nb_ln_looking,
+					char_read, nb_char_read));
+	if (char_reading)
+		free(char_reading);
+	if (char_read)
+		free(char_read);
 	return (NULL);
 }
 
@@ -184,6 +219,15 @@ char	*get_next_line(int fd)
 // 	size_t i;
 	
 // 	fd = open("./file" , O_RDONLY);
+// 	str = get_next_line(fd);
+// 	printf("%s", str);
+// 	free(str);
+// 	close(fd);
+
+// 	fd = open("./file" , O_RDONLY);
+// 	str = get_next_line(fd);
+// 	printf("%s", str);
+// 	free(str);
 // 	str = get_next_line(fd);
 // 	printf("%s", str);
 // 	free(str);
