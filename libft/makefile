@@ -12,11 +12,11 @@ OBJS_BONUS		= $(SRCS_BONUS:%.c=%.o)
 CC				= gcc
 CFLAGS			= -Wall -Werror -Wextra -I.
 
-ifdef WITH_BONUS
+# ifdef WITH_BONUS
 REG_OBJS = $(OBJS) $(OBJS_BONUS)
-else
-REG_OBJS = $(OBJS)
-endif
+# else
+# REG_OBJS = $(OBJS)
+# endif
 
 NAME			= libft.a
 all:			$(NAME)
