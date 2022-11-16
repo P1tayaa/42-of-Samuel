@@ -6,11 +6,22 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 19:19:44 by sboulain          #+#    #+#             */
-/*   Updated: 2022/11/15 22:49:55 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/11/16 14:19:03 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+char	*free_those(char *char_rd, char *char_rding)
+{
+	if (char_rd != NULL)
+		free(char_rd);
+	char_rd = NULL;
+	if (char_rding != NULL)
+		free(char_rding);
+	char_rding = NULL;
+	return (NULL);
+}
 
 char	*copy_line(const char *s, int i)
 {
@@ -42,7 +53,7 @@ char	*copy_line(const char *s, int i)
 }
 
 char	*find_new_line(
-		char *buffer, int number_line, size_t nb_char_read, int *finish)
+		char *buffer, int number_line, size_t nb_char_rd, int *finish)
 {
 	size_t	i;
 	int		current_number_line;
@@ -62,7 +73,7 @@ char	*find_new_line(
 		}
 		i++;
 	}
-	if (buffer[i] == '\0' && nb_char_read == 0 && *finish != 1)
+	if (buffer[i] == '\0' && nb_char_rd == 0 && *finish != 1)
 	{
 		*finish = 1;
 		return (start_current_line_pointer);
@@ -80,13 +91,7 @@ char	*strjoin_an_malloc(char *s1, char *s2, int size_of_s1, int size_of_s2)
 		size_of_s2++;
 	str = (char *)malloc((size_of_s1 + size_of_s2 + 1) * sizeof(char));
 	if (!str || size_of_s1 + size_of_s2 == 0)
-	{
-		if (s1)
-			free(s1);
-		if (str)
-			free(str);
-		return (NULL);
-	}
+		return (free_those(s1, str));
 	size_of_s1 = 0;
 	while (s1 && s1[size_of_s1] != '\0')
 	{
@@ -96,81 +101,71 @@ char	*strjoin_an_malloc(char *s1, char *s2, int size_of_s1, int size_of_s2)
 	size_of_s2 = 0;
 	while (s2 && s2[size_of_s2] != '\0' && size_of_s2 != BUFFER_SIZE)
 		str[size_of_s1++] = s2[size_of_s2++];
-	if (s1)
-		free(s1);
+	free_those(s1, NULL);
 	str[size_of_s1] = '\0';
 	return (str);
 }
 
-char	*get_right_line(char *char_reading,
-	int *nb_ln_looking, char *char_read, int nb_char_read)
+char	*get_ok_ln(char *char_rding,
+	int *nb_ln_looking, char *char_rd, int nb_char_rd)
 {
 	char	*return_val;
 	int		finish;
 
 	finish = 0;
-	free(char_reading);
+	free(char_rding);
 	*nb_ln_looking = *nb_ln_looking + 1;
-	return_val = copy_line(find_new_line(char_read,
-				*nb_ln_looking - 1, nb_char_read, &finish), 0);
-	if (!return_val)
-	{
-		if (char_read)
-			free (char_read);
-		char_read = NULL;
-		return (NULL);
-	}
+	return_val = copy_line(find_new_line(char_rd,
+				*nb_ln_looking - 1, nb_char_rd, &finish), 0);
+	// if (!return_val)
+	// 	return (free_those(char_rd, NULL));
 	return (return_val);
-}
-
-char	*free_those(char *char_read, char *char_reading)
-{
-	if (char_read != NULL)
-		free(char_read);
-	char_read = NULL;
-	if (char_reading != NULL)
-		free(char_reading);
-	char_reading = NULL;
-	return (NULL);
 }
 
 char	*get_next_line(int fd)
 {
-	char			*char_reading;
-	static char		*char_read;
-	int				nb_char_read;
+	char			*char_rding;
+	static char		*char_rd;
+	int				nb_char_rd;
 	static int		nb_ln_looking = 0;
 	static int		finish = 0;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 	{
-		if (char_read)
-			free (char_read);
-		char_read = NULL;
+		if (char_rd)
+			free (char_rd);
+		char_rd = NULL;
 		nb_ln_looking = 0;
 		finish = 0;
 		return (NULL);
 	}
-	char_reading = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (!char_reading)
-		return (free_those(char_read, NULL));
-	nb_char_read = read(fd, char_reading, BUFFER_SIZE);
-	if (nb_char_read > 0)
+	char_rding = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!char_rding)
+		return (free_those(char_rd, NULL));
+	nb_char_rd = read(fd, char_rding, BUFFER_SIZE);
+	if (nb_char_rd > 0)
 		finish = 0;
-	while (nb_char_read > 0 && finish != 1)
+	while (nb_char_rd > 0 && finish != 1)
 	{
-		char_reading[nb_char_read] = '\0';
-		char_read = strjoin_an_malloc(char_read, char_reading, 0, 0);
-		if (!char_read)
-			return (free_those(char_reading, NULL));
-		if (find_new_line(char_read, nb_ln_looking, nb_char_read, &finish))
-			return (get_right_line(char_reading, &nb_ln_looking, char_read, nb_char_read));
-		nb_char_read = read(fd, char_reading, BUFFER_SIZE);
+		char_rding[nb_char_rd] = '\0';
+		char_rd = strjoin_an_malloc(char_rd, char_rding, 0, 0);
+		if (!char_rd)
+			return (free_those(char_rding, NULL));
+		if (find_new_line(char_rd, nb_ln_looking, nb_char_rd, &finish))
+			return (get_ok_ln(char_rding, &nb_ln_looking, char_rd, nb_char_rd));
+		nb_char_rd = read(fd, char_rding, BUFFER_SIZE);
 	}
-	if (nb_char_read != -1 && char_read != NULL)
-		if (find_new_line(char_read, nb_ln_looking, nb_char_read, &finish))
-			return (get_right_line(char_reading, &nb_ln_looking, char_read, nb_char_read));
-	return (free_those(char_reading, char_read));
+	if (nb_char_rd != -1 && char_rd != NULL)
+		if (find_new_line(char_rd, nb_ln_looking, nb_char_rd, &finish))
+			return (get_ok_ln(char_rding, &nb_ln_looking, char_rd, nb_char_rd));
+	if (char_rd)
+		free (char_rd);
+	free_those(char_rding, NULL);
+	char_rd = NULL;
+	nb_ln_looking = 0;
+	finish = 0;
+	return (NULL);
+	// return (free_those(char_rding, char_rd));
 }
 
 // #include <fcntl.h>
