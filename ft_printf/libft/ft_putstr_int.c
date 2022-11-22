@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   ft_putstr_int.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/07 21:26:27 by sboulain          #+#    #+#             */
-/*   Updated: 2022/10/18 14:31:32 by sboulain         ###   ########.fr       */
+/*   Created: 2022/08/11 21:48:54 by sboulain          #+#    #+#             */
+/*   Updated: 2022/11/22 14:05:20 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memchr(const void *s, int c, size_t n)
+int	ft_putstr_int(char const *s)
 {
-	unsigned char	*str;
-	size_t			i;
+	int	i;
 
-	str = (unsigned char *)s;
 	i = 0;
-	while (i < n)
-	{
-		if (str[i] == (unsigned char) c)
-			return (&(str[i]));
+	while (s[i] != '\0')
 		i++;
-	}
-	return (NULL);
+	return (write(1, s, i));
 }

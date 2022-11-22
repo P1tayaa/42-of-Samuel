@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 19:19:44 by sboulain          #+#    #+#             */
-/*   Updated: 2022/11/16 14:19:03 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/11/22 17:36:04 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,15 @@
 char	*free_those(char *char_rd, char *char_rding)
 {
 	if (char_rd != NULL)
+	{
 		free(char_rd);
-	char_rd = NULL;
+		char_rd = NULL;	
+	}
 	if (char_rding != NULL)
+	{
 		free(char_rding);
-	char_rding = NULL;
+		char_rding = NULL;
+	}
 	return (NULL);
 }
 
@@ -117,8 +121,8 @@ char	*get_ok_ln(char *char_rding,
 	*nb_ln_looking = *nb_ln_looking + 1;
 	return_val = copy_line(find_new_line(char_rd,
 				*nb_ln_looking - 1, nb_char_rd, &finish), 0);
-	// if (!return_val)
-	// 	return (free_those(char_rd, NULL));
+	if (!return_val)
+		return (free_those(char_rd, NULL));
 	return (return_val);
 }
 

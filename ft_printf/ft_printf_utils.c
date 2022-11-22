@@ -6,30 +6,31 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 13:17:11 by sboulain          #+#    #+#             */
-/*   Updated: 2022/11/02 18:01:45 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/11/22 14:26:51 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "libftprintf.h"
+#include <stddef.h>
 
-static int	ft_atoi_base_take_care_of_neg(int *number, int *numer_of_char_print)
+int	ft_atoi_base_take_care_of_neg(int *number, int *numer_of_char_print)
 {
-	if (ft_putchar('-') == -1)
+	if (ft_putchar_int('-') == -1)
 		return (-1);
 	*number = -*number;
 	*numer_of_char_print = *numer_of_char_print + 1;
 	return (1);
 }
 
-static int	ft_itoa_base(int number, int base, int isfirst, char lettle)
+int	ft_itoa_base(int number, int base, int isfirst, char lettle)
 {
 	int	numer_of_char_print;
 	int	temp_num;
 
 	numer_of_char_print = 0;
 	if (-2147483648 == number && base == 10)
-		return (ft_putstr("-2147483648"));
+		return (ft_putstr_int("-2147483648"));
 	if (number < 0)
 		if (ft_atoi_base_take_care_of_neg(&number, &numer_of_char_print) == -1)
 			return (-1);
@@ -40,10 +41,10 @@ static int	ft_itoa_base(int number, int base, int isfirst, char lettle)
 			return (-1);
 		numer_of_char_print = numer_of_char_print + temp_num;
 		if ((number % base) < 10)
-			if (ft_putchar((number % base) + '0') == -1)
+			if (ft_putchar_int((number % base) + '0') == -1)
 				return (-1);
 		if ((number % base) > 9)
-			if (ft_putchar((number % base) + lettle - 10) == -1)
+			if (ft_putchar_int((number % base) + lettle - 10) == -1)
 				return (-1);
 	}
 	if (isfirst)
@@ -51,7 +52,7 @@ static int	ft_itoa_base(int number, int base, int isfirst, char lettle)
 	return (numer_of_char_print + 1);
 }
 
-static int	ft_atoui_base(unsigned int number, unsigned int base,
+int	ft_atoui_base(unsigned int number, unsigned int base,
 	int isfirst, char lettle)
 {	
 	int	numer_of_char_print;
@@ -63,10 +64,10 @@ static int	ft_atoui_base(unsigned int number, unsigned int base,
 		if (numer_of_char_print == -1)
 			return (-1);
 		if ((number % base) < 10)
-			if (ft_putchar((number % base) + '0') == -1)
+			if (ft_putchar_int((number % base) + '0') == -1)
 				return (-1);
 		if ((number % base) > 9)
-			if (ft_putchar((number % base) + lettle - 10) == -1)
+			if (ft_putchar_int((number % base) + lettle - 10) == -1)
 				return (-1);
 	}
 	if (isfirst)
@@ -74,13 +75,13 @@ static int	ft_atoui_base(unsigned int number, unsigned int base,
 	return (numer_of_char_print + 1);
 }
 
-static int	ft_atoull_base(unsigned long long number, unsigned long long base,
+int	ft_atoull_base(unsigned long long number, unsigned long long base,
 	int isfirst, char lettle)
 {	
 	int	numer_of_char_print;
 
 	if (isfirst == 1)
-		if (ft_putstr("0x") == -1)
+		if (ft_putstr_int("0x") == -1)
 			return (-1);
 	numer_of_char_print = 0;
 	if (number != 0 || isfirst == 1)
@@ -89,10 +90,10 @@ static int	ft_atoull_base(unsigned long long number, unsigned long long base,
 		if (numer_of_char_print == -1)
 			return (-1);
 		if ((number % base) < 10)
-			if (ft_putchar((number % base) + '0') == -1)
+			if (ft_putchar_int((number % base) + '0') == -1)
 				return (-1);
 		if ((number % base) > 9)
-			if (ft_putchar((number % base) + lettle - 10) == -1)
+			if (ft_putchar_int((number % base) + lettle - 10) == -1)
 				return (-1);
 	}
 	if (isfirst)
@@ -108,13 +109,13 @@ int	manage_print(char const *input, size_t *i, va_list arg)
 	*i = *i + 2;
 	numer_of_char_print = 0;
 	if (input[*i - 1] == 'c')
-		return (ft_putchar(va_arg(arg, int)));
+		return (ft_putchar_int(va_arg(arg, int)));
 	if (input[*i - 1] == 's')
 	{
 		string = va_arg(arg, char *);
 		if (string == NULL)
 			string = "(null)";
-		return (ft_putstr(string));
+		return (ft_putstr_int(string));
 	}
 	if (input[*i - 1] == 'p')
 		return (ft_atoull_base(va_arg(arg,
