@@ -172,39 +172,29 @@ char	*get_next_line(int fd)
 	// return (free_those(char_rding, char_rd));
 }
 
-// #include <fcntl.h>
-// #include <stdio.h>
 
-// int main()
-// {
-// 	int fd;
-// 	char *str;
-// 	size_t i;
+#include <fcntl.h>
+#include <stdio.h>
 
-// 	fd = open("./file" , O_RDONLY);
-// 	str = get_next_line(fd);
-// 	printf("%s", str);
-// 	free(str);
-// 	close(fd);
+int main()
+{
+	int fd;
+	char *str;
+	size_t i;
 
-// 	fd = open("./file" , O_RDONLY);
-// 	str = get_next_line(fd);
-// 	printf("%s", str);
-// 	free(str);
-// 	str = get_next_line(fd);
-// 	printf("%s", str);
-// 	free(str);
-// 	// i  = 0;
-// 	// while (str)
-// 	// {
-// 	// 	printf("%s", str);
-// 	// 	free(str);
-// 	// 	str = get_next_line(fd);
-// 	// 	i++;
-// 	// }
-// 	// str = get_next_line(fd);
-// 	close(fd);
-// 	// system("leaks a.out");
-// 	return (0);
+	fd = open("./file" , O_RDONLY);
+	str = get_next_line(fd);
+	while (str)
+	{
+		printf("%s", str);
+		free(str);
+		str = get_next_line(fd);
+		i++;
+	}
+	str = get_next_line(fd);
+	close(fd);
+	// system("leaks a.out");
+	return (0);
 
-// }
+}
+
