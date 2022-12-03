@@ -42,7 +42,7 @@ char	*revome_fist_line_in_buffer(char *buffer)
 	return (new_buffer);
 }
 
-int	get_first_line_len(char *buffer)
+int	get_first_line_len(char *buffer, int buffer_read_len)
 {
 	size_t	len_line;
 
@@ -53,6 +53,10 @@ int	get_first_line_len(char *buffer)
 			return (len_line);
 		len_line++;
 	}
+	// printf("len_line = {%ld}/n", len_line);
+
+	if (buffer_read_len != 0)
+		return (len_line);
 	return (0);
 }
 
@@ -102,32 +106,31 @@ char	*get_next_line(int fd)
 	char		read_str[BUFFER_SIZE + 1];
 	int 		buffer_read_len;
 
-	// if (buffer == NULL)
-	// {
-	// 	buffer_read_len = read(fd, read_str, BUFFER_SIZE);
-	// 	read_str[buffer_read_len] = '\0';
-	// 	buffer = strjoin_an_malloc(buffer, read_str);
-	// }
-	//read line
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	{
+		if (buffer)
+			free (buffer);
+		buffer = NULL;
+		return (NULL);
+	}
 	buffer_read_len = read(fd, read_str, BUFFER_SIZE);
 	read_str[buffer_read_len] = '\0';
 	if (buffer_read_len != 0)
 		buffer = strjoin_an_malloc(buffer, read_str, 0, 0);
 	while (buffer != NULL)
 	{
-		if (get_first_line_len(buffer) != 0)
+		if (get_first_line_len(buffer, buffer_read_len) != 0)
 		{
 
 			char		*line;
 			int 		i;
 			int 		len_line;
 			i = 0;
-			len_line = get_first_line_len(buffer);
+			len_line = get_first_line_len(buffer, buffer_read_len);
 
 			if (!(line = malloc(len_line + 1 * sizeof(char))))
 				return (NULL);
 				// printf("%d/n", i);
-			// printf("len_line = {%d}/n", len_line);
 			while (i <= len_line)
 			{
 				line[i] = buffer[i];
@@ -176,6 +179,6 @@ int main()
 	}
 	str = get_next_line(fd);
 	close(fd);
-	system("leaks a.out");
+	// system("leaks a.out");
 	return (0);
 }
