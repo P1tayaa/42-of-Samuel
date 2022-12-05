@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:37:09 by sboulain          #+#    #+#             */
-/*   Updated: 2022/12/03 17:00:47 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/12/05 11:26:32 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,27 +134,44 @@ char	*get_next_line(int fd)
 			line[i] = '\0';
 			if (!(buffer = revome_fist_line_in_buffer(buffer)))
 				return (NULL);
-		// printf("{%s}\n", buffer);
 			return (line);
 		}
 		//read line
-		buffer_read_len = read(fd, read_str, BUFFER_SIZE);
-		read_str[buffer_read_len] = '\0';
+		if (buffer_read_len == BUFFER_SIZE)
+		{
+			buffer_read_len = read(fd, read_str, BUFFER_SIZE);
+			read_str[buffer_read_len] = '\0';
+		}
 		if (buffer_read_len != 0)
 			buffer = strjoin_an_malloc(buffer, read_str, 0, 0);
-		if (buffer_read_len == 0)
-			buffer = free_those(buffer, NULL);
+		printf("{%s}\n", buffer);
 		if (buffer_read_len < BUFFER_SIZE)
 		{
 			char *str;
-			str = (char *)malloc(1);
+			int	i;
+			
+			i = 0;
+			while (buffer != NULL && buffer[i] != '\0')
+				i++;
+			str = (char *) malloc(i + 1 * sizeof(char));
 			if (!str)
 				return (NULL);
-			str = strjoin_an_malloc(str, buffer, 0, 0);
-			free (buffer);
+			i = 0;
+			// printf
+			while (buffer != NULL && buffer[i] != '\0')
+			{
+				str[i] = buffer[i];
+				i++;
+			}
+			str[i] = '\0';
+			if (buffer)
+				free(buffer);
 			buffer = NULL;
+			// free_those(buffer, NULL);
 			return (str);
 		}
+		// if (buffer_read_len == 0)
+		// 	buffer = free_those(buffer, NULL);
 	}
 	return (NULL);
 }
@@ -175,6 +192,7 @@ int main()
 	{
 		printf("%s", str);
 		free(str);
+		str = NULL;
 		str = get_next_line(fd);
 		// printf("%s", str);
 		// free(str);
@@ -183,6 +201,6 @@ int main()
 	}
 	str = get_next_line(fd);
 	close(fd);
-	system("leaks a.out");
+	// system("leaks a.out");
 	return (0);
 }
