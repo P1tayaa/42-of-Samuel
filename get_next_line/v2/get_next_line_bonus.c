@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:37:09 by sboulain          #+#    #+#             */
-/*   Updated: 2022/12/10 18:45:00 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/12/10 18:57:40 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 #include <unistd.h>
 
 char	*free_and_return_dup_buffer(char **buffer, int i)
@@ -79,18 +79,19 @@ char	*get_next_line(int fd)
 {
 	char		read_str[BUFFER_SIZE + 1];
 	int			buffer_read_len;
-	static char	*buffer = NULL;
+	static char	*buffer[MAX_FD];
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
-		return (free_those(&buffer, NULL));
-	read_lines(&buffer_read_len, fd, &read_str, &buffer);
-	while (buffer != NULL)
+		return (free_those(&(buffer[fd]), NULL));
+	read_lines(&buffer_read_len, fd, &read_str, &(buffer[fd]));
+	while ((buffer[fd]) != NULL)
 	{
-		if (get_first_line_len(buffer) != -1)
-			return (return_new_line_refreash_buf(&buffer));
-		read_lines(&buffer_read_len, fd, &read_str, &buffer);
-		if (buffer_read_len < BUFFER_SIZE && get_first_line_len(buffer) == -1)
-			return (free_and_return_dup_buffer(&buffer, 0));
+		if (get_first_line_len((buffer[fd])) != -1)
+			return (return_new_line_refreash_buf(&(buffer[fd])));
+		read_lines(&buffer_read_len, fd, &read_str, &(buffer[fd]));
+		if (buffer_read_len < BUFFER_SIZE
+			&& get_first_line_len((buffer[fd])) == -1)
+			return (free_and_return_dup_buffer(&(buffer[fd]), 0));
 	}
 	return (NULL);
 }

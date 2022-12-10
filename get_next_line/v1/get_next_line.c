@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 19:19:44 by sboulain          #+#    #+#             */
-/*   Updated: 2022/11/22 17:36:04 by sboulain         ###   ########.fr       */
+/*   Updated: 2022/12/10 18:46:15 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,28 +173,28 @@ char	*get_next_line(int fd)
 }
 
 
-#include <fcntl.h>
-#include <stdio.h>
+// #include <fcntl.h>
+// #include <stdio.h>
 
-int main()
-{
-	int fd;
-	char *str;
-	size_t i;
+// int main()
+// {
+// 	int fd;
+// 	char *str;
+// 	size_t i;
 
-	fd = open("./file" , O_RDONLY);
-	str = get_next_line(fd);
-	while (str)
-	{
-		printf("%s", str);
-		free(str);
-		str = get_next_line(fd);
-		i++;
-	}
-	str = get_next_line(fd);
-	close(fd);
-	// system("leaks a.out");
-	return (0);
+// 	fd = open("./file" , O_RDONLY);
+// 	str = get_next_line(fd);
+// 	while (str)
+// 	{
+// 		printf("%s", str);
+// 		free(str);
+// 		str = get_next_line(fd);
+// 		i++;
+// 	}
+// 	str = get_next_line(fd);
+// 	close(fd);
+// 	// system("leaks a.out");
+// 	return (0);
 
-}
+// }
 
