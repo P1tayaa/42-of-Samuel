@@ -2,6 +2,8 @@
     "files.associations": {
         "string.h": "c",
         "stddef.h": "c",
-        "fcntl.h": "c"
+        "fcntl.h": "c",
+        "push_swap_tool.h": "c",
+        "stdio.h": "c"
     }
 }
