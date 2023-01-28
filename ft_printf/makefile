@@ -11,16 +11,14 @@ NAME			= libftprintf.a
 all:			$(NAME)
 
 $(NAME):
-				make -C ./libft
-				cp ./libft/libft.a ./libftprintf.a
 				$(CC) $(CFLAGS) -c $(SRCS)
 				ar -rs $(NAME) $(OBJS)
 				@echo   :white_check_mark:Done!
 clean:
-				@rm -f $(OBJS) && make clean -C ./libft
+				@rm -f $(OBJS)
 
 fclean:			clean
-				@rm -f $(NAME) && make fclean -C ./libft
+				@rm -f $(NAME)
 
 re:				fclean $(NAME)
 
