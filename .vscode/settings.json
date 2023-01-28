@@ -3,6 +3,7 @@
         "string.h": "c",
         "stddef.h": "c",
         "fcntl.h": "c",
+<<<<<<< HEAD
         "stdio.h": "c",
         "unistd.h": "c",
         "get_next_line.h": "c",
@@ -10,5 +11,9 @@
         "get_next_line_bonus.h": "c",
         "libftprintf.h": "c",
         "push_swap.h": "c"
+=======
+        "push_swap_tool.h": "c",
+        "stdio.h": "c"
+>>>>>>> df2daa1c8adea8f34c1d57aca47da3807dbe6684
     }
 }
