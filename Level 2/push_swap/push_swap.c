@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 17:18:54 by sboulain          #+#    #+#             */
-/*   Updated: 2023/01/29 14:04:03 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/01/29 14:29:29 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,13 @@ t_stack	*get_stack_of_index(t_stack *first_stack, int index)
 		i++;
 	}
 	return (stack_temp);
+}
+
+void	move_top_of_stack(t_stack *stack_1, t_stack *stack_2)
+{
+	t_stack *next_stack_1;
+
+	next_stack_1 = stack_1 ->next;
 }
 
 t_stack	*make_single_stack(int val)
@@ -139,12 +146,12 @@ void		idex_stack_a(t_stack *stack, int size_stack)
 	{
 		j = 0;
 		temp_stack = stack;
-		while (j < size_stack)
-		{
-			
-			temp_stack = temp_stack -> n;
-			j++;
-		}
+		// while (j < size_stack)
+		// {
+		// 	if (temp_stack -> )
+		// 	temp_stack = temp_stack -> next;
+		// 	j++;
+		// }
 		i++;
 	}
 	
