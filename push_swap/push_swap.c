@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 17:18:54 by sboulain          #+#    #+#             */
-/*   Updated: 2023/01/28 22:48:35 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/01/29 14:04:03 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,14 @@
 
 void	swap_stack_pointer(t_stack *stack_1, t_stack *stack_2)
 {
-	t_stack *stack_temp;
+	int		temp_int;
 
-	stack_temp = stack_1;
-	stack_1 = stack_2;
-	stack_2 = stack_temp;
+	temp_int = stack_1 -> data;
+	stack_1 -> data = stack_2 ->data;
+	stack_2 ->data = temp_int;
+	temp_int = stack_1 -> index_data;
+	stack_1 -> index_data = stack_2 ->index_data;
+	stack_2 ->index_data = temp_int;
 }
 
 t_stack	*get_stack_of_index(t_stack *first_stack, int index)
@@ -31,9 +34,9 @@ t_stack	*get_stack_of_index(t_stack *first_stack, int index)
 	while (i != index)
 	{
 		stack_temp = stack_temp -> next;
+		i++;
 	}
 	return (stack_temp);
-	
 }
 
 t_stack	*make_single_stack(int val)
@@ -122,6 +125,31 @@ int			is_input_good(int argc, char **argv)
 	return (1);
 }
 
+void		idex_stack_a(t_stack *stack, int size_stack)
+{
+	int		i;
+	int		j;
+	int		curent_index;
+	int		last_small_data;
+	t_stack	*temp_stack;
+
+	i = 0;
+	curent_index = 0;
+	while (i < size_stack)
+	{
+		j = 0;
+		temp_stack = stack;
+		while (j < size_stack)
+		{
+			
+			temp_stack = temp_stack -> n;
+			j++;
+		}
+		i++;
+	}
+	
+}
+
 int			main(int argc, char **argv)
 {
 	t_two_stacks *stacks;
@@ -131,8 +159,11 @@ int			main(int argc, char **argv)
 	if (!is_input_good(argc, argv))
 		return (ft_printf("args not int\nError\n"));
 	stacks = make_stacks(argc, argv);
+	print_stacks(stacks);
+	// print_stack(get_stack_of_index(stacks -> stack_a, 1));
 	swap_stack_pointer(get_stack_of_index(stacks -> stack_a, 0),get_stack_of_index(stacks -> stack_a, 1));
-	stacks = make_stacks(argc, argv);
+	// stacks = make_stacks(argc, argv);
+	print_stacks(stacks);
 
 	// ft_printf("%d", ft_atoi(argv[1]));
 }
