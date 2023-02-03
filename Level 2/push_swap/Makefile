@@ -8,7 +8,7 @@ CC				= gcc
 # CFLAGS			= -Wall -Werror -Wextra -I. -fsanitize=address
 CFLAGS			= -Wall -Werror -Wextra -I.
 
-NAME			= push_swap.a
+NAME			= push_swap
 
 all:			$(NAME)
 
