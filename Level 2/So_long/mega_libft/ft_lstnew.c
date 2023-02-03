@@ -1,38 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/28 17:41:22 by sboulain          #+#    #+#             */
-/*   Updated: 2023/02/03 20:22:36 by sboulain         ###   ########.fr       */
+/*   Created: 2022/10/13 18:43:29 by sboulain          #+#    #+#             */
+/*   Updated: 2022/10/14 18:01:43 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include <stdlib.h>
-#include "mega_libft/libft.h"
 
-typedef struct s_stack
+t_list	*ft_lstnew(void *content)
 {
-	int	data;
-	int	index_data;
-	struct s_stack *next;
-}	t_stack;
+	t_list	*list;
 
-typedef struct
-{
-	struct s_stack	*stack_a;
-	struct s_stack	*stack_b;
-}	t_two_stacks;
-
-// typedef struct s_list
-// {
-// 	void			*content;
-// 	struct s_list	*next;
-// }					t_list;
-
-// typedef struct s_list_int
-// {
-// 	struct
-// };
+	list = (t_list *)malloc(sizeof(t_list));
+	if (!list)
+		return (NULL);
+	list -> content = content;
+	list -> next = NULL;
+	return (list);
+}

@@ -1,38 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/28 17:41:22 by sboulain          #+#    #+#             */
-/*   Updated: 2023/02/03 20:22:36 by sboulain         ###   ########.fr       */
+/*   Created: 2022/10/14 16:33:33 by sboulain          #+#    #+#             */
+/*   Updated: 2022/11/02 15:30:31 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "mega_libft/libft.h"
+#include "libft.h"
 
-typedef struct s_stack
+t_list	*ft_lstlast(t_list *lst)
 {
-	int	data;
-	int	index_data;
-	struct s_stack *next;
-}	t_stack;
+	t_list	*curent_list;
 
-typedef struct
-{
-	struct s_stack	*stack_a;
-	struct s_stack	*stack_b;
-}	t_two_stacks;
-
-// typedef struct s_list
-// {
-// 	void			*content;
-// 	struct s_list	*next;
-// }					t_list;
-
-// typedef struct s_list_int
-// {
-// 	struct
-// };
+	if (lst == NULL)
+		return (NULL);
+	curent_list = lst;
+	while (curent_list -> next != NULL)
+		curent_list = curent_list -> next;
+	return (curent_list);
+}

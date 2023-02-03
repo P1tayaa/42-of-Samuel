@@ -1,38 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/28 17:41:22 by sboulain          #+#    #+#             */
-/*   Updated: 2023/02/03 20:22:36 by sboulain         ###   ########.fr       */
+/*   Created: 2022/10/07 17:17:10 by sboulain          #+#    #+#             */
+/*   Updated: 2022/10/14 18:13:55 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "mega_libft/libft.h"
+#include "libft.h"
 
-typedef struct s_stack
+char	*ft_strrchr(const char *s, int c)
 {
-	int	data;
-	int	index_data;
-	struct s_stack *next;
-}	t_stack;
+	int		i;
+	char	*str;
 
-typedef struct
-{
-	struct s_stack	*stack_a;
-	struct s_stack	*stack_b;
-}	t_two_stacks;
-
-// typedef struct s_list
-// {
-// 	void			*content;
-// 	struct s_list	*next;
-// }					t_list;
-
-// typedef struct s_list_int
-// {
-// 	struct
-// };
+	str = (char *)s;
+	i = ft_strlen(s);
+	while (i >= 0)
+	{
+		if (str[i] == (char) c)
+			return (&(str[i]));
+		i--;
+	}
+	return (NULL);
+}

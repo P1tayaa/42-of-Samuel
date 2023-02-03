@@ -1,38 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/28 17:41:22 by sboulain          #+#    #+#             */
-/*   Updated: 2023/02/03 20:22:36 by sboulain         ###   ########.fr       */
+/*   Created: 2022/10/06 11:27:25 by sboulain          #+#    #+#             */
+/*   Updated: 2022/10/17 18:32:22 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include <stdlib.h>
-#include "mega_libft/libft.h"
 
-typedef struct s_stack
+void	*ft_calloc(size_t count, size_t size)
 {
-	int	data;
-	int	index_data;
-	struct s_stack *next;
-}	t_stack;
+	void	*memory_alocated;
 
-typedef struct
-{
-	struct s_stack	*stack_a;
-	struct s_stack	*stack_b;
-}	t_two_stacks;
-
-// typedef struct s_list
-// {
-// 	void			*content;
-// 	struct s_list	*next;
-// }					t_list;
-
-// typedef struct s_list_int
-// {
-// 	struct
-// };
+	memory_alocated = (void *)malloc(count * size);
+	if (!memory_alocated)
+		return (NULL);
+	ft_bzero(memory_alocated, count * size);
+	return (memory_alocated);
+}

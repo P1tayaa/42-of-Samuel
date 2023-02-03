@@ -1,38 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/28 17:41:22 by sboulain          #+#    #+#             */
-/*   Updated: 2023/02/03 20:22:36 by sboulain         ###   ########.fr       */
+/*   Created: 2022/10/06 13:43:25 by sboulain          #+#    #+#             */
+/*   Updated: 2022/10/17 21:59:38 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "mega_libft/libft.h"
+#include "libft.h"
 
-typedef struct s_stack
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	int	data;
-	int	index_data;
-	struct s_stack *next;
-}	t_stack;
+	size_t	i;
 
-typedef struct
-{
-	struct s_stack	*stack_a;
-	struct s_stack	*stack_b;
-}	t_two_stacks;
-
-// typedef struct s_list
-// {
-// 	void			*content;
-// 	struct s_list	*next;
-// }					t_list;
-
-// typedef struct s_list_int
-// {
-// 	struct
-// };
+	i = 0;
+	if (dstsize != 0)
+	{
+		while (src[i] && (i < dstsize - 1))
+		{
+			dst[i] = src[i];
+			i++;
+		}
+		dst[i] = '\0';
+	}
+	while (src[i])
+			i++;
+	return (i);
+}

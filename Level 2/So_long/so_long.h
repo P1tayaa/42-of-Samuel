@@ -1,38 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/28 17:41:22 by sboulain          #+#    #+#             */
-/*   Updated: 2023/02/03 20:22:36 by sboulain         ###   ########.fr       */
+/*   Created: 2023/02/03 18:48:20 by sboulain          #+#    #+#             */
+/*   Updated: 2023/02/03 20:43:05 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "mega_libft/libft.h"
-
-typedef struct s_stack
-{
-	int	data;
-	int	index_data;
-	struct s_stack *next;
-}	t_stack;
+#include "mlx/mlx.h"
+//for close
+#include <unistd.h>
+//for math function
+#include <math.h>
+//for open
+#include <fcntl.h>
+//for bool
+#include <stdbool.h>
+//for malloc and free
+#include <stdlib.h>
 
 typedef struct
 {
-	struct s_stack	*stack_a;
-	struct s_stack	*stack_b;
-}	t_two_stacks;
+	bool	play_can_access;
+	bool	has_player;
+	bool	has_enemy;
+	char	type;
 
-// typedef struct s_list
-// {
-// 	void			*content;
-// 	struct s_list	*next;
-// }					t_list;
-
-// typedef struct s_list_int
-// {
-// 	struct
-// };
+}	t_cell;

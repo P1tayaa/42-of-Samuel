@@ -1,0 +1,28 @@
+
+SRCS			= so_long.c
+
+OBJS			= $(SRCS:%.c=%.o)
+
+CC				= gcc
+
+# CFLAGS			= -Wall -Werror -Wextra -I. -fsanitize=address
+# CFLAGS			= -Wall -Werror -Wextra -I.
+
+NAME			= so_long
+
+all:			$(NAME)
+
+$(NAME):
+				make -C ./mega_libft
+				make -C ./mlx
+				$(CC) $(CFLAGS) -o $(NAME) $(SRCS) ./mega_libft/libft.a ./mlx/libmlx.a
+				@echo   :white_check_mark:Done!
+clean:
+				@rm -f $(OBJS) && make clean -C ./mega_libft && make -C ./mega_libft clean
+
+fclean:			clean
+				@rm -f $(NAME) && make fclean -C ./mega_libft
+
+re:				fclean $(NAME)
+
+.PHONY:			all clean fclean re

@@ -1,38 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/28 17:41:22 by sboulain          #+#    #+#             */
-/*   Updated: 2023/02/03 20:22:36 by sboulain         ###   ########.fr       */
+/*   Created: 2022/10/06 11:59:11 by sboulain          #+#    #+#             */
+/*   Updated: 2022/10/12 11:37:10 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "mega_libft/libft.h"
+#include "libft.h"
 
-typedef struct s_stack
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	int	data;
-	int	index_data;
-	struct s_stack *next;
-}	t_stack;
+	int	i;
 
-typedef struct
-{
-	struct s_stack	*stack_a;
-	struct s_stack	*stack_b;
-}	t_two_stacks;
-
-// typedef struct s_list
-// {
-// 	void			*content;
-// 	struct s_list	*next;
-// }					t_list;
-
-// typedef struct s_list_int
-// {
-// 	struct
-// };
+	if (!dst && !src)
+		return (NULL);
+	if (dst > src)
+	{
+		i = (int)(len - 1);
+		while (i >= 0)
+		{
+			((char *)dst)[i] = ((char *)src)[i];
+			i--;
+		}
+	}
+	else
+	{
+		i = 0;
+		while (i < (int)len)
+		{
+			((char *)dst)[i] = ((char *)src)[i];
+			i++;
+		}
+	}
+	return (dst);
+}
