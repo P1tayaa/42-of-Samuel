@@ -9,7 +9,6 @@ ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c\
 ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c \
 ft_printf.c ft_printf_utils.c \
 ft_get_next_line.c ft_get_next_line_utils.c
-SRCS_BONUS		= 
 OBJS			= $(SRCS:%.c=%.o)
 CC				= gcc
 CFLAGS			= -Wall -Werror -Wextra -I.

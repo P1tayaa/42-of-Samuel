@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:21:06 by sboulain          #+#    #+#             */
-/*   Updated: 2023/02/03 18:41:14 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/02/05 16:30:25 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,9 @@ void	send_message(int pid, char *message)
 	{
 		i = 8;
 		char_sending = message[j];
-		while (i--)
+		while (i)
 		{
+			i--;
 			if (char_sending >> i & 1)
 				kill(pid, SIGUSR2);
 			else

@@ -1,5 +1,5 @@
 
-SRCS			= so_long.c
+SRCS			= so_long.c map_valid_string.c map_making.c
 
 OBJS			= $(SRCS:%.c=%.o)
 
@@ -17,11 +17,23 @@ $(NAME):
 				make -C ./mlx
 				$(CC) $(CFLAGS) -o $(NAME) $(SRCS) ./mega_libft/libft.a ./mlx/libmlx.a
 				@echo   :white_check_mark:Done!
+
+
+
 clean:
-				@rm -f $(OBJS) && make clean -C ./mega_libft && make -C ./mega_libft clean
+				@rm -f $(OBJS)
 
 fclean:			clean
-				@rm -f $(NAME) && make fclean -C ./mega_libft
+				@rm -f $(NAME)
+
+
+
+# right one just for faster load I will use above
+
+# clean:
+# 				@rm -f $(OBJS) && make clean -C ./mega_libft && make -C ./mega_libft clean
+# fclean:			clean
+# 				@rm -f $(NAME) && make fclean -C ./mega_libft
 
 re:				fclean $(NAME)
 
