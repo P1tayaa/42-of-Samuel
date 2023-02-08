@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 14:05:25 by sboulain          #+#    #+#             */
-/*   Updated: 2023/02/05 20:40:50 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/02/08 20:48:48 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*open_map(char *map_name)
 
 	map_location = ft_strjoin("./maps/", map_name);
 	if (ft_memcmp(&map_name[ft_strlen(map_name) - 4], ber, 4) != 0)
-		return(NULL);
+		return(free(map_location), NULL);
 	file_discriptor = open(map_location, O_RDONLY);
 	if (file_discriptor == -1)
 		return(free(map_location), NULL);
@@ -106,8 +106,6 @@ bool	is_only_1_exit(t_map *map)
 			if (map->cells[i][j].type == 'E' && is_exit == false)
 			{
 				is_exit = true;
-				map ->index_of_player_x = j;
-				map ->index_of_player_y = i;
 			}
 			else if (map->cells[i][j].type == 'E' && is_exit == true)
 				return (false);
@@ -140,12 +138,10 @@ bool	is_all_bordes_wall(t_map *map)
 	return (true);
 }
 
-int	main(int argc, char **argv)
+int		check(int argc, char **argv, t_map **map)
 {
 	char	*map_string;
-	t_map	*map;
 
-	atexit(leaks_chec);
 	//get content of file
 	if (argc != 2)
 		return (ft_printf("agrs wrong"));
@@ -162,21 +158,56 @@ int	main(int argc, char **argv)
 		return(ft_printf("map incorect"));
 
 	//make map with the correct cells
-	map = make_map(map_string);
-
-	//make sure 1 and only 1 player
-	if (is_only_1_player(map)== false)
-		return (free_map_cells(map), ft_printf("not only 1 player"));
-	//make sure 1 and only 1 exit
-	if (is_only_1_exit(map)== false)
-		return (free_map_cells(map), ft_printf("not only 1 exit"));
+	*map = make_map(map_string); 
+	// make sure 1 and only 1 player
+	if (is_only_1_player(*map)== false)
+		return (free_map_cells(*map), ft_printf("not only 1 player"));
+	// make sure 1 and only 1 exit
+	if (is_only_1_exit(*map)== false)
+		return (free_map_cells(*map), ft_printf("not only 1 exit"));
 	//make all border are 1/wall
-	if (is_all_bordes_wall(map) == false)
-		return(free_map_cells(map), ft_printf("not border wall"));
+	if (is_all_bordes_wall(*map) == false)
+		return(free_map_cells(*map), ft_printf("not border wall"));
 
-	//free cells in map
-	free_map_cells(map);
+	return (-1);
+}
+
+int	main(int argc, char **argv)
+{
+	t_map	*map;
+	int is_bad;
+	
+	atexit(leaks_chec);
+	is_bad = check(argc, argv, &map);
+
+	if (is_bad != -1)
+		return(1);
+	// print_map(map);
+
+	// free cells in map
 	//so it fees in time
-	usleep(300);
+
+
+	// ! mlx stuff
+	void	*mlx;
+	void	*mlx_window_my_game;
+	int		x_res;
+	int		y_res;
+
+	x_res = 300;
+	y_res = 300;
+	mlx = mlx_init();
+	mlx_window_my_game = mlx_new_window(mlx, x_res, y_res, "Hellow world");
+	//mlx_new_image(mlx, 1920, 1080);
+	mlx_loop(mlx);
+
+	// ft_printf("%d, %d\n", map->index_of_player_x, map->index_of_player_y);
+
+	// print_map(map);
+
+	check_flud_fill_main(&map);
+
+	free_map_cells(map);
+	usleep(30000);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 18:48:20 by sboulain          #+#    #+#             */
-/*   Updated: 2023/02/05 19:53:23 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/02/08 20:50:55 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 
 # include "mega_libft/libft.h"
 # include "mlx/mlx.h"
-//for close
+// for close
 # include <unistd.h>
-//for math function
+// for math function
 # include <math.h>
-//for open
+// for open
 # include <fcntl.h>
-//for bool
+// for bool
 # include <stdbool.h>
-//for malloc and free
+// for malloc and free
 # include <stdlib.h>
 
 typedef struct s_cell
@@ -45,6 +45,12 @@ typedef struct s_map
 
 }	t_map;
 
+typedef struct s_coordinate
+{
+	int	x;
+	int	y;
+}	t_coordinate;
+
 bool	is_map_valid_char(char *map_string);
 
 void	print_map(t_map	*map);
@@ -52,6 +58,9 @@ void	print_map(t_map	*map);
 void	free_map_cells(t_map *map);
 
 t_map	*make_map(char	*map_string);
+
+bool	check_flud_fill_main(t_map **map);
+
 
 
 #endif

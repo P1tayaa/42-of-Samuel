@@ -1,5 +1,5 @@
 
-SRCS			= so_long.c map_valid_string.c map_making.c
+SRCS			= so_long.c map_valid_string.c map_making.c flud_fill_check.c
 
 OBJS			= $(SRCS:%.c=%.o)
 
@@ -15,7 +15,7 @@ all:			$(NAME)
 $(NAME):
 				make -C ./mega_libft
 				make -C ./mlx
-				$(CC) $(CFLAGS) -o $(NAME) $(SRCS) ./mega_libft/libft.a ./mlx/libmlx.a
+				$(CC) $(CFLAGS) -o $(NAME) $(SRCS) ./mega_libft/libft.a ./mlx/libmlx.a -framework OpenGL -framework Appkit
 				@echo   :white_check_mark:Done!
 
 

@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 17:41:22 by sboulain          #+#    #+#             */
-/*   Updated: 2023/02/03 20:22:36 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/02/08 20:58:55 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ typedef struct s_stack
 	struct s_stack *next;
 }	t_stack;
 
-typedef struct
+typedef struct s_two_stacks
 {
 	struct s_stack	*stack_a;
 	struct s_stack	*stack_b;
