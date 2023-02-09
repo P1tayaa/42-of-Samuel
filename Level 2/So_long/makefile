@@ -14,8 +14,8 @@ all:			$(NAME)
 
 $(NAME):
 				make -C ./mega_libft
-				make -C ./mlx
-				$(CC) $(CFLAGS) -o $(NAME) $(SRCS) ./mega_libft/libft.a ./mlx/libmlx.a -framework OpenGL -framework Appkit
+				make -C ./MLX42/build
+				$(CC) $(CFLAGS) -o $(NAME) $(SRCS) ./mega_libft/libft.a ./MLX42/libmlx.a -framework OpenGL -framework Appkit
 				@echo   :white_check_mark:Done!
 
 

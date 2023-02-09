@@ -1,5 +1,5 @@
 
-SRCS			= push_swap.c
+SRCS			= push_swap.c stack_making.c index_stack_a.c stack_change_tools.c
 
 OBJS			= $(SRCS:%.c=%.o)
 

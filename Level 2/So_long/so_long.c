@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 14:05:25 by sboulain          #+#    #+#             */
-/*   Updated: 2023/02/08 20:48:48 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/02/09 13:31:17 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,15 +160,17 @@ int		check(int argc, char **argv, t_map **map)
 	//make map with the correct cells
 	*map = make_map(map_string); 
 	// make sure 1 and only 1 player
-	if (is_only_1_player(*map)== false)
-		return (free_map_cells(*map), ft_printf("not only 1 player"));
+	if (is_only_1_player(*map) == false)
+		return (free_map_cells(*map), ft_printf("not only 1 player\n"));
 	// make sure 1 and only 1 exit
-	if (is_only_1_exit(*map)== false)
-		return (free_map_cells(*map), ft_printf("not only 1 exit"));
+	if (is_only_1_exit(*map) == false)
+		return (free_map_cells(*map), ft_printf("not only 1 exit\n"));
 	//make all border are 1/wall
 	if (is_all_bordes_wall(*map) == false)
-		return(free_map_cells(*map), ft_printf("not border wall"));
-
+		return(free_map_cells(*map), ft_printf("not border wall\n"));
+	//make sure the game is doable all coins acccessible
+	if(check_flud_fill_main(map) == false)
+		return(free_map_cells(*map), ft_printf("game not doable\n"));
 	return (-1);
 }
 
@@ -201,11 +203,10 @@ int	main(int argc, char **argv)
 	//mlx_new_image(mlx, 1920, 1080);
 	mlx_loop(mlx);
 
-	// ft_printf("%d, %d\n", map->index_of_player_x, map->index_of_player_y);
+	ft_printf("%d, %d\n", map->index_of_player_x, map->index_of_player_y);
 
-	// print_map(map);
+	print_map(map);
 
-	check_flud_fill_main(&map);
 
 	free_map_cells(map);
 	usleep(30000);
