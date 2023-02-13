@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:42:07 by sboulain          #+#    #+#             */
-/*   Updated: 2023/02/09 17:11:57 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/02/13 13:08:31 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,55 @@ t_stack	*get_stack_of_index(t_stack *first_stack, int index)
 		i++;
 	}
 	return (stack_temp);
+}
+
+int	get_index_of_empty_index(t_stack *stack)
+{
+	int		index_until_empty;
+	t_stack	*temp_stack;
+
+	index_until_empty = 0;
+	temp_stack = stack;
+	while (temp_stack -> index_data != -1 && temp_stack -> next != NULL)
+	{
+		temp_stack = temp_stack -> next;
+		index_until_empty++;
+	}
+	return (index_until_empty);
+}
+
+void	print_stack(t_stack *stack);
+
+
+//bring the first empty first on the stack
+void	bring_empty_to_first_stack(t_stack *stack)
+{
+	int	index_until_empty;
+
+	index_until_empty = get_index_of_empty_index(stack);
+	while (index_until_empty > 0)
+	{
+		swap_stack_date_pointer(
+			get_stack_of_index(stack, index_until_empty),
+			get_stack_of_index(stack, index_until_empty - 1));
+		index_until_empty--;
+	}
+}
+
+// make the first last
+// line where def index_until_empty, don't look at first one because empty
+void	make_first_element_last_stack(t_stack *stack)
+{
+	int	index_until_empty;
+	int	i;
+
+	index_until_empty = get_index_of_empty_index(stack -> next) + 1;
+	i = 0;
+	while (i < index_until_empty)
+	{
+		swap_stack_date_pointer(
+			get_stack_of_index(stack, i),
+			get_stack_of_index(stack, i + 1));
+		i++;
+	}
 }

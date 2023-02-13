@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 17:18:54 by sboulain          #+#    #+#             */
-/*   Updated: 2023/02/09 17:32:55 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:32:13 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,24 @@ void	print_stacks(t_two_stacks *stacks)
 	print_stack(stacks -> stack_b);
 }
 
+void	print_stacks_para(t_two_stacks *stacks)
+{
+	t_stack	*stack_a_temp;
+	t_stack	*stack_b_temp;
+
+	
+
+	stack_a_temp = stacks -> stack_a;
+	stack_b_temp = stacks -> stack_b;
+	while (stack_a_temp != NULL || stack_b_temp != NULL)
+	{
+		ft_printf("data: %d, index %d, is_val %d          ", stack_a_temp -> data, stack_a_temp -> index_data, stack_a_temp ->has_data);
+		ft_printf("data: %d, index %d, is_val %d\n", stack_b_temp -> data, stack_b_temp -> index_data, stack_b_temp ->has_data);
+		stack_a_temp = stack_a_temp -> next;
+		stack_b_temp = stack_b_temp -> next;
+	}
+}
+
 bool	is_input_good(int argc, char **argv)
 {
 	long	number;
@@ -38,12 +56,12 @@ bool	is_input_good(int argc, char **argv)
 	int		j;
 
 	i = 1;
-	isneg = 0;
-	number = 0;
 	while (i < argc)
 	{
+		number = 0;
+		isneg = 0;
 		j = 0;
-		if (i == 1 && argv[i][j] == '-')
+		if (argv[i][j] == '-')
 		{
 			j++;
 			isneg = 1;
@@ -116,7 +134,22 @@ void 	leaks_chec(void)
 	system("leaks -q push_swap");
 }
 
+bool	is_stack_sorted(t_stack *stack)
+{
+	int	i;
+	t_stack *temp_stack;
 
+	i = 0;
+	temp_stack = stack;
+	while (temp_stack -> next != NULL)
+	{
+		if (temp_stack -> index_data != i)
+			return (false);
+		temp_stack = temp_stack -> next;
+		i++;
+	}
+	return (true);
+}
 
 
 int			main(int argc, char **argv)
@@ -132,11 +165,12 @@ int			main(int argc, char **argv)
 	if (make_sure_no_dup(stacks -> stack_a, stacks -> index_of_stacks) == false)
 		return (free_stacks(stacks),ft_printf("dup int\nError\n"));
 	index_values(stacks -> stack_a, stacks ->index_of_stacks);
+	if (is_stack_sorted(stacks -> stack_a))
+		return (free_stacks(stacks), ft_printf("already sorted\n"));
 
+	radix_sort(stacks);
+	// print_stacks_para(stacks);
 
-
-
-	print_stacks(stacks);
 	// print_stack(get_stack_of_index(stacks -> stack_a, 1));
 	// swap_stack_date_pointer(get_stack_of_index(stacks -> stack_a, 0),get_stack_of_index(stacks -> stack_a, 1));
 	// stacks = make_stacks(argc, argv);

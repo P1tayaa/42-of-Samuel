@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:21:06 by sboulain          #+#    #+#             */
-/*   Updated: 2023/02/03 16:45:08 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/02/13 17:15:12 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,21 @@ static void What_he_do(int sig, siginfo_t *info, void *context)
 	
 	(void)context;
 	my_pid = info -> si_pid;
-	char_getting |= (sig == SIGUSR2);
+	if (sig == SIGUSR2)
+	{
+		char_getting = (1 == 1) | char_getting;
+		// if (number_byte_transfered != 8)
+		// 	char_getting <<= 1;
+	}
+	// else
+	// if (sig == SIGUSR1)
+	// {
+	// 	char_getting = (1 == 0);
+	// 	if (number_byte_transfered != 8)
+	// 		char_getting <<= 1;
+	// }
+	
+	// char_getting = (sig == SIGUSR2);
 	if (++number_byte_transfered == 8)
 	{
 		number_byte_transfered = 0;

@@ -1,5 +1,7 @@
 
-SRCS			= push_swap.c stack_making.c index_stack_a.c stack_change_tools.c
+SRCS			= push_swap.c stack_making.c index_stack_a.c stack_change_tools.c \
+				  stack_action_1.c stack_action_2.c stack_action_3.c \
+				  radix_sort.c
 
 OBJS			= $(SRCS:%.c=%.o)
 
@@ -10,11 +12,14 @@ CFLAGS			= -Wall -Werror -Wextra -I.
 
 NAME			= push_swap
 
+.c.o:
+				gcc -c $< -o $@
+
 all:			$(NAME)
 
-$(NAME):
+$(NAME): $(OBJS)
 				make -C ./mega_libft
-				$(CC) $(CFLAGS) -o push_swap $(SRCS) ./mega_libft/libft.a
+				$(CC) $(CFLAGS) -o push_swap $(OBJS) ./mega_libft/libft.a
 				@echo   :white_check_mark:Done!
 clean:
 				@rm -f $(OBJS) && make clean -C ./mega_libft

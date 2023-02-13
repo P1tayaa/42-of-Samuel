@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:25:53 by sboulain          #+#    #+#             */
-/*   Updated: 2023/02/09 17:11:38 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/02/13 12:25:40 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_two_stacks	*make_stacks(int argc, char **argv)
 		temp_stack -> next = make_single_stack(ft_atoi(argv[i]), true);
 		temp_stack = temp_stack -> next;
 	}
-	stacks -> stack_b = make_emty_stack_with_len(argc - 2);
-	stacks ->index_of_stacks = argc - 2;
+	stacks -> stack_b = make_emty_stack_with_len(argc - 1);
+	stacks -> index_of_stacks = argc - 2;
 	return (stacks);
 }
