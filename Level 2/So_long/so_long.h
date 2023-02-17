@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 18:48:20 by sboulain          #+#    #+#             */
-/*   Updated: 2023/02/08 20:50:55 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/02/17 17:10:09 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define SO_LONG_H
 
 # include "mega_libft/libft.h"
-# include "mlx/mlx.h"
+// include MLX42
+# include "MLX42/include/MLX42/MLX42.h"
 // for close
 # include <unistd.h>
 // for math function

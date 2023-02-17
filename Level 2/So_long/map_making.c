@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 16:48:03 by sboulain          #+#    #+#             */
-/*   Updated: 2023/02/08 17:16:03 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/02/17 17:11:30 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,7 @@ void	print_map(t_map	*map)
 void	free_map_cells(t_map *map)
 {
 	int	i;
-	int	j;
-
+	
 	i = 0;
 	while (i <= map ->max_index_y_down)
 	{
@@ -121,7 +120,8 @@ void	free_map_cells(t_map *map)
 		i++;
 	}
 	free(map ->cells);
-	map ->cells = NULL;
+	// map ->cells = NULL;
+	free(map);
 }
 
 t_map	*make_map(char	*map_string)
@@ -130,9 +130,10 @@ t_map	*make_map(char	*map_string)
 	char	**verctor_string_map;
 	int		i;
 
+	map = malloc(sizeof(t_map));
 	verctor_string_map = ft_split(map_string, '\n');
-	map ->max_index_x_right = get_how_many_x_right(verctor_string_map);
-	map ->max_index_y_down = get_how_many_y_down(verctor_string_map);
+	map -> max_index_x_right = get_how_many_x_right(verctor_string_map);
+	map -> max_index_y_down = get_how_many_y_down(verctor_string_map);
 	map -> cells = (t_cell **)malloc
 		((map ->max_index_y_down + 1) * sizeof(t_cell *));
 	if (map -> cells == NULL)

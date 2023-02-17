@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 12:37:32 by sboulain          #+#    #+#             */
-/*   Updated: 2023/02/13 17:08:01 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/02/17 18:50:58 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ void	move_b_to_a_in_right_order(t_two_stacks *stacks)
 	int	number_of_stack_of_byte_size;
 	int	index_smallest;
 	int	index_biggest;
-
+	
+	// print_stacks_para(stacks);
 	if (get_stack_of_index(stacks -> stack_a, 0) -> index_data < get_stack_of_index(stacks -> stack_a, 1) -> index_data)
 		sa_swap_a(stacks, true);
 	current_byte_size = get_largest_byte(stacks -> stack_b -> index_data);
@@ -110,33 +111,64 @@ void	move_b_to_a_in_right_order(t_two_stacks *stacks)
 			index_smallest = number_of_stack_of_byte_size;
 		number_of_stack_of_byte_size++;
 	}
-	ft_printf("%d\n", index_smallest);
+	// ft_printf("%d\n", index_smallest);
 	int	i;
 	int	j;
+	bool	has_pa;
 
 	j = 0;
-	while (j != number_of_stack_of_byte_size / 2)
-	{
+	// while (j != number_of_stack_of_byte_size / 2)
+	// {
 		
 		i = 0;
+		has_pa = false;
 		while (i < number_of_stack_of_byte_size)
 		{
-			print_stacks_para(stacks);
-			if (get_stack_of_index(stacks -> stack_b, 0) -> index_data > get_stack_of_index(stacks -> stack_b, 1) -> index_data)
+			// print_stacks_para(stacks);
+			if (get_stack_of_index(stacks -> stack_b, 0) -> index_data > get_stack_of_index(stacks -> stack_b, 1) -> index_data && get_stack_of_index(stacks -> stack_b, 1) -> index_data != -1)
+			{
+				// print_stacks_para(stacks);
 				sb_swap_b(stacks, true);
-			if (0 == index_smallest || i + 1 == index_smallest)
-				pa_push_a(stacks, true);
-			rb_rotate_b(stacks, true);
+				if (i + 1 == index_smallest && has_pa == false)
+				{
+					// print_stacks_para(stacks);
+					pa_push_a(stacks, true);
+					has_pa = true;	
+					break ;
+				}
+			}
+			else
+				if (i == index_smallest && has_pa == false)
+				{
+					// print_stacks_para(stacks);
+					pa_push_a(stacks, true);
+					has_pa = true;
+					break ;
+				}
+			if (stacks -> stack_b -> index_data != -1)
+			{
+				// print_stacks_para(stacks);
+				rb_rotate_b(stacks, true);
+
+			}
 			i++;
 		}
 		while (i > 0)
 		{
-			print_stacks_para(stacks);
+			// print_stacks_para(stacks);
 			rrb_reverse_rotate_b(stacks, true);
 			i--;
 		}
 		j++;
+	// }
+	i = 0;
+	while (get_largest_byte(get_stack_of_index(stacks -> stack_b, i) -> index_data) == current_byte_size)
+	{
+		// print_stacks_para(stacks);
+		pa_push_a(stacks, true);
+		i++;
 	}
+	
 	
 	
 	
@@ -158,15 +190,56 @@ void	move_b_to_a_in_right_order(t_two_stacks *stacks)
 void	radix_sort(t_two_stacks *stacks)
 {
 	
-	while (find_largest_bit(stacks -> stack_a) != 0)
-	{
-		put_largest_byte_a_to_b(stacks);
-		print_stacks_para(stacks);
-	}
+	// while (find_largest_bit(stacks -> stack_a) != 0)
+	// {
+	// 	// put_largest_byte_a_to_b(stacks);
+	// 	print_stacks_para(stacks);
+	// }
 
-	ft_printf("\n");
-	move_b_to_a_in_right_order(stacks);
-	print_stacks_para(stacks);
+	// ft_printf("\n");
+	// while (stacks -> stack_b -> index_data != -1)
+	// {
+	// 	// move_b_to_a_in_right_order(stacks);
+	// 	// move_b_to_a_in_right_order(stacks);
+	// 	// move_b_to_a_in_right_order(stacks);
+	// }
+			// print_stacks_para(stacks);
+	int	i;
+	int j;
+	int	num_in_stack_b;
+
+	i = 0;
+	num_in_stack_b = 0;
+	while (!is_stack_sorted(stacks -> stack_a))
+	{
+		num_in_stack_b = 0;
+		j = 0;
+		while ((j <= (stacks -> index_of_stacks)))
+		{
+				// ft_printf("pb");
+			if ((((stacks -> stack_a -> index_data) >> i) & 1) == 0)
+			{
+				pb_push_b(stacks, true);
+				num_in_stack_b++;
+			}
+			else
+				ra_rotate_a(stacks, true);
+			j++;
+		}
+		while (num_in_stack_b >= 0)
+		{
+			// ft_printf("pa");
+			pa_push_a(stacks, true);
+			num_in_stack_b--;
+		}
+		// print_stacks_para(stacks);
+		// ft_printf("%d\n", stacks -> index_of_stacks);
+		i++;
+	}
+	
+
+
+	// print_stacks_para(stacks);
 	// ! wong
 	// while (stacks ->stack_b -> index_data != -1)
 	// {

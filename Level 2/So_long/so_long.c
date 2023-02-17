@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 14:05:25 by sboulain          #+#    #+#             */
-/*   Updated: 2023/02/09 13:31:17 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/02/17 17:20:30 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ char	*open_map(char *map_name)
 	char		*all_file_string;
 
 	map_location = ft_strjoin("./maps/", map_name);
+	if (map_location == NULL)
+		exit(1);
 	if (ft_memcmp(&map_name[ft_strlen(map_name) - 4], ber, 4) != 0)
 		return(free(map_location), NULL);
 	file_discriptor = open(map_location, O_RDONLY);
@@ -160,18 +162,30 @@ int		check(int argc, char **argv, t_map **map)
 	//make map with the correct cells
 	*map = make_map(map_string); 
 	// make sure 1 and only 1 player
+	free(map_string);
 	if (is_only_1_player(*map) == false)
 		return (free_map_cells(*map), ft_printf("not only 1 player\n"));
 	// make sure 1 and only 1 exit
+	
 	if (is_only_1_exit(*map) == false)
 		return (free_map_cells(*map), ft_printf("not only 1 exit\n"));
 	//make all border are 1/wall
+
 	if (is_all_bordes_wall(*map) == false)
 		return(free_map_cells(*map), ft_printf("not border wall\n"));
 	//make sure the game is doable all coins acccessible
+
 	if(check_flud_fill_main(map) == false)
 		return(free_map_cells(*map), ft_printf("game not doable\n"));
+
 	return (-1);
+}
+
+void	ft_hook(void *param)
+{
+	const mlx_t* mlx = param;
+
+	ft_printf("WIDTH: %d | HEIGHT: %d\n", mlx->width, mlx->height);
 }
 
 int	main(int argc, char **argv)
@@ -183,29 +197,34 @@ int	main(int argc, char **argv)
 	is_bad = check(argc, argv, &map);
 
 	if (is_bad != -1)
-		return(1);
+		return(free(map),1);
 	// print_map(map);
 
 	// free cells in map
 	//so it fees in time
 
 
-	// ! mlx stuff
-	void	*mlx;
-	void	*mlx_window_my_game;
-	int		x_res;
-	int		y_res;
+	mlx_t	*mlx;
+	mlx_set_setting(MLX_MAXIMIZED, true);
+	mlx = mlx_init(map -> index_of_player_x * 32, map -> index_of_player_y * 32, "main_window", true);
+	
+	mlx_image_t* img = mlx_new_image(mlx, 256, 256);
+	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
+		exit(1);
 
-	x_res = 300;
-	y_res = 300;
-	mlx = mlx_init();
-	mlx_window_my_game = mlx_new_window(mlx, x_res, y_res, "Hellow world");
-	//mlx_new_image(mlx, 1920, 1080);
+	// Even after the image is being displayed, we can still modify the buffer.
+	mlx_put_pixel(img, 0, 0, 0xFF0000FF);
+
+	// Register a hook and pass mlx as an optional param.
+	// NOTE: Do this before calling mlx_loop!
+	mlx_loop_hook(mlx, ft_hook, mlx);
 	mlx_loop(mlx);
+	mlx_terminate(mlx);
+
 
 	ft_printf("%d, %d\n", map->index_of_player_x, map->index_of_player_y);
 
-	print_map(map);
+	// print_map(map);
 
 
 	free_map_cells(map);

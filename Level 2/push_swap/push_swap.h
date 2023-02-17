@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 17:41:22 by sboulain          #+#    #+#             */
-/*   Updated: 2023/02/13 13:15:27 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/02/17 18:09:36 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ typedef struct s_two_stacks
 	int				index_of_stacks;
 
 }	t_two_stacks;
+
+// * push_swap.c
+bool	is_stack_sorted(t_stack *stack);
 
 // * stack_making.c
 t_two_stacks	*make_stacks(int argc, char **argv);
