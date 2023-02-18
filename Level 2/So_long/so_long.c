@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 14:05:25 by sboulain          #+#    #+#             */
-/*   Updated: 2023/02/17 17:20:30 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/02/18 14:19:27 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,18 +206,18 @@ int	main(int argc, char **argv)
 
 	mlx_t	*mlx;
 	mlx_set_setting(MLX_MAXIMIZED, true);
-	mlx = mlx_init(map -> index_of_player_x * 32, map -> index_of_player_y * 32, "main_window", true);
+	mlx = mlx_init((map -> index_of_player_x) * 32, (map -> index_of_player_y) * 32, "main_window", true);
 	
-	mlx_image_t* img = mlx_new_image(mlx, 256, 256);
-	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
-		exit(1);
+	// mlx_image_t* img = mlx_new_image(mlx, 256, 256);
+	// if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
+	// 	exit(1);
 
 	// Even after the image is being displayed, we can still modify the buffer.
-	mlx_put_pixel(img, 0, 0, 0xFF0000FF);
+	// mlx_put_pixel(img, 0, 0, 0xFF0000FF);
 
 	// Register a hook and pass mlx as an optional param.
 	// NOTE: Do this before calling mlx_loop!
-	mlx_loop_hook(mlx, ft_hook, mlx);
+	// mlx_loop_hook(mlx, ft_hook, mlx);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 

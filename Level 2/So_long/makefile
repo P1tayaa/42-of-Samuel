@@ -6,7 +6,7 @@ OBJS			= $(SRCS:%.c=%.o)
 CC				= gcc
 
 # CFLAGS			= -Wall -Werror -Wextra -I. -fsanitize=address
-CFLAGS			= -Wall -Werror -Wextra -Wunreachable-code -Ofast
+CFLAGS			= -Wall -Werror -Wextra
 
 NAME			= so_long
 
@@ -15,7 +15,9 @@ all:			$(NAME)
 $(NAME):
 				make -C ./mega_libft
 				make -C ./MLX42/build
-				$(CC) $(CFLAGS) -o $(NAME) $(SRCS) ./mega_libft/libft.a ./MLX42/build/libmlx42.a -framework Cocoa -framework OpenGL -framework IOKit -Iinclude -lglfw3
+# $(CC) $(CFLAGS) -o $(NAME) $(SRCS) ./mega_libft/libft.a ./MLX42/build/libmlx42.a -framework Cocoa -framework OpenGL -framework IOKit -Iinclude -lglfw3
+				$(CC) $(CFLAGS) -o $(NAME) $(SRCS) ./mega_libft/libft.a ./MLX42/build/libmlx42.a -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
+# $(CC) $(CFLAGS) ./MLX42/build/libmlx42.a -ldl -lglfw -pthread -lm -I ./include -I ./MLX42/build/libmlx42.a/include -o $(NAME) $(SRCS) ./mega_libft/libft.a
 				@echo   :white_check_mark:Done!
 
 
