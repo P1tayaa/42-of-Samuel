@@ -6,22 +6,30 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 17:18:54 by sboulain          #+#    #+#             */
-/*   Updated: 2023/02/17 14:01:05 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/03/09 21:02:51 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+// ! need to be commentated
+void	leaks_chec(void)
+{
+	system("leaks -q push_swap");
+}
+
+//print one stack and it contants
 void	print_stack(t_stack *stack)
 {
-	// ft_printf("pointer: %p\n", stack);
 	while (stack != NULL)
 	{
-		ft_printf("data: %d, index %d, is_val %d\n", stack -> data, stack -> index_data, stack ->has_data);
+		ft_printf("data: %d, index %d, is_val %d\n",
+			stack -> data, stack -> index_data, stack ->has_data);
 		stack = stack -> next;
 	}
 }
 
+//print both stacks and it contants
 void	print_stacks(t_two_stacks *stacks)
 {
 	ft_printf("stack a:\n");
@@ -30,24 +38,28 @@ void	print_stacks(t_two_stacks *stacks)
 	print_stack(stacks -> stack_b);
 }
 
+//print both stacks and it contants next to each others on the terminal
 void	print_stacks_para(t_two_stacks *stacks)
 {
 	t_stack	*stack_a_temp;
 	t_stack	*stack_b_temp;
 
-	
-
 	stack_a_temp = stacks -> stack_a;
 	stack_b_temp = stacks -> stack_b;
 	while (stack_a_temp != NULL || stack_b_temp != NULL)
 	{
-		ft_printf("data: %d, index %d, is_val %d          ", stack_a_temp -> data, stack_a_temp -> index_data, stack_a_temp ->has_data);
-		ft_printf("data: %d, index %d, is_val %d\n", stack_b_temp -> data, stack_b_temp -> index_data, stack_b_temp ->has_data);
+		ft_printf("data: %d, index %d, is_val %d          ",
+			stack_a_temp -> data,
+			stack_a_temp -> index_data, stack_a_temp ->has_data);
+		ft_printf("data: %d, index %d, is_val %d\n",
+			stack_b_temp -> data,
+			stack_b_temp -> index_data, stack_b_temp ->has_data);
 		stack_a_temp = stack_a_temp -> next;
 		stack_b_temp = stack_b_temp -> next;
 	}
 }
 
+// check weather all inputs are numbers
 bool	is_input_good(int argc, char **argv)
 {
 	long	number;
@@ -80,6 +92,7 @@ bool	is_input_good(int argc, char **argv)
 	return (true);
 }
 
+//make sure there are no dup number in the stack
 bool	make_sure_no_dup(t_stack *stack_a_full, int index_of_stack)
 {
 	int	*array_ints;
@@ -90,7 +103,7 @@ bool	make_sure_no_dup(t_stack *stack_a_full, int index_of_stack)
 	i = 0;
 	while (i <= index_of_stack)
 	{
-		array_ints[i] = get_stack_of_index(stack_a_full, i) -> data;
+		array_ints[i] = get_stack_of_index(stack_a_full, i)-> data;
 		j = 0;
 		while (j < i)
 		{
@@ -104,6 +117,7 @@ bool	make_sure_no_dup(t_stack *stack_a_full, int index_of_stack)
 	return (true);
 }
 
+//free both stack to make sure this is no leaks
 void	free_stacks(t_two_stacks *stacks)
 {
 	int		i;
@@ -112,7 +126,7 @@ void	free_stacks(t_two_stacks *stacks)
 	i = stacks -> index_of_stacks;
 	while (i >= 0)
 	{
-		temp_stack = get_stack_of_index(stacks->stack_a,i);
+		temp_stack = get_stack_of_index(stacks -> stack_a, i);
 		free(temp_stack);
 		temp_stack = NULL;
 		i--;
@@ -120,7 +134,7 @@ void	free_stacks(t_two_stacks *stacks)
 	i = stacks -> index_of_stacks;
 	while (i >= 0)
 	{
-		temp_stack = get_stack_of_index(stacks->stack_b,i);
+		temp_stack = get_stack_of_index(stacks -> stack_b, i);
 		free(temp_stack);
 		temp_stack = NULL;
 		i--;
@@ -129,15 +143,11 @@ void	free_stacks(t_two_stacks *stacks)
 	stacks = NULL;
 }
 
-void 	leaks_chec(void)
-{
-	system("leaks -q push_swap");
-}
-
+//check if the stack is sorted by make sure index are in incrementing by 1 and starting with 0
 bool	is_stack_sorted(t_stack *stack)
 {
-	int	i;
-	t_stack *temp_stack;
+	int		i;
+	t_stack	*temp_stack;
 
 	i = 0;
 	temp_stack = stack;
@@ -151,12 +161,12 @@ bool	is_stack_sorted(t_stack *stack)
 	return (true);
 }
 
-
 int			main(int argc, char **argv)
 {
-	t_two_stacks *stacks;
-	//error handeling
+	t_two_stacks	*stacks;
+	// ! need to be commanted
 	atexit(leaks_chec);
+	// !
 	if (argc < 2)
 		return (ft_printf("not enought args\nError\n"));
 	if (is_input_good(argc, argv) == false)
@@ -167,16 +177,9 @@ int			main(int argc, char **argv)
 	index_values(stacks -> stack_a, stacks ->index_of_stacks);
 	if (is_stack_sorted(stacks -> stack_a))
 		return (free_stacks(stacks), ft_printf("already sorted\n"));
-
+	if (short_sort(stacks))
+		return (free_stacks(stacks), ft_printf("did short sort\n"));
 	radix_sort(stacks);
-	// print_stacks_para(stacks);
-
-	// print_stack(get_stack_of_index(stacks -> stack_a, 1));
-	// swap_stack_date_pointer(get_stack_of_index(stacks -> stack_a, 0),get_stack_of_index(stacks -> stack_a, 1));
-	// stacks = make_stacks(argc, argv);
-	// print_stacks(stacks);
-	
+	print_stacks_para(stacks);
 	free_stacks(stacks);
-
-	// ft_printf("%d", ft_atoi(argv[1]));
 }

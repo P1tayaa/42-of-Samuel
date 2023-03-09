@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 22:32:22 by sboulain          #+#    #+#             */
-/*   Updated: 2023/02/17 19:01:05 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/03/09 16:52:35 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,10 @@ void	rra_reverse_rotate_a(t_two_stacks *stacks, bool do_print)
 	int	index_until_empty;
 
 	index_until_empty = get_index_of_empty_index(stacks -> stack_a);
+	// ft_printf("\n%d\n", index_until_empty);
 	while (index_until_empty > 0)
 	{
-		if (get_stack_of_index(stacks ->stack_b, index_until_empty) -> index_data != -1)
+		if (get_stack_of_index(stacks ->stack_a, index_until_empty) -> index_data != -1)
 			swap_stack_date_pointer(
 				get_stack_of_index(stacks ->stack_a, index_until_empty),
 				get_stack_of_index(stacks ->stack_a, index_until_empty - 1));

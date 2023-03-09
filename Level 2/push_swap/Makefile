@@ -1,9 +1,10 @@
 
 SRCS			= push_swap.c stack_making.c index_stack_a.c stack_change_tools.c \
 				  stack_action_1.c stack_action_2.c stack_action_3.c \
-				  radix_sort.c
+				  radix_sort.c short_sort.c
 
-OBJS			= $(SRCS:%.c=%.o)
+OBJ_FOLDER      = bin
+OBJS			= $(SRCS:%.c=$(OBJ_FOLDER)/%.o)
 
 CC				= gcc
 
@@ -12,7 +13,7 @@ CFLAGS			= -Wall -Werror -Wextra -I.
 
 NAME			= push_swap
 
-.c.o:
+$(OBJ_FOLDER)/%.o: %.c
 				gcc -c $< -o $@
 
 all:			$(NAME)

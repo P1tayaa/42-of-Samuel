@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 17:41:22 by sboulain          #+#    #+#             */
-/*   Updated: 2023/02/17 18:09:36 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/03/08 19:21:49 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,9 @@ int				get_index_of_empty_index(t_stack *stack);
 
 
 // * stack_action_1.c
+
+// * short_sort.c
+bool	short_sort(t_two_stacks *sta);
 
 // sa (swap a): Swap the first 2 elements at the top of stack a.
 // Do nothing if there is only one or no elements.

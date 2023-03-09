@@ -16,11 +16,11 @@ CLIENT			= client
 
 all:			$(SERVER) $(CLIENT)
 
-$(SERVER):
+$(SERVER):	server.c
 				make -C ./mega_libft
 				$(CC) $(CFLAGS) -o $(SERVER) $(SERVER_SRCS) ./mega_libft/libft.a
 				@echo   :white_check_mark:Done!
-$(CLIENT):
+$(CLIENT):	client.c
 				make -C ./mega_libft
 				$(CC) $(CFLAGS) -o $(CLIENT) $(CLIENT_SRCS) ./mega_libft/libft.a
 				@echo   :white_check_mark:Done!

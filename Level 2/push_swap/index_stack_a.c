@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:38:57 by sboulain          #+#    #+#             */
-/*   Updated: 2023/02/11 17:07:29 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/03/09 20:59:28 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,12 @@ void	sort_stack_alone(t_stack *stack_a, int index_of_stack)
 	t_stack	*pivot;
 	int		pivot_index;
 
+	if (index_of_stack < 2)
+	{
+		if (get_stack_of_index(stack_a, 0) -> data > get_stack_of_index(stack_a, 1) -> data)
+			swap_stack_date_pointer(stack_a, stack_a -> next);
+		return ;
+	}
 	pivot_index = (index_of_stack)/2;
 	pivot = get_stack_of_index(stack_a, pivot_index);
 	if (index_of_stack == 0)
@@ -96,14 +102,17 @@ void	sort_stack_alone(t_stack *stack_a, int index_of_stack)
 	high_right = find_highest_before_index(stack_a, pivot_index, pivot_data);
 	// ft_printf("index_of_stack %d, pivot index %d, short %p, high %p\n",index_of_stack, pivot_index, short_left, high_right);
 	if (short_left == NULL && high_right == NULL)
-		return ;
-	else if (short_left == NULL)
+	{
+		sort_stack_alone(stack_a, pivot_index);
+		sort_stack_alone(pivot, index_of_stack - pivot_index);
+	}
+	else if (short_left == NULL && high_right != NULL)
 	{
 		// ft_printf("swap high and pivot\n");
 		swap_stack_date_pointer(high_right, pivot);
 		sort_stack_alone(stack_a, index_of_stack);
 	}
-	else if (high_right == NULL)
+	else if (high_right == NULL && short_left != NULL)
 	{
 		// ft_printf("swap short and pivot\n");
 		swap_stack_date_pointer(short_left, pivot);
@@ -144,13 +153,23 @@ void	compare_and_index(t_stack *stack_og, t_stack *stack_dup_in_order, int index
 	}
 }
 
+void	print_stack(t_stack *stack);
+
 void	index_values(t_stack *stack_a, int index_of_stack)
 {
 	t_stack	*stack_a_dup;
 
 	stack_a_dup = dup_stack(stack_a, index_of_stack);
+	// print_stack(stack_a_dup);
+	// ft_printf("\n");
 	sort_stack_alone(stack_a_dup, index_of_stack);
+	// print_stack(stack_a_dup);
+	// ft_printf("\n");
 	compare_and_index(stack_a, stack_a_dup, index_of_stack);
+	// print_stack(stack_a_dup);
+	// ft_printf("\n");
+	// print_stack(stack_a);
+	// ft_printf("\n");
 	free_dup_stack(stack_a_dup, index_of_stack);
 }
 
