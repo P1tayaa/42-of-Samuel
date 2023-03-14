@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 15:58:28 by sboulain          #+#    #+#             */
-/*   Updated: 2023/02/18 19:52:35 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/03/14 19:57:19 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,17 @@
 # include <stdbool.h>
 //for gettimeofday
 # include <sys/time.h>
+//for printf
+#include <stdio.h>
+
 
 void	put_num(int num);
+
+void	put_num_64(uint64_t num);
+
+bool	ft_atoi(char *str, int *number);
+
+int	put_str(char *str);
 
 typedef struct s_philo
 {
@@ -37,8 +46,22 @@ typedef struct s_philo
 	pthread_t		*current_thread;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
-	pthread_mutex_t	*write_on_terminal;
 
 }	t_philo;
 
+typedef struct s_args_info
+{
+	int		number_of_philosophers;
+	int		time_to_die;
+	int		time_to_eat;
+	int		time_to_sleep;
+	int		number_of_times_each_philosopher_must_eat;
+	bool	all_good;
+}	t_args_info;
+
+typedef struct s_args_info_plus_philo
+{
+	t_philo		*philo;
+	t_args_info	arg_info;
+}t_args_info_plus_philo;
 #endif
