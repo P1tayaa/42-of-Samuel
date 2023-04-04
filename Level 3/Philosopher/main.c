@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 14:47:22 by sboulain          #+#    #+#             */
-/*   Updated: 2023/03/14 20:09:27 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/04/04 12:52:03 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void think(t_args_info_plus_philo *arguments)
 	put_str(" ");
 	put_num(arguments->philo->num_of_phil);
 	put_str(" is thinking\n");
-	usleep(arguments->arg_info.)
+	// usleep(arguments->arg_info.);
 }
 void	*thread_phil(void *arg)
 {

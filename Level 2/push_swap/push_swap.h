@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 17:41:22 by sboulain          #+#    #+#             */
-/*   Updated: 2023/03/08 19:21:49 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/04/04 15:02:57 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 // for bool
 # include <stdbool.h>
 # include "mega_libft/libft.h"
-
 
 typedef struct s_stack
 {
@@ -38,15 +37,13 @@ typedef struct s_two_stacks
 }	t_two_stacks;
 
 // * push_swap.c
-bool	is_stack_sorted(t_stack *stack);
+bool			is_stack_sorted(t_stack *stack);
 
 // * stack_making.c
 t_two_stacks	*make_stacks(int argc, char **argv);
 
-
 // * index_stacks.c
 void			index_values(t_stack *stack_a, int index_of_stack);
-
 
 // * stack_change_tools.c
 void			swap_stack_date_pointer(t_stack *stack_1, t_stack *stack_2);
@@ -55,12 +52,10 @@ t_stack			*get_stack_of_index(t_stack *first_stack, int index);
 
 int				get_index_of_empty_index(t_stack *stack);
 
+// * short_sort.c
+bool			short_sort(t_two_stacks *sta);
 
 // * stack_action_1.c
-
-// * short_sort.c
-bool	short_sort(t_two_stacks *sta);
-
 // sa (swap a): Swap the first 2 elements at the top of stack a.
 // Do nothing if there is only one or no elements.
 void			sa_swap_a(t_two_stacks *stacks, bool do_print);
@@ -79,7 +74,6 @@ void			pa_push_a(t_two_stacks *stacks, bool do_printf);
 // pb (push b): Take the first element at the top of a 
 //and put it at the top of b.
 void			pb_push_b(t_two_stacks *stacks, bool do_printf);
-
 
 // * stack_action_2.c
 
@@ -102,24 +96,11 @@ void			rra_reverse_rotate_a(t_two_stacks *stacks, bool do_print);
 // The last element becomes the first one.
 void			rrb_reverse_rotate_b(t_two_stacks *stacks, bool do_print);
 
-
 // * stack_action_3.c
 
 // rrr : rra and rrb at the same time.
-void	rra_reverse_rotate_both(t_two_stacks *stacks, bool do_print);
+void			rra_reverse_rotate_both(t_two_stacks *stacks, bool do_print);
 
 // * radix_sort.c
-void	radix_sort(t_two_stacks *stacks);
-
-// typedef struct s_list
-// {
-// 	void			*content;
-// 	struct s_list	*next;
-// }					t_list;
-
-// typedef struct s_list_int
-// {
-// 	struct
-// };
-
+void			radix_sort(t_two_stacks *stacks);
 #endif

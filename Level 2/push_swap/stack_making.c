@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:25:53 by sboulain          #+#    #+#             */
-/*   Updated: 2023/02/13 12:25:40 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/04/04 14:56:58 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ t_stack	*make_emty_stack_with_len(int len_of_stack)
 	stack_emty = make_single_stack(0, false);
 	temp_stack = stack_emty;
 	i = 0;
-	// ft_printf("i: %d, argc: %d\n", i, len_of_stack);
 	i++;
 	while (i < len_of_stack)
 	{
@@ -60,7 +59,6 @@ t_two_stacks	*make_stacks(int argc, char **argv)
 		exit(-1);
 	stacks -> stack_a = make_single_stack(ft_atoi(argv[i]), true);
 	temp_stack = stacks -> stack_a;
-	// ft_printf("i: %d, argc: %d\n", i, argc);
 	while (i < argc - 1)
 	{
 		i++;

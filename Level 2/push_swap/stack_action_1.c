@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 22:32:22 by sboulain          #+#    #+#             */
-/*   Updated: 2023/02/13 12:23:11 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/04/04 14:55:22 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	ss_swap_both(t_two_stacks *stacks, bool do_print)
 	sa_swap_a(stacks, false);
 	if (do_print)
 		ft_printf("ss\n");
-
 }
 
 // pa (push a): Take the first element at the top of b 

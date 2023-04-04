@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:42:07 by sboulain          #+#    #+#             */
-/*   Updated: 2023/03/09 18:50:50 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/04/04 14:56:44 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ t_stack	*get_stack_of_index(t_stack *first_stack, int index)
 	}
 	return (stack_temp);
 }
+
 // get the index of the end of the stack or empty
 int	get_index_of_empty_index(t_stack *stack)
 {
@@ -57,9 +58,6 @@ int	get_index_of_empty_index(t_stack *stack)
 	}
 	return (index_until_empty);
 }
-
-void	print_stack(t_stack *stack);
-
 
 //bring the first empty first on the stack
 void	bring_empty_to_first_stack(t_stack *stack)

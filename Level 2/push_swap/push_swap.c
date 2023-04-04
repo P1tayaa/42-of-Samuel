@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 17:18:54 by sboulain          #+#    #+#             */
-/*   Updated: 2023/03/09 21:02:51 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/04/04 13:00:40 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,27 +67,22 @@ bool	is_input_good(int argc, char **argv)
 	int		i;
 	int		j;
 
-	i = 1;
-	while (i < argc)
+	i = 0;
+	while (++i < argc)
 	{
 		number = 0;
 		isneg = 0;
-		j = 0;
-		if (argv[i][j] == '-')
-		{
-			j++;
+		j = -1;
+		if (argv[i][j + 1] == '-')
 			isneg = 1;
-		}
-		while (argv[i][j] != '\0')
+		while (argv[i][++j + isneg] != '\0')
 		{
-			if (!ft_isdigit(argv[i][j]))
+			if (!ft_isdigit(argv[i][j + isneg]))
 				return (false);
-			number = number * 10 + argv[i][j] - '0';
+			number = number * 10 + argv[i][j + isneg] - '0';
 			if (number > 2147483647 || (number > 2147483648 && isneg))
 				return (false);
-			j++;
 		}
-		i++;
 	}
 	return (true);
 }
@@ -143,7 +138,8 @@ void	free_stacks(t_two_stacks *stacks)
 	stacks = NULL;
 }
 
-//check if the stack is sorted by make sure index are in incrementing by 1 and starting with 0
+//check if the stack is sorted by make sure 
+// index are in incrementing by 1 and starting with 0
 bool	is_stack_sorted(t_stack *stack)
 {
 	int		i;
@@ -161,7 +157,7 @@ bool	is_stack_sorted(t_stack *stack)
 	return (true);
 }
 
-int			main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
 	t_two_stacks	*stacks;
 	// ! need to be commanted
