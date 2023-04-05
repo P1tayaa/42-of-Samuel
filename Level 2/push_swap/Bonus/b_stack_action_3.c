@@ -6,11 +6,11 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 22:32:22 by sboulain          #+#    #+#             */
-/*   Updated: 2023/04/04 17:59:56 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/04/04 18:12:53 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker.h"
 
 // rrr : rra and rrb at the same time.
 void	rrr_reverse_rotate_both(t_two_stacks *stacks, bool do_print)

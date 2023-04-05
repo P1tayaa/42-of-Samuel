@@ -1,42 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/28 17:18:54 by sboulain          #+#    #+#             */
-/*   Updated: 2023/04/04 17:45:44 by sboulain         ###   ########.fr       */
+/*   Created: 2023/04/04 17:43:31 by sboulain          #+#    #+#             */
+/*   Updated: 2023/04/04 18:10:01 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-
-// ! need to be commentated
-void	leaks_chec(void)
-{
-	system("leaks -q push_swap");
-}
-
-//print one stack and it contants
-void	print_stack(t_stack *stack)
-{
-	while (stack != NULL)
-	{
-		ft_printf("data: %d, index %d, is_val %d\n",
-			stack -> data, stack -> index_data, stack ->has_data);
-		stack = stack -> next;
-	}
-}
-
-//print both stacks and it contants
-void	print_stacks(t_two_stacks *stacks)
-{
-	ft_printf("stack a:\n");
-	print_stack(stacks -> stack_a);
-	ft_printf("stack b:\n");
-	print_stack(stacks -> stack_b);
-}
+#include "checker.h"
 
 //print both stacks and it contants next to each others on the terminal
 void	print_stacks_para(t_two_stacks *stacks)
@@ -157,25 +131,53 @@ bool	is_stack_sorted(t_stack *stack)
 	return (true);
 }
 
-int		main(int argc, char **argv)
+void	checker(t_two_stacks *stacks)
+{
+	char	*line;
+
+	line = get_next_line(1);
+	while (line != NULL)
+	{
+		if (ft_strncmp(line, "sa\n", 3) == 0)
+			sa_swap_a(stacks, false);
+		else if (ft_strncmp(line, "sb\n", 3) == 0)
+			sb_swap_b(stacks, false);
+		else if (ft_strncmp(line, "ss\n", 3) == 0)
+			ss_swap_both(stacks, false);
+		else if (ft_strncmp(line, "pa\n", 3) == 0)
+			pa_push_a(stacks, false);
+		else if (ft_strncmp(line, "pb\n", 3) == 0)
+			pb_push_b(stacks, false);
+		else if (ft_strncmp(line, "ra\n", 3) == 0)
+			ra_rotate_a(stacks, false);
+		else if (ft_strncmp(line, "rb\n", 3) == 0)
+			rb_rotate_b(stacks, false);
+		else if (ft_strncmp(line, "rr\n", 3) == 0)
+			rr_rotate_both(stacks, false);
+		else if (ft_strncmp(line, "rra\n", 3) == 0)
+			rra_reverse_rotate_a(stacks, false);
+		else if (ft_strncmp(line, "rrb\n", 3) == 0)
+			rrb_reverse_rotate_b(stacks, false);
+		else if (ft_strncmp(line, "rrr\n", 3) == 0)
+			rrr_reverse_rotate_both(stacks, false);
+		line = get_next_line(1);
+	}
+}
+
+int main(int argc, char **argv)
 {
 	t_two_stacks	*stacks;
-	// ! need to be commanted
-	atexit(leaks_chec);
-	// !
+
 	if (argc < 2)
-		return (ft_printf("not enought args\nError\n"));
+		return (ft_printf("no args\nError\n"));
 	if (is_input_good(argc, argv) == false)
 		return (ft_printf("args not int\nError\n"));
 	stacks = make_stacks(argc, argv);
 	if (make_sure_no_dup(stacks -> stack_a, stacks -> index_of_stacks) == false)
 		return (free_stacks(stacks),ft_printf("dup int\nError\n"));
 	index_values(stacks -> stack_a, stacks ->index_of_stacks);
+	checker(stacks);
 	if (is_stack_sorted(stacks -> stack_a))
-		return (free_stacks(stacks), ft_printf("already sorted\n"));
-	if (short_sort(stacks))
-		return (free_stacks(stacks), ft_printf("did short sort\n"));
-	radix_sort(stacks);
-	print_stacks_para(stacks);
-	free_stacks(stacks);
+		return (free_stacks(stacks), ft_printf("OK\n"));
+	return (free_stacks(stacks), ft_printf("KO\n"));
 }

@@ -1,32 +1,42 @@
+# Compiler
+CC = 			gcc
 
-SRCS			= push_swap.c stack_making.c index_stack_a.c stack_change_tools.c \
+# Flags
+CFLAGS 			= -Wall -Werror -Wextra -I. -g
+
+PUSH_SWAP_SRCS = push_swap.c stack_making.c index_stack_a.c stack_change_tools.c \
 				  stack_action_1.c stack_action_2.c stack_action_3.c \
 				  radix_sort.c short_sort.c
+PUSH_SWAP_OBJS = push_swap.o stack_making.o index_stack_a.o stack_change_tools.o \
+				  stack_action_1.o stack_action_2.o stack_action_3.o \
+				  radix_sort.o short_sort.o
 
-OBJ_FOLDER      = bin
-OBJS			= $(SRCS:%.c=$(OBJ_FOLDER)/%.o)
+CHECKER_SRCS = Bonus/b_checker.c Bonus/b_stack_action_1.c Bonus/b_stack_action_2.c Bonus/b_stack_action_3.c \
+				  Bonus/b_stack_making.c Bonus/b_index_stack.c Bonus/b_stack_change_tools.c
+CHECKER_OBJS = b_checker.o b_stack_action_1.o b_stack_action_2.o b_stack_action_3.o \
+				  b_stack_making.o b_index_stack.o b_stack_change_tools.o
+				
+LIBFT			= ./mega_libft/libft.a
 
-CC				= gcc
+pushswap: $(PUSH_SWAP_OBJS)
+	make -C ./mega_libft
+	$(CC) $(CFLAGS) -o push_swap $(PUSH_SWAP_OBJS) $(LIBFT)
 
-# CFLAGS			= -Wall -Werror -Wextra -I. -fsanitize=address
-CFLAGS			= -Wall -Werror -Wextra -I.
+checker: $(CHECKER_OBJS)
+	make -C ./mega_libft
+	$(CC) $(CFLAGS) -o checker $(CHECKER_OBJS) $(LIBFT)
 
-NAME			= push_swap
+$(PUSH_SWAP_OBJS): $(PUSH_SWAP_SRCS)
+	$(CC) $(CFLAGS) -c $(PUSH_SWAP_SRCS)
 
-$(OBJ_FOLDER)/%.o: %.c
-				gcc -c $< -o $@
+$(CHECKER_OBJS): $(CHECKER_SRCS)
+	$(CC) $(CFLAGS) -c $(CHECKER_SRCS)
 
-all:			$(NAME)
-
-$(NAME): $(OBJS)
-				make -C ./mega_libft
-				$(CC) $(CFLAGS) -o push_swap $(OBJS) ./mega_libft/libft.a
-				@echo   :white_check_mark:Done!
 clean:
-				@rm -f $(OBJS) && make clean -C ./mega_libft
+				@rm -f $(PUSH_SWAP_OBJS) && rm -f $(CHECKER_OBJS) && make clean -C ./mega_libft
 
 fclean:			clean
-				@rm -f $(NAME) && make fclean -C ./mega_libft
+				@rm -f pushswap && rm -f checker && make fclean -C ./mega_libft
 
 re:				fclean $(NAME)
 

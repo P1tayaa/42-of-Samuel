@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   index_stack_a.c                                    :+:      :+:    :+:   */
+/*   index_stack_a copy.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:38:57 by sboulain          #+#    #+#             */
-/*   Updated: 2023/04/04 18:29:46 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/04/04 18:25:50 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker.h"
 
 t_stack	*make_single_stack(int val, bool as_data);
 

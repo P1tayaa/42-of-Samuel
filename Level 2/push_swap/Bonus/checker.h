@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   checker.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/28 17:41:22 by sboulain          #+#    #+#             */
-/*   Updated: 2023/04/04 18:00:12 by sboulain         ###   ########.fr       */
+/*   Created: 2023/04/04 17:47:04 by sboulain          #+#    #+#             */
+/*   Updated: 2023/04/04 17:59:50 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,6 @@ t_stack			*get_stack_of_index(t_stack *first_stack, int index);
 
 int				get_index_of_empty_index(t_stack *stack);
 
-// * short_sort.c
-bool			short_sort(t_two_stacks *sta);
 
 // * stack_action_1.c
 // sa (swap a): Swap the first 2 elements at the top of stack a.
@@ -101,6 +99,4 @@ void			rrb_reverse_rotate_b(t_two_stacks *stacks, bool do_print);
 // rrr : rra and rrb at the same time.
 void			rrr_reverse_rotate_both(t_two_stacks *stacks, bool do_print);
 
-// * radix_sort.c
-void			radix_sort(t_two_stacks *stacks);
 #endif

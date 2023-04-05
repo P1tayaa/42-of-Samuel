@@ -6,11 +6,12 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 22:32:22 by sboulain          #+#    #+#             */
-/*   Updated: 2023/04/04 18:12:27 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/04/04 18:13:18 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker.h"
+
 
 // * from stack_change_tools.c
 void	make_first_element_last_stack(t_stack *stack);
