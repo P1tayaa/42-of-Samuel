@@ -8,7 +8,7 @@ OBJS			= $(SRCS:%.c=%.o)
 CC				= gcc
 
 # CFLAGS			= -Wall -Werror -Wextra -I. -fsanitize=address
-# CFLAGS			= -Wall -Werror -Wextra -I.
+CFLAGS			= -Wall -Werror -Wextra -I.
 
 SERVER			= server
 

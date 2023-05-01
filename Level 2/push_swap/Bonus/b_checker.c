@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.c                                          :+:      :+:    :+:   */
+/*   b_checker.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 17:43:31 by sboulain          #+#    #+#             */
-/*   Updated: 2023/04/04 18:10:01 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/04/29 13:51:19 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,59 +112,13 @@ void	free_stacks(t_two_stacks *stacks)
 	stacks = NULL;
 }
 
-//check if the stack is sorted by make sure 
+// check if the stack is sorted by make sure
 // index are in incrementing by 1 and starting with 0
-bool	is_stack_sorted(t_stack *stack)
-{
-	int		i;
-	t_stack	*temp_stack;
+bool	is_stack_sorted(t_stack *stack);
 
-	i = 0;
-	temp_stack = stack;
-	while (temp_stack -> next != NULL)
-	{
-		if (temp_stack -> index_data != i)
-			return (false);
-		temp_stack = temp_stack -> next;
-		i++;
-	}
-	return (true);
-}
+void	checker(t_two_stacks *stacks);
 
-void	checker(t_two_stacks *stacks)
-{
-	char	*line;
-
-	line = get_next_line(1);
-	while (line != NULL)
-	{
-		if (ft_strncmp(line, "sa\n", 3) == 0)
-			sa_swap_a(stacks, false);
-		else if (ft_strncmp(line, "sb\n", 3) == 0)
-			sb_swap_b(stacks, false);
-		else if (ft_strncmp(line, "ss\n", 3) == 0)
-			ss_swap_both(stacks, false);
-		else if (ft_strncmp(line, "pa\n", 3) == 0)
-			pa_push_a(stacks, false);
-		else if (ft_strncmp(line, "pb\n", 3) == 0)
-			pb_push_b(stacks, false);
-		else if (ft_strncmp(line, "ra\n", 3) == 0)
-			ra_rotate_a(stacks, false);
-		else if (ft_strncmp(line, "rb\n", 3) == 0)
-			rb_rotate_b(stacks, false);
-		else if (ft_strncmp(line, "rr\n", 3) == 0)
-			rr_rotate_both(stacks, false);
-		else if (ft_strncmp(line, "rra\n", 3) == 0)
-			rra_reverse_rotate_a(stacks, false);
-		else if (ft_strncmp(line, "rrb\n", 3) == 0)
-			rrb_reverse_rotate_b(stacks, false);
-		else if (ft_strncmp(line, "rrr\n", 3) == 0)
-			rrr_reverse_rotate_both(stacks, false);
-		line = get_next_line(1);
-	}
-}
-
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_two_stacks	*stacks;
 
@@ -174,7 +128,7 @@ int main(int argc, char **argv)
 		return (ft_printf("args not int\nError\n"));
 	stacks = make_stacks(argc, argv);
 	if (make_sure_no_dup(stacks -> stack_a, stacks -> index_of_stacks) == false)
-		return (free_stacks(stacks),ft_printf("dup int\nError\n"));
+		return (free_stacks(stacks), ft_printf("dup int\nError\n"));
 	index_values(stacks -> stack_a, stacks ->index_of_stacks);
 	checker(stacks);
 	if (is_stack_sorted(stacks -> stack_a))

@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 16:42:45 by sboulain          #+#    #+#             */
-/*   Updated: 2023/03/14 19:57:13 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/04/19 17:03:28 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	put_num(int num)
 }
 void	put_num_64(uint64_t num)
 {
-	char	str[13];
+	char	str[20];
 	int		i;
 	
 	i = 0;

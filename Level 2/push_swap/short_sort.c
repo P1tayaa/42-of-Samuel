@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 18:07:54 by sboulain          #+#    #+#             */
-/*   Updated: 2023/03/09 21:02:43 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/04/19 14:53:41 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ bool	short_sort(t_two_stacks *sta)
 		return (true);
 	}
 	sort_first_and_go_b(sta);
-	if (get_index_of_empty_index(sta->stack_a) > 2)
-		fuse_and_sort_stacks(sta);
+	fuse_and_sort_stacks(sta);
 	return (true);
 }

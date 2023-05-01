@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 15:58:28 by sboulain          #+#    #+#             */
-/*   Updated: 2023/03/14 19:57:19 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/04/19 17:14:15 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ typedef struct s_philo
 	int				num_time_eat;
 	int				num_of_phil;
 	bool			*start;
-	bool			alive;
 	pthread_t		*current_thread;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;

@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:21:06 by sboulain          #+#    #+#             */
-/*   Updated: 2023/03/12 14:23:47 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/04/29 15:40:06 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,22 @@ static void	what_he_do(int sig, siginfo_t *info, void *context)
 		char_getting <<= 1;
 }
 
+//SA_SIGINFO is so that sigaction take 3 arguments ensted of 1
+//SA_NODEFER is that if 2 signal are sent at the same time, if
+//  one is blocked it is sent again
+// sa_mask is initializied it to an empty set, so that no 
+// additional signals are blocked while the signal handler is executing.
 int	main(void)
 {
 	struct sigaction	s_sigaction;
 
-	ft_printf("test");
 	ft_printf("this is pid: %d\n", getpid());
-
 	s_sigaction.sa_sigaction = what_he_do;
-	s_sigaction.sa_flags = SA_SIGINFO;
-
+	s_sigaction.sa_flags = SA_SIGINFO | SA_NODEFER;
+	sigemptyset(&s_sigaction.sa_mask);
 	sigaction(SIGUSR1, &s_sigaction, 0);
 	sigaction(SIGUSR2, &s_sigaction, 0);
 	while (1)
 		pause();
-
 	return (1);
 }

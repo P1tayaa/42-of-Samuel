@@ -6,12 +6,12 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 17:47:04 by sboulain          #+#    #+#             */
-/*   Updated: 2023/04/04 17:59:50 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/04/19 16:38:12 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#ifndef CHECKER_H
+# define CHECKER_H
 
 // for malloc and free
 # include <stdlib.h>
@@ -51,7 +51,6 @@ void			swap_stack_date_pointer(t_stack *stack_1, t_stack *stack_2);
 t_stack			*get_stack_of_index(t_stack *first_stack, int index);
 
 int				get_index_of_empty_index(t_stack *stack);
-
 
 // * stack_action_1.c
 // sa (swap a): Swap the first 2 elements at the top of stack a.

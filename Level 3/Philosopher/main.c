@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 14:47:22 by sboulain          #+#    #+#             */
-/*   Updated: 2023/04/04 12:52:03 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/04/19 18:32:38 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,12 @@ void	*thread_phil(void *arg)
 	time_start = get_time();
 	last_time_eat = time_start;
 	write(1, "OK\n", 3);
+	put_num_64(time_start);
 	// try and eat
-	while (arguments->philo->alive)
+	while (arguments->philo)
 	{
-		try_and_eat(arguments, last_time_eat);
+		try_and_eat(arguments, &last_time_eat);
 		// think(arguments);
-		if (last_time_eat + arguments->arg_info.time_to_die > get_time)
-			arguments->philo->alive = false;
 	}
 	
 	// if time of dead then die
@@ -140,7 +139,6 @@ t_philo **make_phil(int	num_of_phil)
 		all_philo[i]-> num_time_eat = 0;
 		all_philo[i]-> num_of_phil = i + 1;
 		all_philo[i]-> start = start;
-		all_philo[i]-> alive = true;
 		if (make_mutex(all_philo[i] -> right_fork) == false)
 			exit(1);
 		if (mutex_old_fork != NULL)
@@ -205,9 +203,16 @@ void	start_threads(t_philo *philo, t_args_info	args_info)
 {
 	t_args_info_plus_philo	*arg_temp;
 	pthread_t				my_thread;
+	t_args_info				args_info_for_philo;
 	
 	arg_temp = malloc(sizeof(t_args_info_plus_philo));
-	arg_temp -> arg_info = args_info;
+	args_info_for_philo.all_good = args_info.all_good;
+	args_info_for_philo.number_of_philosophers = args_info.number_of_philosophers;
+	args_info_for_philo.number_of_times_each_philosopher_must_eat = args_info.number_of_times_each_philosopher_must_eat;
+	args_info_for_philo.time_to_die = args_info.time_to_die;
+	args_info_for_philo.time_to_eat = args_info.time_to_eat;
+	args_info_for_philo.time_to_sleep = args_info.time_to_sleep;
+	arg_temp -> arg_info = args_info_for_philo;
 	arg_temp -> philo = philo;
 	philo -> current_thread = &my_thread;
 	pthread_create(&my_thread, NULL, &thread_phil, arg_temp);
@@ -242,17 +247,17 @@ int	main(int argc, char **argv)
 	// pthread_t thread;
 	start_threads_of_philo(all_philo, args_info);
 	// * how to start a thead
-	// pthread_create(&thread, NULL, &thread_phil, NULL);
+	// // pthread_create(&thread, NULL, &thread_phil, NULL);
 	usleep(1000000);
 	*(all_philo[0]->start) = true;
-	// pthread_create(&thread, NULL, &thread_phil, NULL);
-	// usleep(1000000);
+	// // pthread_create(&thread, NULL, &thread_phil, NULL);
+	// // usleep(1000000);
 
 	while (1)
 		pause();
-	// pthread_mutex_t mutex_fork;
-	// pthread_mutex_init(&mutex_fork, NULL);
-	// pthread_mutex_destroy(&mutex_fork);
-	// printf("%lu\n", sizeof(pthread_t));
-	// usleep(1000000);
+	// // pthread_mutex_t mutex_fork;
+	// // pthread_mutex_init(&mutex_fork, NULL);
+	// // pthread_mutex_destroy(&mutex_fork);
+	// // printf("%lu\n", sizeof(pthread_t));
+	// // usleep(1000000);
 }
