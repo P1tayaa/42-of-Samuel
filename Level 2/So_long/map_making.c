@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 16:48:03 by sboulain          #+#    #+#             */
-/*   Updated: 2023/02/17 17:11:30 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/05/06 13:08:43 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ void	free_map_cells(t_map *map)
 		i++;
 	}
 	free(map ->cells);
-	// map ->cells = NULL;
+	map ->cells = NULL;
 	free(map);
 }
 

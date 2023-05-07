@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 14:05:25 by sboulain          #+#    #+#             */
-/*   Updated: 2023/05/01 15:36:10 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/05/07 11:15:52 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,6 @@ int		check(int argc, char **argv, t_map **map)
 	map_string = open_map(argv[1]);
 	// ft_printf("%s\n",map_string);
 
-
 	if (map_string == NULL)
 		return (ft_printf("file don't exist or is not .ber"));
 	//free(map_string);
@@ -183,9 +182,11 @@ int		check(int argc, char **argv, t_map **map)
 
 void	ft_hook(void *param)
 {
-	const mlx_t* mlx = param;
+	mlx_t* mlx = param;
 
 	ft_printf("WIDTH: %d | HEIGHT: %d\n", mlx->width, mlx->height);
+	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
+		mlx_close_window(mlx);
 }
 
 int	main(int argc, char **argv)
@@ -197,7 +198,7 @@ int	main(int argc, char **argv)
 	is_bad = check(argc, argv, &map);
 
 	if (is_bad != -1)
-		return(free(map),1);
+		return(1);
 	// print_map(map);
 
 	// free cells in map
@@ -217,7 +218,7 @@ int	main(int argc, char **argv)
 
 	// Register a hook and pass mlx as an optional param.
 	// NOTE: Do this before calling mlx_loop!
-	// mlx_loop_hook(mlx, ft_hook, mlx);
+	mlx_loop_hook(mlx, ft_hook, mlx);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 
@@ -225,8 +226,6 @@ int	main(int argc, char **argv)
 	ft_printf("%d, %d\n", map->index_of_player_x, map->index_of_player_y);
 
 	// print_map(map);
-
-
 	free_map_cells(map);
 	usleep(30000);
 	return (0);

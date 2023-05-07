@@ -12,7 +12,7 @@ NAME			= so_long
 
 all:			$(NAME)
 
-$(NAME):
+$(NAME): $(OBJS)
 				make -C ./mega_libft
 				make -C ./MLX42/build
 # $(CC) $(CFLAGS) -o $(NAME) $(SRCS) ./mega_libft/libft.a ./MLX42/build/libmlx42.a -framework Cocoa -framework OpenGL -framework IOKit -Iinclude -lglfw3
