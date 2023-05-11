@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 17:18:54 by sboulain          #+#    #+#             */
-/*   Updated: 2023/05/07 13:39:06 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/05/11 14:52:10 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ bool	is_input_good(int argc, char **argv)
 		number = 0;
 		isneg = 0;
 		j = -1;
+		if (argv[i][j + 1] == '\0')
+			return (false);
 		if (argv[i][j + 1] == '-')
 			isneg = 1;
 		while (argv[i][++j + isneg] != '\0')
@@ -95,6 +97,8 @@ bool	make_sure_no_dup(t_stack *stack_a_full, int index_of_stack)
 	int	j;
 
 	array_ints = (int *)malloc((index_of_stack + 1) * sizeof(int));
+	if (!array_ints)
+		exit(1);
 	i = 0;
 	while (i <= index_of_stack)
 	{
@@ -161,8 +165,8 @@ int	main(int argc, char **argv)
 {
 	t_two_stacks	*stacks;
 
-	if (argc < 2)
-		return (ft_printf("not enought args\nError\n"));
+	if (argc < 3)
+		return (ft_printf("\n"));
 	if (is_input_good(argc, argv) == false)
 		return (ft_printf("args not int\nError\n"));
 	stacks = make_stacks(argc, argv);
@@ -170,9 +174,9 @@ int	main(int argc, char **argv)
 		return (free_stacks(stacks), ft_printf("dup int\nError\n"));
 	index_values(stacks -> stack_a, stacks ->index_of_stacks);
 	if (is_stack_sorted(stacks -> stack_a))
-		return (free_stacks(stacks), ft_printf("already sorted\n"));
+		return (free_stacks(stacks), ft_printf("\n"));
 	if (short_sort(stacks))
-		return (free_stacks(stacks), ft_printf("did short sort\n"));
+		return (free_stacks(stacks), 1);
 	radix_sort(stacks);
 	free_stacks(stacks);
 }
