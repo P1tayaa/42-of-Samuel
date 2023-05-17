@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 17:18:54 by sboulain          #+#    #+#             */
-/*   Updated: 2023/05/11 14:52:10 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/05/17 18:58:06 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ bool	is_input_good(int argc, char **argv)
 		number = 0;
 		isneg = 0;
 		j = -1;
-		if (argv[i][j + 1] == '\0')
+		if (argv[i][0] == '\0' || (argv[i][0] == '-' && argv[i][1] == '\0'))
 			return (false);
 		if (argv[i][j + 1] == '-')
 			isneg = 1;
@@ -160,21 +160,37 @@ bool	is_stack_sorted(t_stack *stack)
 	}
 	return (true);
 }
+//don't want to do it cleanly for these two,
+// you can find the code in stack_action_3.c
+void	short_sort_three(t_two_stacks *sta);
+
+//don't want to do it cleanly for these two,
+// you can find the code in stack_action_3.c
+void	med_short_sort(t_two_stacks *sta);
 
 int	main(int argc, char **argv)
 {
 	t_two_stacks	*stacks;
 
-	if (argc < 3)
-		return (ft_printf("\n"));
 	if (is_input_good(argc, argv) == false)
 		return (ft_printf("args not int\nError\n"));
+	if (argc < 3)
+		return (ft_printf("\n"));
 	stacks = make_stacks(argc, argv);
 	if (make_sure_no_dup(stacks -> stack_a, stacks -> index_of_stacks) == false)
 		return (free_stacks(stacks), ft_printf("dup int\nError\n"));
 	index_values(stacks -> stack_a, stacks ->index_of_stacks);
 	if (is_stack_sorted(stacks -> stack_a))
 		return (free_stacks(stacks), ft_printf("\n"));
+	if (argc == 5)
+	{
+		med_short_sort(stacks);
+	}
+	if (argc == 4)
+	{
+		short_sort_three(stacks);
+		return (free_stacks(stacks), 1);
+	}
 	if (short_sort(stacks))
 		return (free_stacks(stacks), 1);
 	radix_sort(stacks);

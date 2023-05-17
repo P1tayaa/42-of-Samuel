@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 14:18:21 by sboulain          #+#    #+#             */
-/*   Updated: 2023/05/01 14:27:08 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/05/15 16:18:17 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ void	sort_stack_alone(t_stack *stack_a, int i_stack)
 	{
 		pivot = get_stack_of_index(stack_a, i_stack / 2);
 		pivo_data = get_stack_of_index(stack_a, i_stack / 2)-> data;
-		short_left = find_shortest_before_index(pivot, i_stack / 2, pivo_data);
+		short_left = find_shortest_before_index(pivot,
+				(i_stack + 1) / 2, pivo_data);
 		high_right = find_highest_before_index(stack_a, i_stack / 2, pivo_data);
 		if (short_left == NULL && high_right == NULL)
 			sort_l_and_r_of_pivot(stack_a, pivot, i_stack / 2, i_stack);
@@ -81,5 +82,5 @@ void	sort_stack_alone(t_stack *stack_a, int i_stack)
 	if (i_stack < 2)
 		if (get_stack_of_index(stack_a, 0)-> data
 			> get_stack_of_index(stack_a, 1)-> data)
-			swap_stack_date_pointer(stack_a, stack_a -> next);
+			swap_stack_date_pointer(stack_a -> next, stack_a);
 }
