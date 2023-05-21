@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 18:48:20 by sboulain          #+#    #+#             */
-/*   Updated: 2023/05/06 13:08:51 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/05/21 14:05:36 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,45 @@ typedef struct s_coordinate
 	int	x;
 	int	y;
 }	t_coordinate;
+
+typedef struct s_source_images
+{
+	char	*background;
+	char	*wall;
+	char	*item;
+	char	*exit;
+	char	*player_front;
+	char	*player_left;
+	char	*player_right;
+	char	*player_back;
+
+}	t_source_images;
+
+typedef struct s_texture_images
+{
+	mlx_texture_t	*background;
+	mlx_texture_t	*wall;
+	mlx_texture_t	*item;
+	mlx_texture_t	*exit;
+	mlx_texture_t	*player_front;
+	mlx_texture_t	*player_left;
+	mlx_texture_t	*player_right;
+	mlx_texture_t	*player_back;
+
+}	t_texture_images;
+
+typedef struct s_image_images
+{
+	mlx_image_t	*background;
+	mlx_image_t	*wall;
+	mlx_image_t	*item;
+	mlx_image_t	*exit;
+	mlx_image_t	*player_front;
+	mlx_image_t	*player_left;
+	mlx_image_t	*player_right;
+	mlx_image_t	*player_back;
+
+}	t_image_images;
 
 bool	is_map_valid_char(char *map_string);
 

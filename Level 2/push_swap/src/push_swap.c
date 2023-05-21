@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 17:18:54 by sboulain          #+#    #+#             */
-/*   Updated: 2023/05/17 18:58:06 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/05/21 17:19:15 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ bool	is_input_good(int argc, char **argv)
 			if (!ft_isdigit(argv[i][j + isneg]))
 				return (false);
 			number = number * 10 + argv[i][j + isneg] - '0';
-			if (number > 2147483647 || (number > 2147483648 && isneg))
+			if (number > 2147483647 && (number > 2147483648 && isneg))
 				return (false);
 		}
 	}
@@ -160,37 +160,37 @@ bool	is_stack_sorted(t_stack *stack)
 	}
 	return (true);
 }
-//don't want to do it cleanly for these two,
+//don't want to do it cleanly for these three,
 // you can find the code in stack_action_3.c
 void	short_sort_three(t_two_stacks *sta);
 
-//don't want to do it cleanly for these two,
+//don't want to do it cleanly for these three,
 // you can find the code in stack_action_3.c
 void	med_short_sort(t_two_stacks *sta);
+
+//don't want to do it cleanly for these three,
+// you can find the code in stack_action_3.c
+void	error_print(void);
+
 
 int	main(int argc, char **argv)
 {
 	t_two_stacks	*stacks;
 
 	if (is_input_good(argc, argv) == false)
-		return (ft_printf("args not int\nError\n"));
+		return (error_print(), 1);
 	if (argc < 3)
 		return (ft_printf("\n"));
 	stacks = make_stacks(argc, argv);
 	if (make_sure_no_dup(stacks -> stack_a, stacks -> index_of_stacks) == false)
-		return (free_stacks(stacks), ft_printf("dup int\nError\n"));
+		return (free_stacks(stacks), error_print(), 1);
 	index_values(stacks -> stack_a, stacks ->index_of_stacks);
 	if (is_stack_sorted(stacks -> stack_a))
 		return (free_stacks(stacks), ft_printf("\n"));
 	if (argc == 5)
-	{
 		med_short_sort(stacks);
-	}
 	if (argc == 4)
-	{
-		short_sort_three(stacks);
-		return (free_stacks(stacks), 1);
-	}
+		return (short_sort_three(stacks), free_stacks(stacks), 1);
 	if (short_sort(stacks))
 		return (free_stacks(stacks), 1);
 	radix_sort(stacks);

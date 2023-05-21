@@ -6,19 +6,25 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 22:32:22 by sboulain          #+#    #+#             */
-/*   Updated: 2023/05/17 21:25:54 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/05/21 17:13:01 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <unistd.h>
 
 // rrr : rra and rrb at the same time.
-void	rrr_reverse_rotate_both(t_two_stacks *stacks, bool do_print)
+// void	rrr_reverse_rotate_both(t_two_stacks *stacks, bool do_print)
+// {
+// 	ra_rotate_a(stacks, false);
+// 	rb_rotate_b(stacks, false);
+// 	if (do_print)
+// 		ft_printf("rra\n");
+// }
+
+void	error_print(void)
 {
-	ra_rotate_a(stacks, false);
-	rb_rotate_b(stacks, false);
-	if (do_print)
-		ft_printf("rra\n");
+	write(2, "Error", 5);
 }
 
 // * last thing I added and I didn't to add a file sorry
@@ -42,11 +48,14 @@ void	short_sort_three(t_two_stacks *sta)
 	else if (index_num_0 > index_num_1 && index_num_1 < index_num_2
 		&& index_num_0 > index_num_2)
 		ra_rotate_a(sta, true);
-	else if (index_num_0 < index_num_1 && index_num_1 > index_num_2)
+	else if (index_num_0 < index_num_1 && index_num_1 > index_num_2
+		&& index_num_2 > index_num_0)
 	{
 		sa_swap_a(sta, true);
 		ra_rotate_a(sta, true);
 	}
+	else
+		rra_reverse_rotate_a(sta, true);
 }
 
 //for short sort

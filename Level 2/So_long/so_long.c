@@ -6,11 +6,16 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 14:05:25 by sboulain          #+#    #+#             */
-/*   Updated: 2023/05/07 11:15:52 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/05/21 17:50:49 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void error(void)
+{
+	exit(EXIT_FAILURE);
+}
 
 char	*get_all_lines(int fd)
 {
@@ -48,10 +53,10 @@ char	*open_map(char *map_name)
 	if (map_location == NULL)
 		exit(1);
 	if (ft_memcmp(&map_name[ft_strlen(map_name) - 4], ber, 4) != 0)
-		return(free(map_location), NULL);
+		return (free(map_location), NULL);
 	file_discriptor = open(map_location, O_RDONLY);
 	if (file_discriptor == -1)
-		return(free(map_location), NULL);
+		return (free(map_location), NULL);
 	all_file_string = get_all_lines(file_discriptor);
 	free(map_location);
 	close(file_discriptor);
@@ -189,6 +194,8 @@ void	ft_hook(void *param)
 		mlx_close_window(mlx);
 }
 
+void	load_map();
+
 int	main(int argc, char **argv)
 {
 	t_map	*map;
@@ -207,17 +214,11 @@ int	main(int argc, char **argv)
 
 	mlx_t	*mlx;
 	mlx_set_setting(MLX_MAXIMIZED, true);
-	mlx = mlx_init((map -> index_of_player_x) * 32, (map -> index_of_player_y) * 32, "main_window", true);
-	
-	// mlx_image_t* img = mlx_new_image(mlx, 256, 256);
-	// if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
-	// 	exit(1);
+	mlx = mlx_init((map->max_index_x_right) * 8, (map->index_of_player_y) * 8, "main_window", true);
+	if (!mlx)
+		error();
+	load_map(&mlx);	
 
-	// Even after the image is being displayed, we can still modify the buffer.
-	// mlx_put_pixel(img, 0, 0, 0xFF0000FF);
-
-	// Register a hook and pass mlx as an optional param.
-	// NOTE: Do this before calling mlx_loop!
 	mlx_loop_hook(mlx, ft_hook, mlx);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);

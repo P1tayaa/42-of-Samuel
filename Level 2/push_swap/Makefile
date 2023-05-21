@@ -42,6 +42,6 @@ clean:
 fclean:			clean
 				@rm -f push_swap && rm -f checker && make fclean -C ./mega_libft
 
-re:				fclean $(NAME)
+re:				fclean push_swap
 
 .PHONY:			all clean fclean re

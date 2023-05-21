@@ -1,5 +1,5 @@
 
-SRCS			= so_long.c map_valid_string.c map_making.c flud_fill_check.c
+SRCS			= so_long.c map_valid_string.c map_making.c flud_fill_check.c load_map.c
 
 OBJS			= $(SRCS:%.c=%.o)
 
