@@ -1,0 +1,1369 @@
+       1
+parameter: 1 2 3 4 5
+
+       8
+OK
+parameter: 1 2 3 5 4
+pb
+pb
+sb
+sa
+ra
+pa
+pa
+sa
+       7
+OK
+parameter: 1 2 4 3 5
+pb
+pb
+sb
+sa
+pa
+pa
+sa
+       8
+OK
+parameter: 1 2 4 5 3
+pb
+pb
+sb
+ra
+ra
+pa
+pa
+sa
+       7
+OK
+parameter: 1 2 5 3 4
+pb
+pb
+sb
+ra
+pa
+pa
+sa
+       8
+OK
+parameter: 1 2 5 4 3
+pb
+pb
+sb
+ra
+sa
+pa
+pa
+sa
+       8
+OK
+parameter: 1 3 2 4 5
+pb
+pb
+sb
+pa
+ra
+pa
+sa
+rra
+      10
+OK
+parameter: 1 3 2 5 4
+pb
+pb
+sb
+sa
+ra
+pa
+ra
+pa
+sa
+rra
+       9
+OK
+parameter: 1 3 4 2 5
+pb
+pb
+sb
+sa
+pa
+ra
+pa
+sa
+rra
+      10
+OK
+parameter: 1 3 4 5 2
+pb
+pb
+sb
+ra
+ra
+pa
+ra
+pa
+sa
+rra
+       9
+OK
+parameter: 1 3 5 2 4
+pb
+pb
+sb
+ra
+pa
+ra
+pa
+sa
+rra
+      10
+OK
+parameter: 1 3 5 4 2
+pb
+pb
+sb
+ra
+sa
+pa
+ra
+pa
+sa
+rra
+       8
+OK
+parameter: 1 4 2 3 5
+pb
+pb
+sb
+pa
+rra
+pa
+ra
+ra
+      10
+OK
+parameter: 1 4 2 5 3
+pb
+pb
+sb
+sa
+ra
+pa
+rra
+pa
+ra
+ra
+       9
+OK
+parameter: 1 4 3 2 5
+pb
+pb
+sb
+sa
+pa
+rra
+pa
+ra
+ra
+      10
+OK
+parameter: 1 4 3 5 2
+pb
+pb
+sb
+ra
+ra
+pa
+rra
+pa
+ra
+ra
+       9
+OK
+parameter: 1 4 5 2 3
+pb
+pb
+sb
+ra
+pa
+rra
+pa
+ra
+ra
+      10
+OK
+parameter: 1 4 5 3 2
+pb
+pb
+sb
+ra
+sa
+pa
+rra
+pa
+ra
+ra
+       6
+OK
+parameter: 1 5 2 3 4
+pb
+pb
+sb
+pa
+pa
+ra
+       8
+OK
+parameter: 1 5 2 4 3
+pb
+pb
+sb
+sa
+ra
+pa
+pa
+ra
+       7
+OK
+parameter: 1 5 3 2 4
+pb
+pb
+sb
+sa
+pa
+pa
+ra
+       8
+OK
+parameter: 1 5 3 4 2
+pb
+pb
+sb
+ra
+ra
+pa
+pa
+ra
+       7
+OK
+parameter: 1 5 4 2 3
+pb
+pb
+sb
+ra
+pa
+pa
+ra
+       8
+OK
+parameter: 1 5 4 3 2
+pb
+pb
+sb
+ra
+sa
+pa
+pa
+ra
+       5
+OK
+parameter: 2 1 3 4 5
+pb
+pb
+pa
+pa
+sa
+       7
+OK
+parameter: 2 1 3 5 4
+pb
+pb
+sa
+ra
+pa
+pa
+sa
+       6
+OK
+parameter: 2 1 4 3 5
+pb
+pb
+sa
+pa
+pa
+sa
+       7
+OK
+parameter: 2 1 4 5 3
+pb
+pb
+ra
+ra
+pa
+pa
+sa
+       6
+OK
+parameter: 2 1 5 3 4
+pb
+pb
+ra
+pa
+pa
+sa
+       7
+OK
+parameter: 2 1 5 4 3
+pb
+pb
+ra
+sa
+pa
+pa
+sa
+       9
+OK
+parameter: 2 3 1 4 5
+pb
+pb
+sb
+pa
+sa
+ra
+pa
+sa
+rra
+      11
+OK
+parameter: 2 3 1 5 4
+pb
+pb
+sb
+sa
+ra
+pa
+sa
+ra
+pa
+sa
+rra
+      10
+OK
+parameter: 2 3 4 1 5
+pb
+pb
+sb
+sa
+pa
+sa
+ra
+pa
+sa
+rra
+      11
+OK
+parameter: 2 3 4 5 1
+pb
+pb
+sb
+ra
+ra
+pa
+sa
+ra
+pa
+sa
+rra
+      10
+OK
+parameter: 2 3 5 1 4
+pb
+pb
+sb
+ra
+pa
+sa
+ra
+pa
+sa
+rra
+      11
+OK
+parameter: 2 3 5 4 1
+pb
+pb
+sb
+ra
+sa
+pa
+sa
+ra
+pa
+sa
+rra
+       9
+OK
+parameter: 2 4 1 3 5
+pb
+pb
+sb
+pa
+sa
+rra
+pa
+ra
+ra
+      11
+OK
+parameter: 2 4 1 5 3
+pb
+pb
+sb
+sa
+ra
+pa
+sa
+rra
+pa
+ra
+ra
+      10
+OK
+parameter: 2 4 3 1 5
+pb
+pb
+sb
+sa
+pa
+sa
+rra
+pa
+ra
+ra
+      11
+OK
+parameter: 2 4 3 5 1
+pb
+pb
+sb
+ra
+ra
+pa
+sa
+rra
+pa
+ra
+ra
+      10
+OK
+parameter: 2 4 5 1 3
+pb
+pb
+sb
+ra
+pa
+sa
+rra
+pa
+ra
+ra
+      11
+OK
+parameter: 2 4 5 3 1
+pb
+pb
+sb
+ra
+sa
+pa
+sa
+rra
+pa
+ra
+ra
+       7
+OK
+parameter: 2 5 1 3 4
+pb
+pb
+sb
+pa
+sa
+pa
+ra
+       9
+OK
+parameter: 2 5 1 4 3
+pb
+pb
+sb
+sa
+ra
+pa
+sa
+pa
+ra
+       8
+OK
+parameter: 2 5 3 1 4
+pb
+pb
+sb
+sa
+pa
+sa
+pa
+ra
+       9
+OK
+parameter: 2 5 3 4 1
+pb
+pb
+sb
+ra
+ra
+pa
+sa
+pa
+ra
+       8
+OK
+parameter: 2 5 4 1 3
+pb
+pb
+sb
+ra
+pa
+sa
+pa
+ra
+       9
+OK
+parameter: 2 5 4 3 1
+pb
+pb
+sb
+ra
+sa
+pa
+sa
+pa
+ra
+       7
+OK
+parameter: 3 1 2 4 5
+pb
+pb
+pa
+ra
+pa
+sa
+rra
+       9
+OK
+parameter: 3 1 2 5 4
+pb
+pb
+sa
+ra
+pa
+ra
+pa
+sa
+rra
+      10
+OK
+parameter: 3 1 4 2 5
+rra
+rra
+pb
+pb
+sb
+sa
+pa
+sa
+pa
+ra
+       9
+OK
+parameter: 3 1 4 5 2
+rra
+rra
+pb
+pb
+sa
+pa
+sa
+pa
+ra
+       8
+OK
+parameter: 3 1 5 2 4
+pb
+pb
+ra
+pa
+ra
+pa
+sa
+rra
+       9
+OK
+parameter: 3 1 5 4 2
+pb
+pb
+ra
+sa
+pa
+ra
+pa
+sa
+rra
+       8
+OK
+parameter: 3 2 1 4 5
+pb
+pb
+pa
+sa
+ra
+pa
+sa
+rra
+      10
+OK
+parameter: 3 2 1 5 4
+pb
+pb
+sa
+ra
+pa
+sa
+ra
+pa
+sa
+rra
+       9
+OK
+parameter: 3 2 4 1 5
+rra
+rra
+pb
+pb
+sb
+sa
+pa
+pa
+ra
+       8
+OK
+parameter: 3 2 4 5 1
+rra
+rra
+pb
+pb
+sa
+pa
+pa
+ra
+       9
+OK
+parameter: 3 2 5 1 4
+pb
+pb
+ra
+pa
+sa
+ra
+pa
+sa
+rra
+      10
+OK
+parameter: 3 2 5 4 1
+pb
+pb
+ra
+sa
+pa
+sa
+ra
+pa
+sa
+rra
+       9
+OK
+parameter: 3 4 1 2 5
+ra
+ra
+pb
+pb
+sb
+ra
+pa
+pa
+sa
+       8
+OK
+parameter: 3 4 1 5 2
+ra
+ra
+pb
+pb
+sb
+pa
+pa
+ra
+       8
+OK
+parameter: 3 4 2 1 5
+ra
+ra
+pb
+pb
+ra
+pa
+pa
+sa
+       9
+OK
+parameter: 3 4 2 5 1
+ra
+ra
+pb
+pb
+sb
+pa
+sa
+pa
+ra
+       7
+OK
+parameter: 3 4 5 1 2
+ra
+ra
+pb
+pb
+pa
+pa
+ra
+       8
+OK
+parameter: 3 4 5 2 1
+ra
+ra
+pb
+pb
+pa
+sa
+pa
+ra
+       9
+OK
+parameter: 3 5 1 2 4
+pb
+pb
+sb
+ra
+pa
+sa
+rra
+pa
+ra
+      11
+OK
+parameter: 3 5 1 4 2
+pb
+pb
+sb
+sa
+ra
+ra
+pa
+sa
+rra
+pa
+ra
+      10
+OK
+parameter: 3 5 2 1 4
+pb
+pb
+sb
+sa
+ra
+pa
+sa
+rra
+pa
+ra
+      11
+OK
+parameter: 3 5 2 4 1
+pb
+pb
+sb
+ra
+ra
+ra
+pa
+sa
+rra
+pa
+ra
+      10
+OK
+parameter: 3 5 4 1 2
+rra
+rra
+pb
+pb
+sb
+sa
+ra
+pa
+pa
+sa
+       9
+OK
+parameter: 3 5 4 2 1
+rra
+rra
+pb
+pb
+sa
+ra
+pa
+pa
+sa
+       7
+OK
+parameter: 4 1 2 3 5
+pb
+pb
+pa
+rra
+pa
+ra
+ra
+       9
+OK
+parameter: 4 1 2 5 3
+pb
+pb
+sa
+ra
+pa
+rra
+pa
+ra
+ra
+      10
+OK
+parameter: 4 1 3 2 5
+rra
+rra
+pb
+pb
+sb
+ra
+pa
+sa
+pa
+ra
+       9
+OK
+parameter: 4 1 3 5 2
+rra
+rra
+pb
+pb
+ra
+pa
+sa
+pa
+ra
+       8
+OK
+parameter: 4 1 5 2 3
+pb
+pb
+ra
+pa
+rra
+pa
+ra
+ra
+       9
+OK
+parameter: 4 1 5 3 2
+pb
+pb
+ra
+sa
+pa
+rra
+pa
+ra
+ra
+       8
+OK
+parameter: 4 2 1 3 5
+pb
+pb
+pa
+sa
+rra
+pa
+ra
+ra
+      10
+OK
+parameter: 4 2 1 5 3
+pb
+pb
+sa
+ra
+pa
+sa
+rra
+pa
+ra
+ra
+       9
+OK
+parameter: 4 2 3 1 5
+rra
+rra
+pb
+pb
+sb
+ra
+pa
+pa
+ra
+       8
+OK
+parameter: 4 2 3 5 1
+rra
+rra
+pb
+pb
+ra
+pa
+pa
+ra
+       9
+OK
+parameter: 4 2 5 1 3
+pb
+pb
+ra
+pa
+sa
+rra
+pa
+ra
+ra
+      10
+OK
+parameter: 4 2 5 3 1
+pb
+pb
+ra
+sa
+pa
+sa
+rra
+pa
+ra
+ra
+      10
+OK
+parameter: 4 3 1 2 5
+ra
+ra
+pb
+pb
+sb
+ra
+sa
+pa
+pa
+sa
+      10
+OK
+parameter: 4 3 1 5 2
+ra
+ra
+pb
+pb
+sb
+sa
+ra
+pa
+pa
+ra
+       9
+OK
+parameter: 4 3 2 1 5
+ra
+ra
+pb
+pb
+ra
+sa
+pa
+pa
+sa
+      11
+OK
+parameter: 4 3 2 5 1
+ra
+ra
+pb
+pb
+sb
+sa
+ra
+pa
+sa
+pa
+ra
+       9
+OK
+parameter: 4 3 5 1 2
+ra
+ra
+pb
+pb
+sa
+ra
+pa
+pa
+ra
+      10
+OK
+parameter: 4 3 5 2 1
+ra
+ra
+pb
+pb
+sa
+ra
+pa
+sa
+pa
+ra
+       7
+OK
+parameter: 4 5 1 2 3
+pb
+pb
+sb
+pa
+ra
+pa
+ra
+       9
+OK
+parameter: 4 5 1 3 2
+pb
+pb
+sb
+sa
+ra
+pa
+ra
+pa
+ra
+       8
+OK
+parameter: 4 5 2 1 3
+pb
+pb
+sb
+sa
+pa
+ra
+pa
+ra
+       9
+OK
+parameter: 4 5 2 3 1
+pb
+pb
+sb
+ra
+ra
+pa
+ra
+pa
+ra
+      10
+OK
+parameter: 4 5 3 1 2
+rra
+rra
+pb
+pb
+sb
+ra
+ra
+pa
+pa
+sa
+       9
+OK
+parameter: 4 5 3 2 1
+rra
+rra
+pb
+pb
+ra
+ra
+pa
+pa
+sa
+       5
+OK
+parameter: 5 1 2 3 4
+pb
+pb
+pa
+pa
+ra
+       7
+OK
+parameter: 5 1 2 4 3
+pb
+pb
+sa
+ra
+pa
+pa
+ra
+       6
+OK
+parameter: 5 1 3 2 4
+pb
+pb
+sa
+pa
+pa
+ra
+       7
+OK
+parameter: 5 1 3 4 2
+pb
+pb
+ra
+ra
+pa
+pa
+ra
+       6
+OK
+parameter: 5 1 4 2 3
+pb
+pb
+ra
+pa
+pa
+ra
+       7
+OK
+parameter: 5 1 4 3 2
+pb
+pb
+ra
+sa
+pa
+pa
+ra
+       6
+OK
+parameter: 5 2 1 3 4
+pb
+pb
+pa
+sa
+pa
+ra
+       8
+OK
+parameter: 5 2 1 4 3
+pb
+pb
+sa
+ra
+pa
+sa
+pa
+ra
+       7
+OK
+parameter: 5 2 3 1 4
+pb
+pb
+sa
+pa
+sa
+pa
+ra
+       8
+OK
+parameter: 5 2 3 4 1
+pb
+pb
+ra
+ra
+pa
+sa
+pa
+ra
+       7
+OK
+parameter: 5 2 4 1 3
+pb
+pb
+ra
+pa
+sa
+pa
+ra
+       8
+OK
+parameter: 5 2 4 3 1
+pb
+pb
+ra
+sa
+pa
+sa
+pa
+ra
+       8
+OK
+parameter: 5 3 1 2 4
+pb
+pb
+ra
+pa
+sa
+rra
+pa
+ra
+      10
+OK
+parameter: 5 3 1 4 2
+pb
+pb
+sa
+ra
+ra
+pa
+sa
+rra
+pa
+ra
+       9
+OK
+parameter: 5 3 2 1 4
+pb
+pb
+sa
+ra
+pa
+sa
+rra
+pa
+ra
+      10
+OK
+parameter: 5 3 2 4 1
+pb
+pb
+ra
+ra
+ra
+pa
+sa
+rra
+pa
+ra
+       9
+OK
+parameter: 5 3 4 1 2
+pb
+pb
+ra
+ra
+pa
+sa
+rra
+pa
+ra
+      10
+OK
+parameter: 5 3 4 2 1
+pb
+pb
+ra
+sa
+ra
+pa
+sa
+rra
+pa
+ra
+       6
+OK
+parameter: 5 4 1 2 3
+pb
+pb
+pa
+ra
+pa
+ra
+       8
+OK
+parameter: 5 4 1 3 2
+pb
+pb
+sa
+ra
+pa
+ra
+pa
+ra
+       7
+OK
+parameter: 5 4 2 1 3
+pb
+pb
+sa
+pa
+ra
+pa
+ra
+       8
+OK
+parameter: 5 4 2 3 1
+pb
+pb
+ra
+ra
+pa
+ra
+pa
+ra
+       7
+OK
+parameter: 5 4 3 1 2
+pb
+pb
+ra
+pa
+ra
+pa
+ra
