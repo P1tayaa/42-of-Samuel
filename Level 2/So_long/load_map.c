@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 13:43:36 by sboulain          #+#    #+#             */
-/*   Updated: 2023/05/28 20:21:41 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/05/28 21:25:10 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,59 +110,41 @@ void	terminate_texture(t_texture_images *texture_pouinter)
 }
 
 
-void	load_cell(mlx_t **mlx, t_cell **cell, t_texture_images *textures_pointers, t_coordinate	*cell_codinates)
+void	load_cell(mlx_t **mlx, t_cell *cell, t_texture_images *textures_pointers, t_coordinate	*cell_codinates)
 {
-	if ((*cell)->type == '1')
+	if ((*cell).type == '1')
 	{
-		(*cell)->background = mlx_texture_to_image(*mlx, textures_pointers->wall);
-		if (mlx_image_to_window(*mlx, (*cell)->background, cell_codinates->x, cell_codinates->y) < 0)
+		(*cell).background = mlx_texture_to_image(*mlx, textures_pointers->wall);
+		if (mlx_image_to_window(*mlx, (*cell).background, cell_codinates->x * 8, cell_codinates->y * 8) < 0)
         	exit (1);
-		(*cell)->object = NULL;
-		(*cell)->player = NULL;
+		(*cell).object = NULL;
+		(*cell).player = NULL;
 		return ;
 	}
-	(*cell)->background = mlx_texture_to_image(*mlx, textures_pointers->background);
-		if (mlx_image_to_window(*mlx, (*cell)->background, cell_codinates->x, cell_codinates->y) < 0)
+	(*cell).background = mlx_texture_to_image(*mlx, textures_pointers->background);
+		if (mlx_image_to_window(*mlx, (*cell).background, cell_codinates->x * 8, cell_codinates->y * 8) < 0)
         	exit (1);
-	if ((*cell)->type == 'C')
+	if ((*cell).type == 'C')
 	{
-		(*cell)->object = mlx_texture_to_image(*mlx, textures_pointers->item);
-		if (mlx_image_to_window(*mlx, (*cell)->object, cell_codinates->x, cell_codinates->y) < 0)
+		(*cell).object = mlx_texture_to_image(*mlx, textures_pointers->item);
+		if (mlx_image_to_window(*mlx, (*cell).object, cell_codinates->x * 8, cell_codinates->y * 8) < 0)
         	exit (1);
-		(*cell)->player = NULL;
+		(*cell).player = NULL;
 	}
-	if ((*cell)->type == 'E')
+	if ((*cell).type == 'E')
 	{
-		(*cell)->object = mlx_texture_to_image(*mlx, textures_pointers->exit);
-		if (mlx_image_to_window(*mlx, (*cell)->object, cell_codinates->x, cell_codinates->y) < 0)
+		(*cell).object = mlx_texture_to_image(*mlx, textures_pointers->exit);
+		if (mlx_image_to_window(*mlx, (*cell).object, cell_codinates->x * 8, cell_codinates->y * 8) < 0)
         	exit (1);
-		(*cell)->player = NULL;
+		(*cell).player = NULL;
 	}
-	if ((*cell)->has_player)
+	if ((*cell).has_player)
 	{
-		(*cell)->player = mlx_texture_to_image(*mlx, textures_pointers->player_front);
-		if (mlx_image_to_window(*mlx, (*cell)->player, cell_codinates->x, cell_codinates->y) < 0)
+		(*cell).player = mlx_texture_to_image(*mlx, textures_pointers->player_front);
+		if (mlx_image_to_window(*mlx, (*cell).player, cell_codinates->x * 8, cell_codinates->y * 8) < 0)
         	exit (1);
-		(*cell)->object = NULL;
+		(*cell).object = NULL;
 	}
-}
-
-void	load_images(mlx_t **mlx)
-{
-	t_source_images		*images_source;
-	t_texture_images	*textures_pointers;
-	t_image_images		*images_pointers;
-
-	images_source = create_path_png();
-	ft_printf("test\n");
-	textures_pointers = make_texture_from_png(images_source);
-	ft_printf("test\n");
-	path_image_free(images_source);
-	images_pointers = make_images_from_texture(mlx, textures_pointers);
-	ft_printf("test\n");
-	// terminate_texture(textures_pointers);
-	int i;
-	i = 0;
 }
 
 void	load_map_images(mlx_t **mlx, t_map **map, t_texture_images *textures_pointers)
@@ -175,18 +157,20 @@ void	load_map_images(mlx_t **mlx, t_map **map, t_texture_images *textures_pointe
 	if (!cell_codinates)
 		exit(1);
 	i = 0;
-	while (i < (*map)->max_index_y_down)
+	while (i <= (*map)->max_index_y_down)
 	{
 		j = 0;
-		while (j < (*map)->index_of_player_x)
+		while (j <= (*map)->max_index_x_right)
 		{
 			cell_codinates->y = i;
 			cell_codinates->x = j;
-			load_cell(&((*map)->cells[i][j]), textures_pointers, j, i);
+			ft_printf("loading image %d, %d\n", j ,i);
+			load_cell(mlx, &((*map)->cells[i][j]), textures_pointers, cell_codinates);
 			j++;
 		}
 		i++;
 	}
+
 	free(cell_codinates);
 	
 }
@@ -198,7 +182,24 @@ void	load_map_images(mlx_t **mlx, t_map **map, t_texture_images *textures_pointe
 	
 // }
 
+t_texture_images	*load_images(mlx_t **mlx)
+{
+	t_source_images		*images_source;
+	t_texture_images	*textures_pointers;
+	t_image_images		*images_pointers;
+
+	images_source = create_path_png();
+	textures_pointers = make_texture_from_png(images_source);
+	path_image_free(images_source);
+	images_pointers = NULL;
+	int i;
+	i = 0;
+	return (textures_pointers);
+}
+
 void	load_map(mlx_t **mlx, t_map **map)
 {
-	load_images(mlx);
+	t_texture_images	*textures_pointers;
+	textures_pointers = load_images(mlx);
+	load_map_images(mlx, map, textures_pointers);
 }

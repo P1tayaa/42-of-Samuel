@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 14:05:25 by sboulain          #+#    #+#             */
-/*   Updated: 2023/05/28 20:02:55 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/05/28 20:51:02 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,7 +189,7 @@ void	ft_hook(void *param)
 {
 	mlx_t* mlx = param;
 
-	ft_printf("WIDTH: %d | HEIGHT: %d\n", mlx->width, mlx->height);
+	// ft_printf("WIDTH: %d | HEIGHT: %d\n", mlx->width, mlx->height);
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(mlx);
 }
@@ -214,7 +214,7 @@ int	main(int argc, char **argv)
 
 	mlx_t	*mlx;
 	mlx_set_setting(MLX_MAXIMIZED, true);
-	mlx = mlx_init((map->max_index_x_right) * 8, (map->index_of_player_y) * 8, "main_window", true);
+	mlx = mlx_init((map->max_index_x_right + 1) * 8, (map->index_of_player_y + 1) * 8, "main_window", true);
 	if (!mlx)
 		error();
 	load_map(&mlx, &map);	
