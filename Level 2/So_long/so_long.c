@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 14:05:25 by sboulain          #+#    #+#             */
-/*   Updated: 2023/05/21 17:50:49 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/05/28 20:02:55 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,7 +217,7 @@ int	main(int argc, char **argv)
 	mlx = mlx_init((map->max_index_x_right) * 8, (map->index_of_player_y) * 8, "main_window", true);
 	if (!mlx)
 		error();
-	load_map(&mlx);	
+	load_map(&mlx, &map);	
 
 	mlx_loop_hook(mlx, ft_hook, mlx);
 	mlx_loop(mlx);

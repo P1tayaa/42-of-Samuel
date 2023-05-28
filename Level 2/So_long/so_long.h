@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 18:48:20 by sboulain          #+#    #+#             */
-/*   Updated: 2023/05/21 14:05:36 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/05/28 19:59:42 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,19 @@ typedef struct s_cell
 	bool	has_player;
 	bool	has_enemy;
 	char	type;
+	mlx_image_t	*background;
+	mlx_image_t	*object;
+	mlx_image_t	*player;
 
 }	t_cell;
 
 typedef struct s_map
 {
-	t_cell	**cells;
-	int		max_index_x_right;
-	int		max_index_y_down;
-	int		index_of_player_x;
-	int		index_of_player_y;
+	t_cell		**cells;
+	int			max_index_x_right;
+	int			max_index_y_down;
+	int			index_of_player_x;
+	int			index_of_player_y;	
 
 }	t_map;
 
