@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 13:43:36 by sboulain          #+#    #+#             */
-/*   Updated: 2023/05/21 17:57:02 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/05/28 17:01:03 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,6 @@ void	load_images(mlx_t **mlx)
 	mlx_image_t* img = mlx_texture_to_image(*mlx, images_to_texture->wall);
 	if (!img || (mlx_image_to_window(*mlx, img, 0, 0) < 0))
 		error();
-	
-	
 }
 
 void	load_map(mlx_t **mlx)
