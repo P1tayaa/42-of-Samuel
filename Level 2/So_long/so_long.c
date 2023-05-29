@@ -6,16 +6,11 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 14:05:25 by sboulain          #+#    #+#             */
-/*   Updated: 2023/05/28 20:51:02 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/05/29 20:21:41 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-void error(void)
-{
-	exit(EXIT_FAILURE);
-}
 
 char	*get_all_lines(int fd)
 {
@@ -63,7 +58,7 @@ char	*open_map(char *map_name)
 	return (all_file_string);
 }
 
-void leaks_chec(void)
+void	leaks_chec(void)
 {
 	system("leaks -q so_long");
 }
@@ -126,19 +121,21 @@ bool	is_only_1_exit(t_map *map)
 
 bool	is_all_bordes_wall(t_map *map)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i <= map ->max_index_x_right)
 	{
-		if (!(map -> cells[0][i].type == '1' && map -> cells[map ->max_index_y_down][i].type == '1'))
+		if (!(map -> cells[0][i].type == '1' && map
+			-> cells[map ->max_index_y_down][i].type == '1'))
 			return (false);
 		i++;
 	}
 	i = 0;
 	while (i <= map ->max_index_y_down)
 	{
-		if (map -> cells[i][0].type != '1' && map -> cells[i][map ->max_index_x_right].type != '1')
+		if (map -> cells[i][0].type != '1' && map
+			-> cells[i][map ->max_index_x_right].type != '1')
 			return (false);
 		i++;
 	}
@@ -149,84 +146,78 @@ int		check(int argc, char **argv, t_map **map)
 {
 	char	*map_string;
 
-	//get content of file
 	if (argc != 2)
 		return (ft_printf("agrs wrong"));
 	map_string = open_map(argv[1]);
-	// ft_printf("%s\n",map_string);
-
 	if (map_string == NULL)
 		return (ft_printf("file don't exist or is not .ber"));
-	//free(map_string);
-
-	//make sure content is corrert char per line and what char inside
 	if (is_map_valid_char(map_string) == false)
-		return(ft_printf("map incorect"));
-
-	//make map with the correct cells
-	*map = make_map(map_string); 
-	// make sure 1 and only 1 player
+		return (ft_printf("map incorect"));
+	*map = make_map(map_string);
 	free(map_string);
 	if (is_only_1_player(*map) == false)
 		return (free_map_cells(*map), ft_printf("not only 1 player\n"));
-	// make sure 1 and only 1 exit
-	
 	if (is_only_1_exit(*map) == false)
 		return (free_map_cells(*map), ft_printf("not only 1 exit\n"));
-	//make all border are 1/wall
-
 	if (is_all_bordes_wall(*map) == false)
-		return(free_map_cells(*map), ft_printf("not border wall\n"));
-	//make sure the game is doable all coins acccessible
-
-	if(check_flud_fill_main(map) == false)
-		return(free_map_cells(*map), ft_printf("game not doable\n"));
-
+		return (free_map_cells(*map), ft_printf("not border wall\n"));
+	if (check_flud_fill_main(map) == false)
+		return (free_map_cells(*map), ft_printf("game not doable\n"));
 	return (-1);
 }
 
+void	error_free_texture(t_texture_images *textures_pointers);
+void	player_moves(int x, int y, t_param_for_hook *param_hooks);
+
 void	ft_hook(void *param)
 {
-	mlx_t* mlx = param;
+	t_param_for_hook	*param_hook;
 
-	// ft_printf("WIDTH: %d | HEIGHT: %d\n", mlx->width, mlx->height);
-	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(mlx);
+	param_hook = param;
+	if (mlx_is_key_down(param_hook->mlx, MLX_KEY_ESCAPE))
+	{
+		error_free_texture(param_hook->textures_pointers);
+		mlx_close_window(param_hook->mlx);
+	}
+	else if (mlx_is_key_down(param_hook->mlx, MLX_KEY_W))
+		player_moves(0, 1, param);
+	else if (mlx_is_key_down(param_hook->mlx, MLX_KEY_S))
+		player_moves(0, -1, param);
+	else if (mlx_is_key_down(param_hook->mlx, MLX_KEY_A))
+		player_moves(-1, 0, param);
+	else if (mlx_is_key_down(param_hook->mlx, MLX_KEY_D))
+		player_moves(1, 0, param);
 }
 
-void	load_map();
+t_texture_images	*load_map(mlx_t **mlx, t_map **map);
 
 int	main(int argc, char **argv)
 {
-	t_map	*map;
-	int is_bad;
-	
+	t_map				*map;
+	int 				is_bad;
+	mlx_t				*mlx;
+	t_param_for_hook	*param_hook;
+
 	atexit(leaks_chec);
 	is_bad = check(argc, argv, &map);
-
 	if (is_bad != -1)
 		return(1);
-	// print_map(map);
-
-	// free cells in map
-	//so it fees in time
-
-
-	mlx_t	*mlx;
-	mlx_set_setting(MLX_MAXIMIZED, true);
-	mlx = mlx_init((map->max_index_x_right + 1) * 8, (map->index_of_player_y + 1) * 8, "main_window", true);
+	mlx = mlx_init((map->max_index_x_right + 1) * 16, (map->index_of_player_y + 3) * 16, "main_window", false);
 	if (!mlx)
-		error();
-	load_map(&mlx, &map);	
-
-	mlx_loop_hook(mlx, ft_hook, mlx);
+		exit(1);
+	param_hook = malloc(sizeof(param_hook));
+	if (!param_hook)
+		exit(1);
+	param_hook->textures_pointers = load_map(&mlx, &map);	
+	param_hook->map = map;
+	param_hook->mlx = mlx;
+	param_hook->step_done = 0;
+	mlx_loop_hook(mlx, ft_hook, param_hook);
 	mlx_loop(mlx);
+	error_free_texture(param_hook->textures_pointers);
 	mlx_terminate(mlx);
-
-
 	ft_printf("%d, %d\n", map->index_of_player_x, map->index_of_player_y);
-
-	// print_map(map);
+	free(param_hook);
 	free_map_cells(map);
 	usleep(30000);
 	return (0);

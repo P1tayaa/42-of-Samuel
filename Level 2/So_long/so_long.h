@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 18:48:20 by sboulain          #+#    #+#             */
-/*   Updated: 2023/05/28 19:59:42 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/05/29 19:39:22 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@
 
 typedef struct s_cell
 {
-	bool	play_can_access;
-	bool	has_player;
-	bool	has_enemy;
-	char	type;
+	bool		play_can_access;
+	bool		has_player;
+	bool		has_enemy;
+	char		type;
 	mlx_image_t	*background;
 	mlx_image_t	*object;
 	mlx_image_t	*player;
@@ -42,6 +42,7 @@ typedef struct s_cell
 typedef struct s_map
 {
 	t_cell		**cells;
+	int			coin_left;
 	int			max_index_x_right;
 	int			max_index_y_down;
 	int			index_of_player_x;
@@ -93,6 +94,15 @@ typedef struct s_image_images
 	mlx_image_t	*player_back;
 
 }	t_image_images;
+
+typedef struct s_param_for_hook
+{
+	mlx_t				*mlx;
+	t_map				*map;
+	t_texture_images	*textures_pointers;
+	int					step_done;
+
+}	t_param_for_hook;
 
 bool	is_map_valid_char(char *map_string);
 

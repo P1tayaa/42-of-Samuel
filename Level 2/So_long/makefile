@@ -1,5 +1,5 @@
 
-SRCS			= so_long.c map_valid_string.c map_making.c flud_fill_check.c load_map.c
+SRCS			= so_long.c map_valid_string.c map_making.c map_making_p2.c flud_fill_check.c load_map.c load_cells.c player_moves.c path_png_stuff.c find_coordinate_need_to_access.c
 
 OBJS			= $(SRCS:%.c=%.o)
 

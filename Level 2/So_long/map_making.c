@@ -6,112 +6,50 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 16:48:03 by sboulain          #+#    #+#             */
-/*   Updated: 2023/05/28 21:24:11 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/05/29 20:31:12 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	verctor_string_map_freeur(char **verctor_string_map)
-{
-	int	i;
+void	verctor_string_map_freeur(char **verctor_string_map);
 
-	i = 0;
-	while (verctor_string_map[i] != NULL)
-	{
-		free(verctor_string_map[i]);
-		i++;
-	}
-	free(verctor_string_map);
-	verctor_string_map = NULL;
-}
+t_cell	make_cell(char type);
 
-t_cell	make_cell(char type)
-{
-	t_cell	cell;
+t_cell	*make_cell_row(char *line_string, int max_index_x_right);
 
-	if (type == 'P')
-	{
-		cell.type = '0';
-		cell.has_player = true;
-		cell.has_enemy = false;
-		cell.play_can_access = true;
-		return (cell);
-	}
-	cell.type = type;
-	cell.has_player = false;
-	cell.has_enemy = false;
-	cell.play_can_access = false;
-	return (cell);
-}
+int		get_how_many_y_down(char **verctor_string_map);
 
-t_cell	*make_cell_row(char *line_string, int max_index_x_right)
-{
-	t_cell	*cells_row;
-	int		i;
+int		get_how_many_x_right(char **verctor_string_map);
 
-	cells_row = malloc(sizeof(t_cell) * (max_index_x_right + 1));
-	i = 0;
-	while (i <= max_index_x_right)
-	{
-		cells_row[i] = make_cell(line_string[i]);
-		i++;
-	}
-	return (cells_row);
-}
+// void	print_map(t_map	*map)
+// {
+// 	int	i;
+// 	int	j;
 
-int	get_how_many_y_down(char **verctor_string_map)
-{
-	int	i;
-
-	i = 0;
-	while (verctor_string_map[i] != NULL)
-	{
-		i++;
-	}
-	return (i - 1);
-}
-
-int	get_how_many_x_right(char **verctor_string_map)
-{
-	int	i;
-
-	i = 0;
-	while (verctor_string_map[0][i] != '\0')
-	{
-		i++;
-	}
-	return (i - 1);
-}
-
-void	print_map(t_map	*map)
-{
-	int	i;
-	int	j;
-
-	ft_printf("x = %d, y = %d \n",
-		map ->max_index_x_right, map ->max_index_y_down);
-	i = 0;
-	while (i <= map ->max_index_y_down)
-	{
-		j = 0;
-		while (j <= map ->max_index_x_right)
-		{
-			if (i == map->index_of_player_y && j == map->index_of_player_x)
-				ft_printf("P");
-			else
-				ft_printf("%c", map ->cells[i][j].type);
-			j++;
-		}
-		ft_printf("%c", '\n');
-		i++;
-	}
-}
+// 	ft_printf("x = %d, y = %d \n",
+// 		map ->max_index_x_right, map ->max_index_y_down);
+// 	i = 0;
+// 	while (i <= map ->max_index_y_down)
+// 	{
+// 		j = 0;
+// 		while (j <= map ->max_index_x_right)
+// 		{
+// 			if (i == map->index_of_player_y && j == map->index_of_player_x)
+// 				ft_printf("P");
+// 			else
+// 				ft_printf("%c", map ->cells[i][j].type);
+// 			j++;
+// 		}
+// 		ft_printf("%c", '\n');
+// 		i++;
+// 	}
+// }
 
 void	free_map_cells(t_map *map)
 {
 	int	i;
-	
+
 	i = 0;
 	while (i <= map ->max_index_y_down)
 	{
@@ -145,8 +83,6 @@ t_map	*make_map(char	*map_string)
 			(verctor_string_map[i], map ->max_index_x_right);
 		i++;
 	}
-	// ft_printf("%d\n", i);
-	// print_map(map);
 	verctor_string_map_freeur(verctor_string_map);
 	return (map);
 }
