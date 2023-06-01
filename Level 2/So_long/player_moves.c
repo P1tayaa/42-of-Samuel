@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 15:42:00 by sboulain          #+#    #+#             */
-/*   Updated: 2023/05/29 20:58:04 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/06/01 16:19:08 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	item_manger(t_param_for_hook *param_hooks)
 		{
 			ft_printf("gg\n");
 			terminate_texture(param_hooks->textures_pointers);
+			mlx_terminate(param_hooks->mlx);
 			exit (0);
 		}
 	}
@@ -92,6 +93,7 @@ void	moving_image_of_player(int x, int y, t_param_for_hook *param_hooks)
 			param_hooks->map->index_of_player_x * size,
 			param_hooks->map->index_of_player_y * size) < 0)
 		error_free_texture(param_hooks->textures_pointers);
+	usleep(50000);
 }
 
 void	player_moves(int x, int y, t_param_for_hook *param_hooks)
@@ -119,5 +121,4 @@ void	player_moves(int x, int y, t_param_for_hook *param_hooks)
 		return ;
 	}
 	moving_image_of_player(x, y, param_hooks);
-	usleep(100000);
 }

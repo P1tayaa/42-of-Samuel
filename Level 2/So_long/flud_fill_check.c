@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 13:33:23 by sboulain          #+#    #+#             */
-/*   Updated: 2023/05/29 20:41:36 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/06/01 16:28:04 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ bool	check_flud_fill_main(t_map **map)
 
 	need_to_access_coo = find_coordinate_need_to_access(*map);
 	check_if_side_are_accessible((*map)->index_of_player_x,
-		(*map)->max_index_y_down, map);
+		(*map)->index_of_player_y, map);
 	return_val = is_need_to_access_acessible(need_to_access_coo, *map);
 	free(need_to_access_coo);
 	return (return_val);
