@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 14:05:25 by sboulain          #+#    #+#             */
-/*   Updated: 2023/06/01 16:25:05 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/06/01 19:04:15 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ t_param_for_hook	*parram_hook_start( t_map *map, mlx_t *mlx)
 
 void				terminate_texture(t_texture_images *texture_pouinter);
 
-	// atexit(leaks_chec);
 int	main(int argc, char **argv)
 {
 	t_map				*map;
@@ -97,6 +96,7 @@ int	main(int argc, char **argv)
 	mlx_t				*mlx;
 	t_param_for_hook	*param_hook;
 
+	atexit(leaks_chec);
 	is_bad = check(argc, argv, &map);
 	if (is_bad != -1)
 		return (1);

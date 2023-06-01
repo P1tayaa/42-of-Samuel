@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 18:48:20 by sboulain          #+#    #+#             */
-/*   Updated: 2023/05/29 19:39:22 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/06/01 18:45:12 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,5 @@ void	free_map_cells(t_map *map);
 t_map	*make_map(char	*map_string);
 
 bool	check_flud_fill_main(t_map **map);
-
-
 
 #endif
