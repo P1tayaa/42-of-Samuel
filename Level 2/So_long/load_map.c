@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 13:43:36 by sboulain          #+#    #+#             */
-/*   Updated: 2023/05/29 20:31:32 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/06/02 14:49:47 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	load_map_images(mlx_t **mlx, t_map **map,
 
 // }
 
-t_texture_images	*load_images(mlx_t **mlx)
+t_texture_images	*load_images(void)
 {
 	t_source_images		*images_source;
 	t_texture_images	*textures_pointers;
@@ -110,7 +110,7 @@ t_texture_images	*load_map(mlx_t **mlx, t_map **map)
 {
 	t_texture_images	*textures_pointers;
 
-	textures_pointers = load_images(mlx);
+	textures_pointers = load_images();
 	load_map_images(mlx, map, textures_pointers);
 	return (textures_pointers);
 }

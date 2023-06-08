@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 16:42:45 by sboulain          #+#    #+#             */
-/*   Updated: 2023/04/19 17:03:28 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/06/08 19:33:30 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,56 @@
 //for bool
 # include <stdbool.h>
 
-void	put_num(int num)
+#include <stdlib.h>
+
+char	*strdup(const char *s)
 {
-	char	str[13];
+	char	*dupstr;
+	int		i;
+
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	dupstr = (char *)malloc((i + 1) * sizeof(char));
+	if (!dupstr)
+		return (NULL);
+	i = 0;
+	while (s[i] != '\0')
+	{
+		dupstr[i] = s[i];
+		i++;
+	}
+	dupstr[i] = '\0';
+	return (dupstr);
+}
+
+void	string_rev(char *str)
+{
+	int len;
+	int	i;
+	char temp;
+
+	len = 0;
+	while (str[len]!= '\0')
+		len++;
+	i = 0;
+	while (i < len / 2)
+	{
+		temp = str[i];
+		str[i] = str[len - 1 - i];
+		str[len - 1 - i] = temp;
+		i++;
+	}
+}
+
+char	*itoa(int num)
+{
+	char	*str[13];
 	int		i;
 	bool	is_neg;
 
-
 	if (num == -2147483648)
-	{
-		write(1, "-2147483648", 11);
-		return ;
-	}
+		return ("-2147483648");
 	is_neg = false;
 	if (num < 0)
 	{
@@ -40,20 +78,20 @@ void	put_num(int num)
 		num = num / 10;
 		i++;
 	}
-	str[i] = '\0';
 	if (is_neg)
-		write(1, "-",1);
-	while (i != -1)
-	{
-		write(1, &(str[i]), 1);
-		i--;
-	}
+		str[i++] = '-';
+	str[i] = '\0';
+	return (string_rev(str), str);
 }
-void	put_num_64(uint64_t num)
+
+
+char	*put_num_64(uint64_t num)
 {
 	char	str[20];
 	int		i;
 	
+	if (num == 0)
+		str[0] = '0';
 	i = 0;
 	while (num != 0)
 	{
@@ -62,11 +100,8 @@ void	put_num_64(uint64_t num)
 		i++;
 	}
 	str[i] = '\0';
-	while (i != -1)
-	{
-		write(1, &(str[i]), 1);
-		i--;
-	}
+	string_rev(str);
+	return (str);
 }
 
 bool	ft_atoi(char *str, int *number)
@@ -98,11 +133,31 @@ bool	ft_atoi(char *str, int *number)
 }
 
 
-int	put_str(char *str)
+char	*str_join_and_free(char *str1, char *str2)
 {
-	size_t i;
+	char *new_str;
+	int	i;
+	int	j;
 
-	while (str[i] != '\0')
+	i = 0;
+	j = 0;
+	while (str1[i]!= '\0')
 		i++;
-	return (write(1, str, i));
+	while (str2[j]!= '\0')
+		j++;
+	new_str = malloc(sizeof(char) * (i + j + 1));
+	i = 0;
+	while (str1[i]!= '\0')
+	{
+		new_str[i] = str1[i];
+		i++;
+	}
+	j = 0;
+	while (str2[j]!= '\0')
+	{
+		new_str[i + j] = str2[j];
+		j++;
+	}
+	new_str[i + j] = '\0';
+	return (free(str1), free(str2), new_str);
 }

@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 14:47:22 by sboulain          #+#    #+#             */
-/*   Updated: 2023/04/19 18:32:38 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/06/08 19:54:01 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,52 +28,32 @@ uint64_t	get_time()
 	struct timeval	time;
 	
 	gettimeofday(&time, NULL);
-	return ((time.tv_sec * (uint64_t)1000) + (time.tv_usec * (uint64_t)1000));
+	return ((time.tv_sec * (uint64_t)1000) + (time.tv_usec / (uint64_t)1000));
 }
 
-void	try_and_eat(t_args_info_plus_philo *arguments, uint64_t	*last_time_eat)
+void	try_and_eat(t_args_info_plus_philo *arguments, uint64_t *last_time_eat)
 {
 	int	error;
 	
-	error = pthread_mutex_lock(arguments->philo->left_fork);
-	if (error != 0)
-		return ;
-	put_num_64(get_time());
-	put_str(" ");
-	put_num(arguments->philo->num_of_phil);
-	put_str(" has taken a fork\n");
-	error = pthread_mutex_lock(arguments->philo->right_fork);
-	if (error != 0)
-	{
-		pthread_mutex_unlock(arguments->philo->left_fork);
-		return ;
-	}
-	put_num_64(get_time());
-	put_str(" ");
-	put_num(arguments->philo->num_of_phil);
-	put_str(" has taken a fork\n");
-	put_num_64(get_time());
-	put_str(" ");
-	put_num(arguments->philo->num_of_phil);
-	put_str(" is eating\n");
-	*last_time_eat = get_time();
-	usleep(arguments->arg_info.time_to_eat);
-	pthread_mutex_unlock(arguments->philo->left_fork);
-	pthread_mutex_unlock(arguments->philo->right_fork);
-	put_num_64(get_time());
-	put_str(" ");
-	put_num(arguments->philo->num_of_phil);
-	put_str(" is sleeping\n");
-	usleep(arguments->arg_info.time_to_sleep);
+	pthread_mutex_lock(&arguments->philo->left_fork);
+	printf("%llu: %d has taken a fork\n", get_time() - arguments->start_time, arguments->philo->num_of_phil);
+	pthread_mutex_lock(&arguments->philo->right_fork);
+	*last_time_eat = get_time() - arguments->start_time;
+		printf("%llu: %d has taken a fork\n%llu: %d is eating\n", *last_time_eat, arguments->philo->num_of_phil, *last_time_eat, arguments->philo->num_of_phil);
+	usleep(arguments->arg_info.time_to_eat * 1000);
+	error = pthread_mutex_unlock(&arguments->philo->left_fork);
+	error = pthread_mutex_unlock(&arguments->philo->right_fork);
+	printf("%llu: %d is sleeping\n", get_time() - arguments->start_time, arguments->philo->num_of_phil);
+	usleep(arguments->arg_info.time_to_sleep * 1000);
 }
 
 void think(t_args_info_plus_philo *arguments)
 {
-	put_num_64(get_time());
-	put_str(" ");
-	put_num(arguments->philo->num_of_phil);
-	put_str(" is thinking\n");
-	// usleep(arguments->arg_info.);
+	char *print;
+
+		printf("%llu: %d is thinking\n", get_time() - arguments->start_time, arguments->philo->num_of_phil);
+	// printf("%d\n\n", arguments->arg_info.time_to_sleep);
+	usleep(arguments->arg_info.time_to_sleep * 1000);
 }
 void	*thread_phil(void *arg)
 {
@@ -90,13 +70,19 @@ void	*thread_phil(void *arg)
 	}
 	time_start = get_time();
 	last_time_eat = time_start;
-	write(1, "OK\n", 3);
-	put_num_64(time_start);
+	arguments->start_time = time_start;
+	// write(1, "OK\n", 3);
+	// put_num_64(time_start);
+	// write(1, "\n", 1);
 	// try and eat
+	if (arguments->philo->num_of_phil % 2 == 1)
+		think(arguments);
 	while (arguments->philo)
 	{
+		// put_str("test\n");
 		try_and_eat(arguments, &last_time_eat);
-		// think(arguments);
+		think(arguments);
+		usleep(1);
 	}
 	
 	// if time of dead then die
@@ -112,13 +98,10 @@ void	*thread_phil(void *arg)
 	return (NULL);
 }
 
-bool make_mutex(pthread_mutex_t *mutex_pointer)
+bool make_mutex(t_philo *philo)
 {
-	pthread_mutex_t mutex;
-	if (pthread_mutex_init(&mutex, NULL) != 0)
+	if (pthread_mutex_init(&philo->right_fork, NULL) != 0)
 		return (false);
-	mutex_pointer = &mutex;
-
 	return (true);
 }
 
@@ -131,7 +114,6 @@ t_philo **make_phil(int	num_of_phil)
 
 	all_philo = malloc(sizeof(t_philo *) * (num_of_phil + 1));
 	i = 0;
-	mutex_old_fork = NULL;
 	*start = false;
 	while (i < num_of_phil)
 	{
@@ -139,17 +121,27 @@ t_philo **make_phil(int	num_of_phil)
 		all_philo[i]-> num_time_eat = 0;
 		all_philo[i]-> num_of_phil = i + 1;
 		all_philo[i]-> start = start;
-		if (make_mutex(all_philo[i] -> right_fork) == false)
-			exit(1);
-		if (mutex_old_fork != NULL)
-			all_philo[i] -> left_fork = mutex_old_fork;
-		mutex_old_fork = all_philo[i] -> right_fork;
+		pthread_mutex_init(&(all_philo[i]->right_fork), NULL);
+		if (i != 0)
+			all_philo[i] -> left_fork = *mutex_old_fork;
+		mutex_old_fork = &all_philo[i] -> right_fork;
 		i++;
 	} 
 	all_philo[0] -> left_fork = all_philo[i - 1] -> right_fork;
-	
 	return (all_philo);
 }
+
+// void	print_phil_content(t_philo **phillos, int	num_of_phil)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (i < num_of_phil)
+// 	{
+// 		printf("the philo %d, has address %p, left fork: %d right fork: %d\n", phillos[i]->num_of_phil, phillos[i], phillos[i]->left_fork, phillos[i]->right_fork);
+// 		i++;
+// 	} 
+// }
 
 
 //args:
@@ -193,7 +185,7 @@ void	phillo_terminator(t_philo **all_philo, int num_of_phil)
 	i = 0;
 	while (i < num_of_phil)
 	{
-		pthread_mutex_destroy(all_philo[i]->left_fork);
+		pthread_mutex_destroy(&all_philo[i]->left_fork);
 		i++;
 	}
 		free(all_philo);
@@ -206,6 +198,8 @@ void	start_threads(t_philo *philo, t_args_info	args_info)
 	t_args_info				args_info_for_philo;
 	
 	arg_temp = malloc(sizeof(t_args_info_plus_philo));
+	if (!arg_temp)
+		exit(1);
 	args_info_for_philo.all_good = args_info.all_good;
 	args_info_for_philo.number_of_philosophers = args_info.number_of_philosophers;
 	args_info_for_philo.number_of_times_each_philosopher_must_eat = args_info.number_of_times_each_philosopher_must_eat;
@@ -245,6 +239,7 @@ int	main(int argc, char **argv)
 	all_philo = make_phil(args_info.number_of_philosophers);
 	
 	// pthread_t thread;
+	// print_phil_content(all_philo, args_info.number_of_philosophers);
 	start_threads_of_philo(all_philo, args_info);
 	// * how to start a thead
 	// // pthread_create(&thread, NULL, &thread_phil, NULL);
@@ -254,7 +249,7 @@ int	main(int argc, char **argv)
 	// // usleep(1000000);
 
 	while (1)
-		pause();
+		usleep(1);
 	// // pthread_mutex_t mutex_fork;
 	// // pthread_mutex_init(&mutex_fork, NULL);
 	// // pthread_mutex_destroy(&mutex_fork);

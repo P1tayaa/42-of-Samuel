@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 14:05:25 by sboulain          #+#    #+#             */
-/*   Updated: 2023/06/01 19:04:15 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/06/02 15:18:24 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	check(int argc, char **argv, t_map **map)
 	if (map_string == NULL)
 		return (ft_printf("file don't exist or is not .ber"));
 	if (is_map_valid_char(map_string) == false)
-		return (ft_printf("map incorect"));
+		return (free(map_string), ft_printf("map incorect\n"));
 	*map = make_map(map_string);
 	free(map_string);
 	if (is_only_1_player(*map) == false)
@@ -44,6 +44,8 @@ int	check(int argc, char **argv, t_map **map)
 		return (free_map_cells(*map), ft_printf("not border wall\n"));
 	if (check_flud_fill_main(map) == false)
 		return (free_map_cells(*map), ft_printf("game not doable\n"));
+	if ((*map)->coin_left == 0)
+		return (free_map_cells(*map), ft_printf("0 brush in maze\n"));
 	return (-1);
 }
 
@@ -89,6 +91,7 @@ t_param_for_hook	*parram_hook_start( t_map *map, mlx_t *mlx)
 
 void				terminate_texture(t_texture_images *texture_pouinter);
 
+	// atexit(leaks_chec);
 int	main(int argc, char **argv)
 {
 	t_map				*map;
@@ -96,7 +99,6 @@ int	main(int argc, char **argv)
 	mlx_t				*mlx;
 	t_param_for_hook	*param_hook;
 
-	atexit(leaks_chec);
 	is_bad = check(argc, argv, &map);
 	if (is_bad != -1)
 		return (1);

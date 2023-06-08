@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 13:29:23 by sboulain          #+#    #+#             */
-/*   Updated: 2023/06/01 16:19:15 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/06/02 13:11:04 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ bool	is_all_bordes_wall(t_map *map)
 	int	i;
 
 	i = 0;
-	while (i <= map ->max_index_x_right)
+	while (i <= map -> max_index_x_right)
 	{
 		if (!(map -> cells[0][i].type == '1' && map
 			-> cells[map ->max_index_y_down][i].type == '1'))
@@ -129,8 +129,8 @@ bool	is_all_bordes_wall(t_map *map)
 	i = 0;
 	while (i <= map ->max_index_y_down)
 	{
-		if (map -> cells[i][0].type != '1' && map
-			-> cells[i][map ->max_index_x_right].type != '1')
+		if (!(map -> cells[i][0].type == '1' && map
+			-> cells[i][map ->max_index_x_right].type == '1'))
 			return (false);
 		i++;
 	}

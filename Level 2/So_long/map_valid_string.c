@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 13:11:48 by sboulain          #+#    #+#             */
-/*   Updated: 2023/05/29 19:33:13 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/06/02 13:22:59 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,12 @@ bool	are_lines_good(char *map_string, int lenght_of_line)
 		j = 0;
 		while (j < lenght_of_line)
 		{
-			if (map_string[i + j] == '\n' && are_char_right(map_string[i + j]))
+			if (j == lenght_of_line - 1)
+			{
+				j++;
+				break ;
+			}
+			if (!are_char_right(map_string[i + j]))
 				return (false);
 			j++;
 		}

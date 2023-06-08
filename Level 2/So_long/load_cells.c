@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 15:09:17 by sboulain          #+#    #+#             */
-/*   Updated: 2023/05/30 14:44:56 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/06/02 14:50:55 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	terminate_texture(t_texture_images *texture_pouinter);
 
-void	error_free_texture(t_texture_images *textures_pointers, mlx_t *mlx)
+void	error_free_texture(t_texture_images *textures_pointers)
 {
 	terminate_texture(textures_pointers);
 	exit(1);
@@ -24,7 +24,6 @@ mlx_image_t	*make_and_display_texture(t_coordinate	*cell_codinates,
 	mlx_texture_t *texture, int size, mlx_t **mlx)
 {
 	mlx_image_t	*images;
-	bool		success;
 
 	images = mlx_texture_to_image(*mlx, texture);
 	if (!images)
@@ -57,7 +56,7 @@ void	load_cell(mlx_t **mlx, t_cell *cell,
 		(*cell).background = make_and_display_texture(cell_codinates,
 				textures_pointers->wall, size, mlx);
 		if ((*cell).background == NULL)
-			error_free_texture(textures_pointers, *mlx);
+			error_free_texture(textures_pointers);
 		(*cell).object = NULL;
 		(*cell).player = NULL;
 		return ;
@@ -65,7 +64,7 @@ void	load_cell(mlx_t **mlx, t_cell *cell,
 	(*cell).background = make_and_display_texture(cell_codinates,
 			textures_pointers->background, size, mlx);
 	if ((*cell).background == NULL)
-		error_free_texture(textures_pointers, *mlx);
+		error_free_texture(textures_pointers);
 	load_cell_p2(mlx, cell, textures_pointers, cell_codinates);
 }
 
@@ -80,7 +79,7 @@ void	load_cell_p2(mlx_t **mlx, t_cell *cell,
 		(*cell).object = make_and_display_texture(cell_codinates,
 				textures_pointers->item, size, mlx);
 		if ((*cell).object == NULL)
-			error_free_texture(textures_pointers, *mlx);
+			error_free_texture(textures_pointers);
 		(*cell).player = NULL;
 	}
 	if ((*cell).type == 'E')
@@ -88,7 +87,7 @@ void	load_cell_p2(mlx_t **mlx, t_cell *cell,
 		(*cell).object = make_and_display_texture(cell_codinates,
 				textures_pointers->exit, size, mlx);
 		if ((*cell).object == NULL)
-			error_free_texture(textures_pointers, *mlx);
+			error_free_texture(textures_pointers);
 		(*cell).player = NULL;
 	}
 	load_cell_p3(mlx, cell, textures_pointers, cell_codinates);
@@ -105,7 +104,7 @@ void	load_cell_p3(mlx_t **mlx, t_cell *cell,
 		(*cell).player = make_and_display_texture(cell_codinates,
 				textures_pointers->player_front, size, mlx);
 		if ((*cell).player == NULL)
-			error_free_texture(textures_pointers, *mlx);
+			error_free_texture(textures_pointers);
 		(*cell).object = NULL;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 15:58:28 by sboulain          #+#    #+#             */
-/*   Updated: 2023/04/19 17:14:15 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/06/08 19:15:35 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,17 @@
 #include <stdio.h>
 
 
-void	put_num(int num);
+char	*itoa(int num);
 
-void	put_num_64(uint64_t num);
+char	*put_num_64(uint64_t num);
 
 bool	ft_atoi(char *str, int *number);
 
-int	put_str(char *str);
+void	put_str(char *str);
+
+char	*strdup(const char *s);
+
+char	*str_join_and_free(char *str1, char *str2);
 
 typedef struct s_philo
 {
@@ -43,9 +47,9 @@ typedef struct s_philo
 	int				num_of_phil;
 	bool			*start;
 	pthread_t		*current_thread;
-	pthread_mutex_t	*left_fork;
-	pthread_mutex_t	*right_fork;
-
+	pthread_mutex_t	left_fork;
+	pthread_mutex_t	right_fork;
+	
 }	t_philo;
 
 typedef struct s_args_info
@@ -56,11 +60,14 @@ typedef struct s_args_info
 	int		time_to_sleep;
 	int		number_of_times_each_philosopher_must_eat;
 	bool	all_good;
+	
 }	t_args_info;
 
 typedef struct s_args_info_plus_philo
 {
 	t_philo		*philo;
 	t_args_info	arg_info;
+	uint64_t		start_time;
+	
 }t_args_info_plus_philo;
 #endif

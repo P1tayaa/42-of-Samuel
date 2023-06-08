@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 15:42:00 by sboulain          #+#    #+#             */
-/*   Updated: 2023/06/01 16:19:08 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/06/02 14:54:03 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ mlx_image_t	*make_image_for_player(
 	mlx_image_t	*new_images_player;
 	int			size;
 
+	new_images_player = NULL;
 	size = 16;
 	if (x == 1)
 		new_images_player = mlx_texture_to_image(
@@ -93,7 +94,6 @@ void	moving_image_of_player(int x, int y, t_param_for_hook *param_hooks)
 			param_hooks->map->index_of_player_x * size,
 			param_hooks->map->index_of_player_y * size) < 0)
 		error_free_texture(param_hooks->textures_pointers);
-	usleep(50000);
 }
 
 void	player_moves(int x, int y, t_param_for_hook *param_hooks)

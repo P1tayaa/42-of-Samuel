@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 20:41:16 by sboulain          #+#    #+#             */
-/*   Updated: 2023/05/29 20:45:32 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/06/02 14:52:27 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,6 @@ t_coordinate	*make_coordinates_need_to_access(int count_coo,
 t_coordinate	*find_coordinate_need_to_access(t_map *map)
 {
 	const char		*need_to_access = "EC";
-	int				i;
-	int				j;
 	int				count_coo;
 	t_coordinate	*need_to_access_coo;
 
