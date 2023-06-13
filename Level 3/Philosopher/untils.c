@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 16:42:45 by sboulain          #+#    #+#             */
-/*   Updated: 2023/06/08 19:33:30 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/06/13 14:43:34 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,16 @@
 # include <stdbool.h>
 
 #include <stdlib.h>
+
+#include <sys/time.h>
+
+uint64_t	get_time()
+{
+	struct timeval	time;
+	
+	gettimeofday(&time, NULL);
+	return ((time.tv_sec * (uint64_t)1000) + (time.tv_usec / (uint64_t)1000));
+}
 
 char	*strdup(const char *s)
 {
@@ -57,52 +67,53 @@ void	string_rev(char *str)
 	}
 }
 
-char	*itoa(int num)
-{
-	char	*str[13];
-	int		i;
-	bool	is_neg;
+// char	*itoa(int num)
+// {
+// 	char	str[13];
+// 	int		i;
+// 	bool	is_neg;
 
-	if (num == -2147483648)
-		return ("-2147483648");
-	is_neg = false;
-	if (num < 0)
-	{
-		is_neg = true;
-		num = -num;
-	}
-	i = 0;
-	while (num != 0)
-	{
-		str[i] = (num % 10) + '0';
-		num = num / 10;
-		i++;
-	}
-	if (is_neg)
-		str[i++] = '-';
-	str[i] = '\0';
-	return (string_rev(str), str);
-}
+// 	if (num == -2147483648)
+// 		return ("-2147483648");
+// 	is_neg = false;
+// 	if (num < 0)
+// 	{
+// 		is_neg = true;
+// 		num = -num;
+// 	}
+// 	i = 0;
+// 	while (num != 0)
+// 	{
+// 		str[i] = (num % 10) + '0';
+// 		num = num / 10;
+// 		i++;
+// 	}
+// 	if (is_neg)
+// 		str[i++] = '-';
+// 	str[i] = '\0';
+// 	string_rev(str);
+// 	return (str);
+// }
 
 
-char	*put_num_64(uint64_t num)
-{
-	char	str[20];
-	int		i;
+// char	*put_num_64(uint64_t num)
+// {
+// 	char	str[20];
+// 	int		i;
 	
-	if (num == 0)
-		str[0] = '0';
-	i = 0;
-	while (num != 0)
-	{
-		str[i] = (num % 10) + '0';
-		num = num / 10;
-		i++;
-	}
-	str[i] = '\0';
-	string_rev(str);
-	return (str);
-}
+// 	if (num == 0)
+// 		str[0] = '0';
+// 	i = 0;
+// 	while (num != 0)
+// 	{
+// 		str[i] = (num % 10) + '0';
+// 		num = num / 10;
+// 		i++;
+// 	}
+// 	str[i] = '\0';
+// 	string_rev(str);
+// 	return (str);
+// }
 
 bool	ft_atoi(char *str, int *number)
 {

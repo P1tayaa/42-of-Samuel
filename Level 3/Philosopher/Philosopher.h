@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 15:58:28 by sboulain          #+#    #+#             */
-/*   Updated: 2023/06/08 19:15:35 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/06/13 14:33:16 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	put_str(char *str);
 char	*strdup(const char *s);
 
 char	*str_join_and_free(char *str1, char *str2);
+
+uint64_t	get_time();
 
 typedef struct s_philo
 {

@@ -1,5 +1,5 @@
 
-SRCS			= main.c untils.c
+SRCS			= main.c untils.c philosopher.c make_philo.c
 
 OBJS			= $(SRCS:%.c=%.o)
 
