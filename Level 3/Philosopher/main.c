@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 14:47:22 by sboulain          #+#    #+#             */
-/*   Updated: 2023/06/13 15:06:32 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/07/09 12:15:12 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,56 @@ void	start_threads_of_philo(t_philo **all_philo, t_args_info	args_info)
 	}
 }
 
+void	phillo_terminator(t_philo **all_philo, int num_of_phil);
+
+int	death_manager(t_philo **all_philo, t_args_info	args_info, bool is_eat_restriction)
+{
+	bool still_going;
+
+	still_going = true;
+	while (still_going)
+	{
+		int	i;
+
+		i = 0;
+		while (i < args_info.number_of_philosophers)
+		{
+			if (all_philo[i]->time_sinse_last_meal + args_info.time_to_die <= get_time() - all_philo[i]->start_time)
+				
+				{
+					
+					printf("%llu, %llu\n", all_philo[i]->time_sinse_last_meal + args_info.time_to_die, get_time() - all_philo[i]->start_time);
+					break ;
+				}
+			i++;
+		}
+		if (i != args_info.number_of_philosophers)
+			break ;
+		i = 0;
+		if (is_eat_restriction)
+		{
+			while (i < args_info.number_of_philosophers)
+			{
+				if (all_philo[i]->num_time_eat < args_info.number_of_times_each_philosopher_must_eat)
+					break ;
+				i++;
+			}
+			// printf("%d, %d\n", i , args_info.number_of_philosophers);
+			if (i == args_info.number_of_philosophers)
+			{
+				printf("all did eat");
+				break ;
+			}
+		}
+	}
+	printf("test\n");
+	phillo_terminator(all_philo, args_info.number_of_philosophers);
+	return (0);
+}
+
+
 t_args_info	get_arg_to_struct(int argc, char **argv);
 t_philo **make_phil(int	num_of_phil);
-void	phillo_terminator(t_philo **all_philo, int num_of_phil);
 
 int	main(int argc, char **argv)
 {
@@ -103,10 +150,13 @@ int	main(int argc, char **argv)
 	// // pthread_create(&thread, NULL, &thread_phil, NULL);
 	// // usleep(1000000);
 
-	usleep(10000000);
-	phillo_terminator(all_philo, args_info.number_of_philosophers);
+	// usleep(10000000);
 
+	usleep(10000);
+	death_manager(all_philo, args_info, argc == 6);
 	usleep(1000);
+	// system("leaks -q philosopher");
+	
 	exit(0);
 	// // pthread_mutex_t mutex_fork;
 	// // pthread_mutex_init(&mutex_fork, NULL);

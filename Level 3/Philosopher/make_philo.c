@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:28:41 by sboulain          #+#    #+#             */
-/*   Updated: 2023/06/13 15:05:12 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/07/09 10:40:19 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ void	phillo_terminator(t_philo **all_philo, int num_of_phil)
 	i = num_of_phil - 1;
 	while (i > 0)
 	{
-		pthread_join(all_philo[i + 1], all_philo[i]);
-		i++;
+		pthread_join(*all_philo[i]->current_thread, NULL);
+		i--;
 	}
 	
 	while (i < num_of_phil)
