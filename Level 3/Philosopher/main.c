@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 14:47:22 by sboulain          #+#    #+#             */
-/*   Updated: 2023/07/09 12:15:12 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/07/10 12:38:12 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	start_threads_of_philo(t_philo **all_philo, t_args_info	args_info)
 	int	i;
 
 	i = 0;
+	
 	while (i < args_info.number_of_philosophers)
 	{
 		start_threads(all_philo[i], args_info);
@@ -87,15 +88,16 @@ int	death_manager(t_philo **all_philo, t_args_info	args_info, bool is_eat_restri
 		int	i;
 
 		i = 0;
+
 		while (i < args_info.number_of_philosophers)
 		{
+			pthread_mutex_lock(&all_philo[0]->printf);
 			if (all_philo[i]->time_sinse_last_meal + args_info.time_to_die <= get_time() - all_philo[i]->start_time)
-				
 				{
-					
-					printf("%llu, %llu\n", all_philo[i]->time_sinse_last_meal + args_info.time_to_die, get_time() - all_philo[i]->start_time);
+					printf("%d, %llu, %d, %llu\n", i, all_philo[i]->time_sinse_last_meal,  args_info.time_to_die, get_time() - all_philo[i]->start_time);
 					break ;
 				}
+			pthread_mutex_unlock(&all_philo[0]->printf);
 			i++;
 		}
 		if (i != args_info.number_of_philosophers)
@@ -103,9 +105,10 @@ int	death_manager(t_philo **all_philo, t_args_info	args_info, bool is_eat_restri
 		i = 0;
 		if (is_eat_restriction)
 		{
+			pthread_mutex_lock(&all_philo[0]->printf);
 			while (i < args_info.number_of_philosophers)
 			{
-				if (all_philo[i]->num_time_eat < args_info.number_of_times_each_philosopher_must_eat)
+				if (all_philo[i]->num_time_eat < args_info.number_of_times_each_philosopher_must_eat - 2)
 					break ;
 				i++;
 			}
@@ -115,6 +118,7 @@ int	death_manager(t_philo **all_philo, t_args_info	args_info, bool is_eat_restri
 				printf("all did eat");
 				break ;
 			}
+			pthread_mutex_unlock(&all_philo[0]->printf);
 		}
 	}
 	printf("test\n");

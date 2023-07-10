@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:28:41 by sboulain          #+#    #+#             */
-/*   Updated: 2023/07/09 10:40:19 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/07/10 12:26:37 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_philo **make_phil(int	num_of_phil)
 	int		i;
 	bool	*start;
 	pthread_mutex_t *mutex_old_fork;
+	pthread_mutex_t *mutex_printf;
 
 	all_philo = malloc(sizeof(t_philo *) * (num_of_phil + 1));
 	i = 0;
@@ -35,10 +36,17 @@ t_philo **make_phil(int	num_of_phil)
 		all_philo[i]-> num_time_eat = 0;
 		all_philo[i]-> num_of_phil = i + 1;
 		all_philo[i]-> start = start;
+		if (i == 0)
+		{
+			pthread_mutex_init(&(all_philo[0]->printf), NULL);
+			mutex_printf = &(all_philo[0]->printf);
+		}
 		pthread_mutex_init(&(all_philo[i]->right_fork), NULL);
 		if (i != 0)
 			all_philo[i] -> left_fork = *mutex_old_fork;
 		mutex_old_fork = &all_philo[i] -> right_fork;
+		if (i != 0)
+			all_philo[i]->printf = *mutex_printf;
 		i++;
 	} 
 	all_philo[0] -> left_fork = all_philo[i - 1] -> right_fork;
@@ -83,7 +91,7 @@ void	phillo_terminator(t_philo **all_philo, int num_of_phil)
 		pthread_join(*all_philo[i]->current_thread, NULL);
 		i--;
 	}
-	
+	pthread_mutex_destroy(&all_philo[0]->printf);
 	while (i < num_of_phil)
 	{
 		pthread_mutex_destroy(&all_philo[i]->left_fork);

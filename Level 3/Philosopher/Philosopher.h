@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 15:58:28 by sboulain          #+#    #+#             */
-/*   Updated: 2023/07/09 11:11:59 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/07/10 12:13:21 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_philo
 	pthread_t		*current_thread;
 	pthread_mutex_t	left_fork;
 	pthread_mutex_t	right_fork;
+	pthread_mutex_t	printf;
 	
 }	t_philo;
 
