@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 14:47:22 by sboulain          #+#    #+#             */
-/*   Updated: 2023/07/10 12:38:12 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/07/13 15:51:38 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,16 +88,18 @@ int	death_manager(t_philo **all_philo, t_args_info	args_info, bool is_eat_restri
 		int	i;
 
 		i = 0;
-
 		while (i < args_info.number_of_philosophers)
 		{
-			pthread_mutex_lock(&all_philo[0]->printf);
+			pthread_mutex_lock(&all_philo[i]->mutex_time_sinse_last_meal);
 			if (all_philo[i]->time_sinse_last_meal + args_info.time_to_die <= get_time() - all_philo[i]->start_time)
 				{
+					pthread_mutex_lock(&all_philo[0]->printf);
 					printf("%d, %llu, %d, %llu\n", i, all_philo[i]->time_sinse_last_meal,  args_info.time_to_die, get_time() - all_philo[i]->start_time);
+					pthread_mutex_unlock(&all_philo[i]->mutex_time_sinse_last_meal);
+					pthread_mutex_unlock(&all_philo[0]->printf);
 					break ;
 				}
-			pthread_mutex_unlock(&all_philo[0]->printf);
+			pthread_mutex_unlock(&all_philo[i]->mutex_time_sinse_last_meal);
 			i++;
 		}
 		if (i != args_info.number_of_philosophers)
@@ -105,20 +107,25 @@ int	death_manager(t_philo **all_philo, t_args_info	args_info, bool is_eat_restri
 		i = 0;
 		if (is_eat_restriction)
 		{
-			pthread_mutex_lock(&all_philo[0]->printf);
 			while (i < args_info.number_of_philosophers)
 			{
-				if (all_philo[i]->num_time_eat < args_info.number_of_times_each_philosopher_must_eat - 2)
+				pthread_mutex_lock(&all_philo[i]->mutex_num_time_eat);
+				if (all_philo[i]->num_time_eat < args_info.number_of_times_each_philosopher_must_eat - 3)
+				{
+					pthread_mutex_unlock(&all_philo[i]->mutex_num_time_eat);
 					break ;
+				}
+				pthread_mutex_unlock(&all_philo[i]->mutex_num_time_eat);
 				i++;
 			}
 			// printf("%d, %d\n", i , args_info.number_of_philosophers);
 			if (i == args_info.number_of_philosophers)
 			{
+				pthread_mutex_lock(&all_philo[0]->printf);
 				printf("all did eat");
+				pthread_mutex_unlock(&all_philo[0]->printf);
 				break ;
 			}
-			pthread_mutex_unlock(&all_philo[0]->printf);
 		}
 	}
 	printf("test\n");
@@ -149,16 +156,15 @@ int	main(int argc, char **argv)
 	start_threads_of_philo(all_philo, args_info);
 	// * how to start a thead
 	// // pthread_create(&thread, NULL, &thread_phil, NULL);
-	usleep(1000000);
-	*(all_philo[0]->start) = true;
 	// // pthread_create(&thread, NULL, &thread_phil, NULL);
 	// // usleep(1000000);
 
 	// usleep(10000000);
 
-	usleep(10000);
+	usleep(500);
+	printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
 	death_manager(all_philo, args_info, argc == 6);
-	usleep(1000);
+	// usleep(1000);
 	// system("leaks -q philosopher");
 	
 	exit(0);

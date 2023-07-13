@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:28:41 by sboulain          #+#    #+#             */
-/*   Updated: 2023/07/10 12:26:37 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/07/13 15:48:15 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,30 +21,27 @@ bool make_mutex(t_philo *philo)
 
 t_philo **make_phil(int	num_of_phil)
 {
-	t_philo **all_philo;
-	int		i;
-	bool	*start;
-	pthread_mutex_t *mutex_old_fork;
-	pthread_mutex_t *mutex_printf;
+	t_philo			**all_philo;
+	int				i;
+	pthread_mutex_t	*mutex_printf;
 
 	all_philo = malloc(sizeof(t_philo *) * (num_of_phil + 1));
 	i = 0;
-	*start = false;
 	while (i < num_of_phil)
 	{
 		all_philo[i] = malloc(sizeof(t_philo));
 		all_philo[i]-> num_time_eat = 0;
 		all_philo[i]-> num_of_phil = i + 1;
-		all_philo[i]-> start = start;
 		if (i == 0)
 		{
 			pthread_mutex_init(&(all_philo[0]->printf), NULL);
 			mutex_printf = &(all_philo[0]->printf);
 		}
+		pthread_mutex_init(&(all_philo[i]->mutex_num_time_eat), NULL);
+		pthread_mutex_init(&(all_philo[i]->mutex_time_sinse_last_meal), NULL);
 		pthread_mutex_init(&(all_philo[i]->right_fork), NULL);
 		if (i != 0)
-			all_philo[i] -> left_fork = *mutex_old_fork;
-		mutex_old_fork = &all_philo[i] -> right_fork;
+			all_philo[i] -> left_fork = all_philo[i] -> right_fork;
 		if (i != 0)
 			all_philo[i]->printf = *mutex_printf;
 		i++;
@@ -85,19 +82,24 @@ void	phillo_terminator(t_philo **all_philo, int num_of_phil)
 {
 	int	i;
 	
+	puts("\n\n\n");
 	i = num_of_phil - 1;
 	while (i > 0)
 	{
-		pthread_join(*all_philo[i]->current_thread, NULL);
+		
+		pthread_detach(*all_philo[i]->current_thread);
 		i--;
 	}
-	pthread_mutex_destroy(&all_philo[0]->printf);
+	// pthread_mutex_destroy(&all_philo[0]->printf);
 	while (i < num_of_phil)
 	{
 		pthread_mutex_destroy(&all_philo[i]->left_fork);
+		pthread_mutex_destroy(&all_philo[i]->mutex_num_time_eat);
+		pthread_mutex_destroy(&all_philo[i]->mutex_time_sinse_last_meal);
 		i++;
 	}
 		free(all_philo);
+	// exit(0);
 }
 
 

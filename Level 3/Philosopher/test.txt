@@ -1,0 +1,61 @@
+philo number 1 is alive
+philo number 2 is alive
+0: 2 has taken a fork
+philo number 4 is alive
+0: 4 has taken a fork
+0: 4 has taken a fork
+0: 4 is eating
+0: 2 has taken a fork
+0: 2 is eating
+0: 1 is thinking
+philo number 3 is alive
+0: 3 is thinking
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+201: 4 is sleeping
+201: 2 is sleeping
+201: 1 has taken a fork
+201: 3 has taken a fork
+201: 3 has taken a fork
+201: 3 is eating
+201: 1 has taken a fork
+201: 1 is eating
+402: 4 is thinking
+402: 2 is thinking
+402: 3 is sleeping
+402: 1 is sleeping
+602: 3 is thinking
+602: 4 has taken a fork
+602: 4 has taken a fork
+602: 4 is eating
+602: 1 is thinking
+602: 2 has taken a fork
+602: 2 has taken a fork
+602: 2 is eating
+805: 4 is sleeping
+805: 2 is sleeping
+805: 1 has taken a fork
+805: 1 has taken a fork
+805: 1 is eating
+805: 3 has taken a fork
+805: 3 has taken a fork
+805: 3 is eating
+1008: 4 is thinking
+1008: 1 is sleeping
+1009: 2 is thinking
+1009: 3 is sleeping
+1208: 1 is thinking
+1208: 4 has taken a fork
+1208: 4 has taken a fork
+1208: 4 is eating
+1214: 3 is thinking
+1214: 2 has taken a fork
+1214: 2 has taken a fork
+1214: 2 is eating
+1409: 1 has taken a fork
+1409: 1 has taken a fork
+1409: 1 is eating
+1413: 4 is sleeping
+1414: 2 is sleeping
+1414: 3 has taken a fork
+1414: 3 has taken a fork
+1414: 3 is eating
