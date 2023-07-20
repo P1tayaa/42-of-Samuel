@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 14:47:22 by sboulain          #+#    #+#             */
-/*   Updated: 2023/07/13 15:51:38 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/07/20 13:22:57 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,20 +86,21 @@ int	death_manager(t_philo **all_philo, t_args_info	args_info, bool is_eat_restri
 	while (still_going)
 	{
 		int	i;
-
+		
+		usleep(8);
 		i = 0;
 		while (i < args_info.number_of_philosophers)
 		{
-			pthread_mutex_lock(&all_philo[i]->mutex_time_sinse_last_meal);
+			pthread_mutex_lock(all_philo[i]->mutex_time_sinse_last_meal);
 			if (all_philo[i]->time_sinse_last_meal + args_info.time_to_die <= get_time() - all_philo[i]->start_time)
 				{
-					pthread_mutex_lock(&all_philo[0]->printf);
+					pthread_mutex_lock(all_philo[0]->printf);
 					printf("%d, %llu, %d, %llu\n", i, all_philo[i]->time_sinse_last_meal,  args_info.time_to_die, get_time() - all_philo[i]->start_time);
-					pthread_mutex_unlock(&all_philo[i]->mutex_time_sinse_last_meal);
-					pthread_mutex_unlock(&all_philo[0]->printf);
+					pthread_mutex_unlock(all_philo[i]->mutex_time_sinse_last_meal);
+					pthread_mutex_unlock(all_philo[0]->printf);
 					break ;
 				}
-			pthread_mutex_unlock(&all_philo[i]->mutex_time_sinse_last_meal);
+			pthread_mutex_unlock(all_philo[i]->mutex_time_sinse_last_meal);
 			i++;
 		}
 		if (i != args_info.number_of_philosophers)
@@ -109,21 +110,21 @@ int	death_manager(t_philo **all_philo, t_args_info	args_info, bool is_eat_restri
 		{
 			while (i < args_info.number_of_philosophers)
 			{
-				pthread_mutex_lock(&all_philo[i]->mutex_num_time_eat);
-				if (all_philo[i]->num_time_eat < args_info.number_of_times_each_philosopher_must_eat - 3)
+				pthread_mutex_lock(all_philo[i]->mutex_num_time_eat);
+				if (all_philo[i]->num_time_eat < args_info.number_of_times_each_philosopher_must_eat - 2)
 				{
-					pthread_mutex_unlock(&all_philo[i]->mutex_num_time_eat);
+					pthread_mutex_unlock(all_philo[i]->mutex_num_time_eat);
 					break ;
 				}
-				pthread_mutex_unlock(&all_philo[i]->mutex_num_time_eat);
+				pthread_mutex_unlock(all_philo[i]->mutex_num_time_eat);
 				i++;
 			}
 			// printf("%d, %d\n", i , args_info.number_of_philosophers);
 			if (i == args_info.number_of_philosophers)
 			{
-				pthread_mutex_lock(&all_philo[0]->printf);
+				pthread_mutex_lock(all_philo[0]->printf);
 				printf("all did eat");
-				pthread_mutex_unlock(&all_philo[0]->printf);
+				pthread_mutex_unlock(all_philo[0]->printf);
 				break ;
 			}
 		}
@@ -149,10 +150,22 @@ int	main(int argc, char **argv)
 	if (args_info.all_good == false)
 		return (printf("arg wrongs 2\n"));
 	i = 0;
+	puts("test1");
 	all_philo = make_phil(args_info.number_of_philosophers);
+	puts("test1");
 	
+	i = 0;
+	while (i < args_info.number_of_philosophers)
+	{
+		printf("phil num %d, left fork %p right fork %p\n", i , all_philo[i]->left_fork, all_philo[i]->right_fork);
+		i++;
+	}
+	
+
 	// pthread_t thread;
 	// print_phil_content(all_philo, args_info.number_of_philosophers);
+	
+	pthread_mutex_lock(all_philo[0]->printf);
 	start_threads_of_philo(all_philo, args_info);
 	// * how to start a thead
 	// // pthread_create(&thread, NULL, &thread_phil, NULL);
@@ -161,16 +174,12 @@ int	main(int argc, char **argv)
 
 	// usleep(10000000);
 
-	usleep(500);
+	pthread_mutex_unlock(all_philo[0]->printf);
+	usleep(600);
 	printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
 	death_manager(all_philo, args_info, argc == 6);
 	// usleep(1000);
 	// system("leaks -q philosopher");
 	
 	exit(0);
-	// // pthread_mutex_t mutex_fork;
-	// // pthread_mutex_init(&mutex_fork, NULL);
-	// // pthread_mutex_destroy(&mutex_fork);
-	// // printf("%lu\n", sizeof(pthread_t));
-	// // usleep(1000000);
 }

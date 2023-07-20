@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 15:58:28 by sboulain          #+#    #+#             */
-/*   Updated: 2023/07/13 15:08:26 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/07/20 12:32:10 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ typedef struct s_philo
 	uint64_t		time_sinse_last_meal;
 	uint64_t		start_time;
 	pthread_t		*current_thread;
-	pthread_mutex_t	left_fork;
-	pthread_mutex_t	right_fork;
-	pthread_mutex_t	printf;
-	pthread_mutex_t mutex_time_sinse_last_meal;
-	pthread_mutex_t mutex_num_time_eat;
+	pthread_mutex_t	*left_fork;
+	pthread_mutex_t	*right_fork;
+	pthread_mutex_t	*printf;
+	pthread_mutex_t *mutex_time_sinse_last_meal;
+	pthread_mutex_t *mutex_num_time_eat;
 	
 }	t_philo;
 
@@ -73,7 +73,7 @@ typedef struct s_args_info_plus_philo
 {
 	t_philo		*philo;
 	t_args_info	arg_info;
-	uint64_t		start_time;
+	uint64_t	start_time;
 	
-}t_args_info_plus_philo;
+}	t_args_info_plus_philo;
 #endif

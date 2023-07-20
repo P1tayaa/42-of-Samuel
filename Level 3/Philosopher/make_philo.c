@@ -6,18 +6,18 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:28:41 by sboulain          #+#    #+#             */
-/*   Updated: 2023/07/13 15:48:15 by sboulain         ###   ########.fr       */
+/*   Updated: 2023/07/20 13:08:37 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Philosopher.h"
 
-bool make_mutex(t_philo *philo)
-{
-	if (pthread_mutex_init(&philo->right_fork, NULL) != 0)
-		return (false);
-	return (true);
-}
+// bool make_mutex(t_philo *philo)
+// {
+// 	if (pthread_mutex_init(&philo->right_fork, NULL) != 0)
+// 		return (false);
+// 	return (true);
+// }
 
 t_philo **make_phil(int	num_of_phil)
 {
@@ -29,23 +29,36 @@ t_philo **make_phil(int	num_of_phil)
 	i = 0;
 	while (i < num_of_phil)
 	{
+		// printf("phil N %d, making\n", i);
 		all_philo[i] = malloc(sizeof(t_philo));
 		all_philo[i]-> num_time_eat = 0;
 		all_philo[i]-> num_of_phil = i + 1;
 		if (i == 0)
 		{
-			pthread_mutex_init(&(all_philo[0]->printf), NULL);
-			mutex_printf = &(all_philo[0]->printf);
+			all_philo[0]->printf = malloc(sizeof(pthread_mutex_t));
+			pthread_mutex_init((all_philo[0]->printf), NULL);
+			mutex_printf = (all_philo[0]->printf);
 		}
-		pthread_mutex_init(&(all_philo[i]->mutex_num_time_eat), NULL);
-		pthread_mutex_init(&(all_philo[i]->mutex_time_sinse_last_meal), NULL);
-		pthread_mutex_init(&(all_philo[i]->right_fork), NULL);
+		// puts("made a mutex");
+		all_philo[i]->mutex_num_time_eat = malloc(sizeof(pthread_mutex_t));
+		all_philo[i]->mutex_time_sinse_last_meal = malloc(sizeof(pthread_mutex_t));
+		all_philo[i]->right_fork = malloc(sizeof(pthread_mutex_t));
+		pthread_mutex_init((all_philo[i]->mutex_num_time_eat), NULL);
+		pthread_mutex_init((all_philo[i]->mutex_time_sinse_last_meal), NULL);
+		pthread_mutex_init((all_philo[i]->right_fork), NULL);
 		if (i != 0)
-			all_philo[i] -> left_fork = all_philo[i] -> right_fork;
+		{
+			// all_philo[i] -> left_fork = malloc(sizeof(pthread_mutex_t));
+			all_philo[i] -> left_fork = all_philo[i - 1] -> right_fork;
+		}
 		if (i != 0)
-			all_philo[i]->printf = *mutex_printf;
+		{
+			// all_philo[i]->printf = malloc(sizeof(pthread_mutex_t));
+			all_philo[i]->printf = mutex_printf;
+		}
 		i++;
 	} 
+	all_philo[0] -> left_fork = malloc(sizeof(pthread_mutex_t));
 	all_philo[0] -> left_fork = all_philo[i - 1] -> right_fork;
 	return (all_philo);
 }
@@ -93,9 +106,9 @@ void	phillo_terminator(t_philo **all_philo, int num_of_phil)
 	// pthread_mutex_destroy(&all_philo[0]->printf);
 	while (i < num_of_phil)
 	{
-		pthread_mutex_destroy(&all_philo[i]->left_fork);
-		pthread_mutex_destroy(&all_philo[i]->mutex_num_time_eat);
-		pthread_mutex_destroy(&all_philo[i]->mutex_time_sinse_last_meal);
+		pthread_mutex_destroy(all_philo[i]->left_fork);
+		pthread_mutex_destroy(all_philo[i]->mutex_num_time_eat);
+		pthread_mutex_destroy(all_philo[i]->mutex_time_sinse_last_meal);
 		i++;
 	}
 		free(all_philo);
