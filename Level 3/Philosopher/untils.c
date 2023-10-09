@@ -10,14 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//for write
-# include <unistd.h>
-//for bool
-# include <stdbool.h>
-
-#include <stdlib.h>
-
-#include <sys/time.h>
+#include "Philosopher.h"
 
 uint64_t	get_time()
 {

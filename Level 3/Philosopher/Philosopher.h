@@ -27,7 +27,9 @@
 # include <sys/time.h>
 //for printf
 #include <stdio.h>
-
+//for uint64_t 
+#include <stdint.h>
+#include <inttypes.h>
 
 char	*itoa(int num);
 

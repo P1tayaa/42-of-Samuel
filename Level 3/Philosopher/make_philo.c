@@ -77,14 +77,17 @@ t_args_info	get_arg_to_struct(int argc, char **argv)
 	if (ft_atoi(argv[3], &temp_num) == false)
 		return (args_info);
 	args_info.time_to_eat = temp_num;
-	if (ft_atoi(argv[3], &temp_num) == false)
+	if (ft_atoi(argv[4], &temp_num) == false)
 		return (args_info);
 	args_info.time_to_sleep = temp_num;
-	if (argc == 5)
+	if (argc == 6)
 	{
-		if (ft_atoi(argv[3], &temp_num) == false)
+		if (ft_atoi(argv[5], &temp_num) == false)
 			return (args_info);
-		args_info.time_to_sleep = temp_num;
+		args_info.number_of_times_each_philosopher_must_eat = temp_num;
+		printf("%d\n", args_info.number_of_times_each_philosopher_must_eat);
+
+		// pause();
 	}
 	args_info.all_good = true;
 	return (args_info);
