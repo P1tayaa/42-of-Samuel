@@ -49,7 +49,7 @@ typedef struct s_philo
 {
 	int				num_time_eat;
 	int				num_of_phil;
-	uint64_t		time_sinse_last_meal;
+	uint64_t		*time_sinse_last_meal;
 	uint64_t		start_time;
 	pthread_t		*current_thread;
 	pthread_mutex_t	*left_fork;
@@ -73,7 +73,7 @@ typedef struct s_args_info
 
 typedef struct s_args_info_plus_philo
 {
-	t_philo		*philo;
+	t_philo		**philo;
 	t_args_info	arg_info;
 	uint64_t	start_time;
 	

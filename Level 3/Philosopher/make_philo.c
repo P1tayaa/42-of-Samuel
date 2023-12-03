@@ -40,6 +40,7 @@ t_philo **make_phil(int	num_of_phil)
 			mutex_printf = (all_philo[0]->printf);
 		}
 		// puts("made a mutex");
+		all_philo[i]->time_sinse_last_meal = malloc(sizeof(uint64_t));
 		all_philo[i]->mutex_num_time_eat = malloc(sizeof(pthread_mutex_t));
 		all_philo[i]->mutex_time_sinse_last_meal = malloc(sizeof(pthread_mutex_t));
 		all_philo[i]->right_fork = malloc(sizeof(pthread_mutex_t));
@@ -86,15 +87,13 @@ t_args_info	get_arg_to_struct(int argc, char **argv)
 			return (args_info);
 		args_info.number_of_times_each_philosopher_must_eat = temp_num;
 		printf("%d\n", args_info.number_of_times_each_philosopher_must_eat);
-
-		// pause();
 	}
 	args_info.all_good = true;
 	return (args_info);
 }
 
 // ! have to do
-void	phillo_terminator(t_philo **all_philo, int num_of_phil)
+void	phillo_terminator(t_philo ***all_philo, int num_of_phil)
 {
 	int	i;
 	
@@ -103,18 +102,18 @@ void	phillo_terminator(t_philo **all_philo, int num_of_phil)
 	while (i > 0)
 	{
 		
-		pthread_detach(*all_philo[i]->current_thread);
+		pthread_detach(*(*all_philo)[i]->current_thread);
 		i--;
 	}
 	// pthread_mutex_destroy(&all_philo[0]->printf);
 	while (i < num_of_phil)
 	{
-		pthread_mutex_destroy(all_philo[i]->left_fork);
-		pthread_mutex_destroy(all_philo[i]->mutex_num_time_eat);
-		pthread_mutex_destroy(all_philo[i]->mutex_time_sinse_last_meal);
+		pthread_mutex_destroy((*all_philo)[i]->left_fork);
+		pthread_mutex_destroy((*all_philo)[i]->mutex_num_time_eat);
+		pthread_mutex_destroy((*all_philo)[i]->mutex_time_sinse_last_meal);
 		i++;
 	}
-		free(all_philo);
+		free((*all_philo));
 	// exit(0);
 }
 

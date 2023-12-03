@@ -42,7 +42,7 @@
 
 void	*thread_phil(void *arg);
 
-void	start_threads(t_philo *philo, t_args_info	args_info)
+void	start_threads(t_philo **philo, t_args_info	args_info)
 {
 	t_args_info_plus_philo	*arg_temp;
 	pthread_t				my_thread;
@@ -59,26 +59,26 @@ void	start_threads(t_philo *philo, t_args_info	args_info)
 	args_info_for_philo.time_to_sleep = args_info.time_to_sleep;
 	arg_temp -> arg_info = args_info_for_philo;
 	arg_temp -> philo = philo;
-	philo -> current_thread = &my_thread;
+	(*philo) -> current_thread = &my_thread;
 	pthread_create(&my_thread, NULL, &thread_phil, arg_temp);
 }
 
-void	start_threads_of_philo(t_philo **all_philo, t_args_info	args_info)
+void	start_threads_of_philo(t_philo ***all_philo, t_args_info	*args_info)
 {
 	int	i;
 
 	i = 0;
 	
-	while (i < args_info.number_of_philosophers)
+	while (i < (*args_info).number_of_philosophers)
 	{
-		start_threads(all_philo[i], args_info);
+		start_threads(&(*all_philo)[i], (*args_info));
 		i++;
 	}
 }
 
-void	phillo_terminator(t_philo **all_philo, int num_of_phil);
+void	phillo_terminator(t_philo ***all_philo, int num_of_phil);
 
-int	death_manager(t_philo **all_philo, t_args_info	args_info, bool is_eat_restriction)
+int	death_manager(t_philo ***all_philo, t_args_info	*args_info, bool is_eat_restriction)
 {
 	bool still_going;
 
@@ -86,44 +86,43 @@ int	death_manager(t_philo **all_philo, t_args_info	args_info, bool is_eat_restri
 	while (still_going)
 	{
 		int	i;
-		
-		// usleep(8);
+
 		i = 0;
-		while (i < args_info.number_of_philosophers)
+		while (i < (*args_info).number_of_philosophers)
 		{
-			// printf("check\n");
-			pthread_mutex_lock(all_philo[i]->mutex_time_sinse_last_meal);
+			pthread_mutex_lock((*all_philo)[i]->mutex_time_sinse_last_meal);
 			// printf("Time meal %lu, time till dead %lu\n", get_time() - all_philo[i]->start_time, all_philo[i]->time_sinse_last_meal + args_info.time_to_die);
-			if (all_philo[i]->time_sinse_last_meal + args_info.time_to_die <= get_time() - all_philo[i]->start_time)
+			if ((*(*all_philo)[i]->time_sinse_last_meal) + (*args_info).time_to_die <= get_time() - (*all_philo)[i]->start_time)
 				{
 					// pthread_mutex_lock(all_philo[0]->printf);
-					printf("%d, %lu, %d, %lu\n", i, all_philo[i]->time_sinse_last_meal,  args_info.time_to_die, get_time() - all_philo[i]->start_time);
-					pthread_mutex_unlock(all_philo[i]->mutex_time_sinse_last_meal);
+					printf("%d, %lu, %p %d, %lu\n", i, (*(*all_philo)[i]->time_sinse_last_meal), (*all_philo)[i]->time_sinse_last_meal,  (*args_info).time_to_die, get_time() - (*all_philo)[i]->start_time);
+					pthread_mutex_unlock((*all_philo)[i]->mutex_time_sinse_last_meal);
 					// pthread_mutex_unlock(all_philo[0]->printf);
 					break ;
 				}
-			pthread_mutex_unlock(all_philo[i]->mutex_time_sinse_last_meal);
+			pthread_mutex_unlock((*all_philo)[i]->mutex_time_sinse_last_meal);
 			i++;
 		}
-		if (i != args_info.number_of_philosophers)
+		if (i != (*args_info).number_of_philosophers)
 			break ;
+
 		i = 0;
 		if (is_eat_restriction)
 		{
-			while (i < args_info.number_of_philosophers)
+			while (i < (*args_info).number_of_philosophers)
 			{
-				pthread_mutex_lock(all_philo[i]->mutex_num_time_eat);
+				pthread_mutex_lock((*all_philo)[i]->mutex_num_time_eat);
 				// printf("time eat %d, stop at %d\n", all_philo[i]->num_time_eat, args_info.number_of_times_each_philosopher_must_eat - 2);
-				if (all_philo[i]->num_time_eat < args_info.number_of_times_each_philosopher_must_eat)
+				if ((*all_philo)[i]->num_time_eat < (*args_info).number_of_times_each_philosopher_must_eat)
 				{
-					pthread_mutex_unlock(all_philo[i]->mutex_num_time_eat);
+					pthread_mutex_unlock((*all_philo)[i]->mutex_num_time_eat);
 					break ;
 				}
-				pthread_mutex_unlock(all_philo[i]->mutex_num_time_eat);
+				pthread_mutex_unlock((*all_philo)[i]->mutex_num_time_eat);
 				i++;
 			}
 			// printf("%d, %d\n", i , args_info.number_of_philosophers);
-			if (i == args_info.number_of_philosophers)
+			if (i == (*args_info).number_of_philosophers)
 			{
 				// pthread_mutex_lock(all_philo[0]->printf);
 				printf("all did eat");
@@ -132,9 +131,9 @@ int	death_manager(t_philo **all_philo, t_args_info	args_info, bool is_eat_restri
 			}
 		}
 	}
-	printf("\n\n\n\n\n\n");
+	printf("\n\n");
 	printf("test\n");
-	phillo_terminator(all_philo, args_info.number_of_philosophers);
+	phillo_terminator(all_philo, (*args_info).number_of_philosophers);
 	return (0);
 }
 
@@ -154,36 +153,18 @@ int	main(int argc, char **argv)
 	if (args_info.all_good == false)
 		return (printf("arg wrongs 2\n"));
 	i = 0;
-	puts("test1");
 	all_philo = make_phil(args_info.number_of_philosophers);
-	puts("test1");
-	
 	i = 0;
 	while (i < args_info.number_of_philosophers)
 	{
-		printf("phil num %d, left fork %p right fork %p\n", i , all_philo[i]->left_fork, all_philo[i]->right_fork);
+		printf("phil num %d, left fork %p right fork %p, time_since %p\n", i , all_philo[i]->left_fork, all_philo[i]->right_fork, all_philo[i]->time_sinse_last_meal);
 		i++;
 	}
-	
-
-	// pthread_t thread;
-	// print_phil_content(all_philo, args_info.number_of_philosophers);
-	
 	pthread_mutex_lock(all_philo[0]->printf);
-	start_threads_of_philo(all_philo, args_info);
-	// * how to start a thead
-	// // pthread_create(&thread, NULL, &thread_phil, NULL);
-	// // pthread_create(&thread, NULL, &thread_phil, NULL);
-	// // usleep(1000000);
-
-	// usleep(10000000);
-
+	start_threads_of_philo(&all_philo, &args_info);
+	usleep(100);
 	pthread_mutex_unlock(all_philo[0]->printf);
-	usleep(600);
-	printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
-	death_manager(all_philo, args_info, argc == 6);
-	// usleep(1000);
-	// system("leaks -q philosopher");
-	
+	usleep(args_info.time_to_die - 50);
+	death_manager(&all_philo, &args_info, argc == 6);
 	exit(0);
 }
