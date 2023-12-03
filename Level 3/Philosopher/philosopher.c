@@ -104,6 +104,8 @@ void	*thread_phil(void *arg)
 	pthread_mutex_unlock((*arguments->philo)->mutex_num_time_eat);
 	pthread_mutex_unlock((*arguments->philo)->mutex_time_sinse_last_meal);
 
+	if ((*arguments->philo)->num_of_phil % 2 == 1)
+		think(arguments);
 	while ((*arguments->philo))
 	{
 		try_and_eat(&arguments, &last_time_eat);
