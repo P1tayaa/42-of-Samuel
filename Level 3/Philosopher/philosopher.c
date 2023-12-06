@@ -12,6 +12,17 @@
 
 #include "Philosopher.h"
 
+// void    print_message(char *str, t_philo *all_philo, int id)
+// {
+//     int    time;
+
+//     pthread_mutex_lock(all_philo->printf);
+//     // time = get_current_time() - all_philo->start_time;
+//     if (!dead(all_philo))
+//         printf("[%d] all_philo[%d] %s\n", time, id, str);
+//     pthread_mutex_unlock(all_philo[0]->write_lock);
+// }
+
 void	phillo_terminator(t_philo **all_philo, int num_of_phil);
 
 void	make_time_since_last_meal(uint64_t *time_since, uint64_t *last_time_eat)

@@ -92,14 +92,6 @@ int	death_manager(t_philo ***all_philo, t_args_info	*args_info, bool is_eat_rest
 			pthread_mutex_lock((*all_philo)[i]->mutex_time_sinse_last_meal);
 			if ((*(*all_philo)[i]->time_sinse_last_meal) + (*args_info).time_to_die <= get_time() - (*all_philo)[i]->start_time)
 				{
-					if ((*args_info).time_to_die, get_time() - (*all_philo)[i]->start_time >= 170162147640)
-					{
-						usleep(40);
-						puts("la");
-						i++;
-						pthread_mutex_unlock((*all_philo)[i]->mutex_time_sinse_last_meal);
-						continue ;
-					}
 					printf("%d, %lu, %p %d, %lu\n", i, (*(*all_philo)[i]->time_sinse_last_meal), (*all_philo)[i]->time_sinse_last_meal,  (*args_info).time_to_die, get_time() - (*all_philo)[i]->start_time);
 					pthread_mutex_lock((*all_philo)[0]->printf);
 					pthread_mutex_unlock((*all_philo)[i]->mutex_time_sinse_last_meal);
@@ -165,7 +157,7 @@ int	main(int argc, char **argv)
 	start_threads_of_philo(&all_philo, &args_info);
 	usleep(100);
 	pthread_mutex_unlock(all_philo[0]->printf);
-	usleep(args_info.time_to_die - 50);
+	usleep(args_info.time_to_die - 10);
 	death_manager(&all_philo, &args_info, argc == 6);
 	exit(0);
 }

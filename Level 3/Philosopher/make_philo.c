@@ -29,7 +29,6 @@ t_philo **make_phil(int	num_of_phil)
 	i = 0;
 	while (i < num_of_phil)
 	{
-		// printf("phil N %d, making\n", i);
 		all_philo[i] = malloc(sizeof(t_philo));
 		all_philo[i]-> num_time_eat = 0;
 		all_philo[i]-> num_of_phil = i + 1;
@@ -39,7 +38,6 @@ t_philo **make_phil(int	num_of_phil)
 			pthread_mutex_init((all_philo[0]->printf), NULL);
 			mutex_printf = (all_philo[0]->printf);
 		}
-		// puts("made a mutex");
 		all_philo[i]->time_sinse_last_meal = malloc(sizeof(uint64_t));
 		all_philo[i]->mutex_num_time_eat = malloc(sizeof(pthread_mutex_t));
 		all_philo[i]->mutex_time_sinse_last_meal = malloc(sizeof(pthread_mutex_t));
@@ -48,17 +46,11 @@ t_philo **make_phil(int	num_of_phil)
 		pthread_mutex_init((all_philo[i]->mutex_time_sinse_last_meal), NULL);
 		pthread_mutex_init((all_philo[i]->right_fork), NULL);
 		if (i != 0)
-		{
-			// all_philo[i] -> left_fork = malloc(sizeof(pthread_mutex_t));
 			all_philo[i] -> left_fork = all_philo[i - 1] -> right_fork;
-		}
 		if (i != 0)
-		{
-			// all_philo[i]->printf = malloc(sizeof(pthread_mutex_t));
 			all_philo[i]->printf = mutex_printf;
-		}
 		i++;
-	} 
+	}
 	all_philo[0] -> left_fork = malloc(sizeof(pthread_mutex_t));
 	all_philo[0] -> left_fork = all_philo[i - 1] -> right_fork;
 	return (all_philo);
