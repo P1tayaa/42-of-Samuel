@@ -5,7 +5,7 @@ OBJS			= $(SRCS:%.c=%.o)
 
 CC				= gcc
 
-CFLAGS			= -Wall -Werror -Wextra -pthread -I.  -g -fsanitize=address
+CFLAGS			= -Wall -Werror -Wextra -pthread -g -fsanitize=address
 # CFLAGS			= -Wall -Werror -Wextra -I.
 
 NAME			= philosopher
@@ -16,7 +16,7 @@ NAME			= philosopher
 all:			$(NAME)
 
 $(NAME): $(OBJS)
-				$(CC) $(CFLAGS) -o philosopher $(OBJS)
+				$(CC) $(CFLAGS) -o philo $(OBJS)
 
 clean:
 				@rm -f $(OBJS)

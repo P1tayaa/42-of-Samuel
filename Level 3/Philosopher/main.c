@@ -70,6 +70,8 @@ void	start_threads_of_philo(t_philo ***all_philo, t_args_info	*args_info)
 	i = 0;
 	while (i < (*args_info).number_of_philosophers)
 	{
+		if (i % 2 == 1)
+			usleep(2000);
 		start_threads(&(*all_philo)[i], (*args_info));
 		i++;
 	}
@@ -153,10 +155,10 @@ int	main(int argc, char **argv)
 		printf("phil num %d, left fork %p right fork %p, time_since %p\n", i , all_philo[i]->left_fork, all_philo[i]->right_fork, all_philo[i]->time_sinse_last_meal);
 		i++;
 	}
-	pthread_mutex_lock(all_philo[0]->printf);
+	// pthread_mutex_lock(all_philo[0]->printf);
 	start_threads_of_philo(&all_philo, &args_info);
-	usleep(100);
-	pthread_mutex_unlock(all_philo[0]->printf);
+	// usleep(100);
+	// pthread_mutex_unlock(all_philo[0]->printf);
 	usleep(args_info.time_to_die - 10);
 	death_manager(&all_philo, &args_info, argc == 6);
 	exit(0);

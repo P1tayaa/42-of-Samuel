@@ -97,15 +97,29 @@ void	phillo_terminator(t_philo ***all_philo, int num_of_phil)
 		pthread_detach(*(*all_philo)[i]->current_thread);
 		i--;
 	}
+	free((*all_philo)[0]->printf);
 	// pthread_mutex_destroy(&all_philo[0]->printf);
 	while (i < num_of_phil)
 	{
+		printf("free mutx %d\n", i);
 		pthread_mutex_destroy((*all_philo)[i]->left_fork);
+		free((*all_philo)[i]->right_fork);
 		pthread_mutex_destroy((*all_philo)[i]->mutex_num_time_eat);
 		pthread_mutex_destroy((*all_philo)[i]->mutex_time_sinse_last_meal);
+		free((*all_philo)[i]->time_sinse_last_meal);
+		free((*all_philo)[i]->mutex_num_time_eat);
+		free((*all_philo)[i]->mutex_time_sinse_last_meal);
 		i++;
 	}
-		free((*all_philo));
+	i = num_of_phil - 1;
+	while (i >= 0)
+	{
+		printf("free phil %d\n", i);
+		free((*all_philo)[i]);
+		i--;
+	}
+	
+	free((*all_philo));
 	// exit(0);
 }
 

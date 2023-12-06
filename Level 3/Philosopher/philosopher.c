@@ -34,27 +34,33 @@ void	try_and_eat(t_args_info_plus_philo **arguments, uint64_t *last_time_eat)
 {
 	int	error;
 
-	if ((*(*arguments)->philo)->num_of_phil % 2 == 1)
-	{
+	pthread_mutex_lock((*(*arguments)->philo)->left_fork);
+	pthread_mutex_lock((*(*arguments)->philo)->printf);
+	printf("%lu: %d has taken a fork\n", get_time() - (*arguments)->start_time, (*(*arguments)->philo)->num_of_phil);
+	pthread_mutex_unlock((*(*arguments)->philo)->printf);
+
+	pthread_mutex_lock((*(*arguments)->philo)->right_fork);
+
+	// if ((*(*arguments)->philo)->num_of_phil % 2 == 1)
+	// {
 		
-		pthread_mutex_lock((*(*arguments)->philo)->left_fork);
+	// 	pthread_mutex_lock((*(*arguments)->philo)->left_fork);
+	// 	pthread_mutex_lock((*(*arguments)->philo)->printf);
+	// 	printf("%lu: %d has taken a fork\n", get_time() - (*arguments)->start_time, (*(*arguments)->philo)->num_of_phil);
+	// 	pthread_mutex_unlock((*(*arguments)->philo)->printf);
 
-		// pthread_mutex_lock(arguments->philo->printf);
-		printf("%lu: %d has taken a fork\n", get_time() - (*arguments)->start_time, (*(*arguments)->philo)->num_of_phil);
-		// error = pthread_mutex_unlock(arguments->philo->printf);
+	// 	pthread_mutex_lock((*(*arguments)->philo)->right_fork);
+	// }
+	// else
+	// {
+	// 	pthread_mutex_lock((*(*arguments)->philo)->right_fork);
 
-		pthread_mutex_lock((*(*arguments)->philo)->right_fork);
-	}
-	else
-	{
-		pthread_mutex_lock((*(*arguments)->philo)->right_fork);
+	// 	pthread_mutex_lock((*(*arguments)->philo)->printf);
+	// 	printf("%lu: %d has taken a fork\n", get_time() - (*arguments)->start_time, (*(*arguments)->philo)->num_of_phil);
+	// 	pthread_mutex_unlock((*(*arguments)->philo)->printf);
 
-		// pthread_mutex_lock(arguments->philo->printf);
-		printf("%lu: %d has taken a fork\n", get_time() - (*arguments)->start_time, (*(*arguments)->philo)->num_of_phil);
-		// error = pthread_mutex_unlock(arguments->philo->printf);
-
-		pthread_mutex_lock((*(*arguments)->philo)->left_fork);
-	}
+	// 	pthread_mutex_lock((*(*arguments)->philo)->left_fork);
+	// }
 	
 
 	pthread_mutex_lock((*(*arguments)->philo)->mutex_time_sinse_last_meal);
