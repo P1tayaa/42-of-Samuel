@@ -5,7 +5,8 @@ OBJS			= $(SRCS:%.c=%.o)
 
 CC				= gcc
 
-CFLAGS			= -Wall -Werror -Wextra -pthread -g -fsanitize=address
+# CFLAGS			= -Wall -Werror -Wextra -pthread -g -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -pthread -g -fsanitize=address
 # CFLAGS			= -Wall -Werror -Wextra -I.
 
 NAME			= philosopher

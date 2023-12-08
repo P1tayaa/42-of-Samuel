@@ -51,10 +51,10 @@ t_philo **make_phil(int	num_of_phil)
 			all_philo[i]->printf = mutex_printf;
 		i++;
 	}
-	all_philo[0] -> left_fork = malloc(sizeof(pthread_mutex_t));
 	all_philo[0] -> left_fork = all_philo[i - 1] -> right_fork;
 	return (all_philo);
 }
+
 t_args_info	get_arg_to_struct(int argc, char **argv)
 {
 	t_args_info args_info;
@@ -88,20 +88,16 @@ t_args_info	get_arg_to_struct(int argc, char **argv)
 void	phillo_terminator(t_philo ***all_philo, int num_of_phil)
 {
 	int	i;
-	
-	puts("\n\n\n");
+
 	i = num_of_phil - 1;
 	while (i > 0)
 	{
-		
 		pthread_detach(*(*all_philo)[i]->current_thread);
 		i--;
 	}
 	free((*all_philo)[0]->printf);
-	// pthread_mutex_destroy(&all_philo[0]->printf);
 	while (i < num_of_phil)
 	{
-		printf("free mutx %d\n", i);
 		pthread_mutex_destroy((*all_philo)[i]->left_fork);
 		free((*all_philo)[i]->right_fork);
 		pthread_mutex_destroy((*all_philo)[i]->mutex_num_time_eat);
@@ -114,13 +110,10 @@ void	phillo_terminator(t_philo ***all_philo, int num_of_phil)
 	i = num_of_phil - 1;
 	while (i >= 0)
 	{
-		printf("free phil %d\n", i);
 		free((*all_philo)[i]);
 		i--;
 	}
-	
 	free((*all_philo));
-	// exit(0);
 }
 
 
