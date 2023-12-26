@@ -1,0 +1,15 @@
+#include <iostream>
+#include <string>
+
+
+class Zombie
+{
+    public:
+    // Zombie() : name("Bob") {};
+    Zombie(std::string name) : name(name) {};
+    ~Zombie();
+    void    announce(void);
+
+    private:
+    std::string name;
+};
