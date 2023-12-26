@@ -1,11 +1,11 @@
-SRCS			= Zombie.cpp main.cpp zombieHorde.cpp
+SRCS			= main.cpp Harl.cpp
 OBJS			= $(SRCS:.cpp=.o)
 
 CPP				= g++
 RM				= rm -f
 CPPFLAGS		= -Wall -Wextra -Werror -I. -fsanitize=address
 
-NAME			= Zombie
+NAME			= Harl
 
 all:			$(NAME)
 
