@@ -1,8 +1,10 @@
+
+#ifndef WEAPON_HPP
+# define WEAPON_HPP
+
 #include <iostream>
 #include <string>
 
-#ifndef WEAPON_HPP
-#define WEAPON_HPP
 class Weapon
 {
     public:
@@ -14,4 +16,4 @@ class Weapon
     private:
     std::string type;
 };
-#endif
+# endif

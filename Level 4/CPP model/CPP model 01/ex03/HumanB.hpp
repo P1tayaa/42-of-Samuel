@@ -1,3 +1,6 @@
+#ifndef HUMANB_HPP
+# define HUMANB_HPP
+
 #include "Weapon.hpp"
 
 class HumanB
@@ -12,3 +15,5 @@ class HumanB
 	std::string	name;
 	Weapon*		type = NULL;
 };
+
+# endif

@@ -1,3 +1,6 @@
+#ifndef FIXED_HPP
+# define FIXED_HPP
+
 #include <iostream>
 // #include <string>
 
@@ -16,3 +19,5 @@ class Fixed
     int fixed_value;
     const int fixed_value_size = 8;
 };
+
+#endif

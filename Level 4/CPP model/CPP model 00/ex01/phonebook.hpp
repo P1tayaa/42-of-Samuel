@@ -1,14 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   phonebook.hpp                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/17 12:09:42 by sboulain          #+#    #+#             */
-/*   Updated: 2023/08/17 12:09:42 by sboulain         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#ifndef PHONEBOOK_HPP
+# define PHONEBOOK_HPP
 
 #include <iostream>
 #include <iomanip>
@@ -53,3 +44,5 @@ class phonebook
 	int			current_index;
 	
 };
+
+# endif

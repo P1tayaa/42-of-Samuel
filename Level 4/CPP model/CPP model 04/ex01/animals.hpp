@@ -1,8 +1,10 @@
-#include <iostream>
-#include <string>
 
 #ifndef ANIMAL_HPP
 # define ANIMAL_HPP
+
+#include <iostream>
+#include <string>
+#include "brain.hpp"
 
 class Animal
 {
@@ -22,6 +24,10 @@ class Dog : public Animal
     Dog();
     virtual ~Dog();
     void        makeSound() const;
+    brain&      get_access_brain();
+    
+    private:
+    brain* my_brain;
 };
 
 class Cat : public Animal
@@ -30,6 +36,10 @@ class Cat : public Animal
     Cat();
     virtual ~Cat();
     void        makeSound() const;
+    brain&      get_access_brain();
+    
+    private:
+    brain* my_brain;
 };
 
 #endif

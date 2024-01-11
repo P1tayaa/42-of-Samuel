@@ -11,4 +11,5 @@ class ScavTrap : public ClapTrap
     ~ScavTrap();
     void guardGate();
 };
+
 # endif
