@@ -1,12 +1,12 @@
 
-SRCS			= main.c untils.c philosopher.c make_philo.c
+SRCS			= main.c
 
 OBJS			= $(SRCS:%.c=%.o)
 
 CC				= gcc
 
 # CFLAGS			= -Wall -Werror -Wextra -fsanitize=address
-CFLAGS = -Wall -Werror -Wextra -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -fsanitize=address -lm
 # CFLAGS			= -Wall -Werror -Wextra -I.
 
 NAME			= cube3d
@@ -17,7 +17,7 @@ NAME			= cube3d
 all:			$(NAME)
 
 $(NAME): $(OBJS)
-				$(CC) $(CFLAGS) -o philo $(OBJS)
+				$(CC) $(CFLAGS) -o cube3d $(OBJS)
 
 clean:
 				@rm -f $(OBJS)
