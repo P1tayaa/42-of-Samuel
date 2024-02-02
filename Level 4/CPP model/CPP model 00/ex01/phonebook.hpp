@@ -40,9 +40,8 @@ class phonebook
 	
 	private:
 	static const int	max_contontac = 8;
-	contact		contacts[max_contontac];
+	contact		*contacts[max_contontac + 1];
 	int			current_index;
-	
 };
 
 # endif

@@ -6,12 +6,11 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 12:09:12 by sboulain          #+#    #+#             */
-/*   Updated: 2023/08/17 12:09:12 by sboulain         ###   ########.fr       */
+/*   Updated: 2024/02/02 12:27:23 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "phonebook.hpp"
-
 
 contact::contact(std::string first_name, std::string last_name,
 				 std::string nickname, std::string phone_number,
@@ -65,11 +64,21 @@ void	contact::print_contact_detail()
 phonebook::phonebook() 
 {
 	this->current_index = 0;
+	for (int i = 0; i <= this->max_contontac; i++)
+	{
+		this->contacts[i] = NULL;
+	}
 }
 
 
 phonebook::~phonebook() 
 {
+	int	i = 0;
+	while (this->contacts[i] != NULL)
+	{
+		delete this->contacts[i];
+		i++;
+	}
 	std::cout << "phonebook power off\n";
 }
 
@@ -78,6 +87,13 @@ int phonebook::add_contact()
 {
 	std::string	user_input[5];
 
+	if (this->current_index == 8)
+		this->current_index = 0;
+	if (this->contacts[this->current_index] != NULL)
+	{
+		delete this->contacts[this->current_index];
+		this->contacts[this->current_index] = NULL;
+	}
 	std::cout << "What is their first name of said contact\n";
 	std::cin >> user_input[0];
 	std::cout << "What is their last name of said contact\n";
@@ -88,15 +104,16 @@ int phonebook::add_contact()
 	std::cin >> user_input[3];
 	std::cout << "What is their darkest_secret of said contact\n";
 	std::cin >> user_input[4];
-	this->contacts[this->current_index] = contact(user_input[0], user_input[1], user_input[2], user_input[3], user_input[4]);
-	return 0; 
+	this->contacts[this->current_index] = new contact(user_input[0], user_input[1], user_input[2], user_input[3], user_input[4]);
+	this->current_index++;
+	return 0;
 }
 
 std::string	format_sting_with_dots(std::string input, int trun_size)
 {
-	if (input.length() == trun_size)
+	if (input.length() == (unsigned long)trun_size)
 		return (input);
-	if (input.length() < trun_size)
+	if (input.length() < (unsigned long)trun_size)
 		return (input + std::string(trun_size - input.length(), '.'));
 	// if (input.length() > trun_size)
 	return (input.substr(0, trun_size));
@@ -116,7 +133,9 @@ int	is_valid_index(std::string	user_input)
 
 int phonebook::search_contact() 
 {
-	if (this->contacts[0].get_first_name().compare("tom") == 0)
+	int i;
+
+	if (this->contacts[0] == NULL)
 	{
 		std::cout << "No contact yet\n";
 		return (1);
@@ -125,13 +144,16 @@ int phonebook::search_contact()
 				<< std::setw(10) << "first name" << "|"
 				<< std::setw(10) << "last name" << "|"
 				<< std::setw(10) << "nickname" << "|" << std::endl;
-	for (size_t i = 0; i <= this->current_index; i++)
+	i = 0;
+	while (this->contacts[i] != NULL)
 	{
 		std::cout	<< std::setw(10) << i << "|"
-					<< std::setw(10) << format_sting_with_dots(this->contacts->get_first_name(), 10) << "|"
-					<< std::setw(10) << format_sting_with_dots(this->contacts->get_last_name(), 10) << "|"
-					<< std::setw(10) << format_sting_with_dots(this->contacts->get_nickname(), 10) << "|" << std::endl;
+					<< std::setw(10) << format_sting_with_dots(this->contacts[i]->get_first_name(), 10) << "|"
+					<< std::setw(10) << format_sting_with_dots(this->contacts[i]->get_last_name(), 10) << "|"
+					<< std::setw(10) << format_sting_with_dots(this->contacts[i]->get_nickname(), 10) << "|" << std::endl;
+		i++;
 	}
+	
 
 	std::string	user_input;
 	int			index_wanted = -1;
@@ -145,11 +167,11 @@ int phonebook::search_contact()
 			index_wanted = -1;
 		if (index_wanted != -1)
 		{
-			if (this->contacts[index_wanted].get_first_name().compare("tom") == 0)
+			if (this->contacts[index_wanted] == NULL)
 				index_wanted = -1;
 		}
 	}
-	this->contacts[index_wanted].print_contact_detail();
+	this->contacts[index_wanted]->print_contact_detail();
 	return 0;
 }
 
@@ -166,13 +188,13 @@ int main()
 
 	while (user_input.compare("EXIT") != 0)
 	{
-		std::cin >> user_input;
+		std::getline(std::cin, user_input);
 		if (user_input.compare("ADD") == 0)
 			the_phonebook.add_contact();
 		else if (user_input.compare("SEARCH") == 0)
 			the_phonebook.search_contact();
-		else if (user_input.compare("EXIT") != 0)
-			std::cout << "Not valid input, try ADD, SEARCH or EXIT" << std::endl;
+		else if (user_input.compare("EXIT") != 0 || user_input.length() == 0)
+			std::cout << "\nNot valid input, try ADD, SEARCH or EXIT" << std::endl;
 	}
 	return (0);
 }
