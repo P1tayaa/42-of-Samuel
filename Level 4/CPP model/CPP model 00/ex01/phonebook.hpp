@@ -11,7 +11,7 @@ class contact
 	public:
 	
 	contact();
-	contact(std::string first_name, std::string last_name,
+	void	make_contact(std::string first_name, std::string last_name,
 			std::string nickname, std::string phone_number,
 			std::string darkest_secret);
 	~contact();
@@ -40,7 +40,7 @@ class phonebook
 	
 	private:
 	static const int	max_contontac = 8;
-	contact		*contacts[max_contontac + 1];
+	contact		contacts[max_contontac + 1];
 	int			current_index;
 };
 

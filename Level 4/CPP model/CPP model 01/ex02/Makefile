@@ -1,13 +1,16 @@
 SRCS			= main.cpp
 OBJS			= $(SRCS:.cpp=.o)
 
-CPP				= g++
+CPP				= c++
 RM				= rm -f
 CPPFLAGS		= -Wall -Wextra -Werror -I. -fsanitize=address
 
 NAME			= Brain
 
 all:			$(NAME)
+
+%.o:			%.cpp
+				$(CPP) $(CPPFLAGS) -c -o $@ $<
 
 $(NAME):		$(OBJS)
 				$(CPP) $(CPPFLAGS) -o $(NAME) $(OBJS)

@@ -6,7 +6,7 @@
 #    By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/16 17:12:49 by sboulain          #+#    #+#              #
-#    Updated: 2024/02/02 11:55:00 by sboulain         ###   ########.fr        #
+#    Updated: 2024/02/02 14:23:35 by sboulain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ OBJS			= $(SRCS:.cpp=.o)
 
 CC				= c++
 RM				= rm -f
-CPPFLAGS		= -Wall -Wextra -Werror -I. -std=c++98
+CPPFLAGS		= -Wall -Wextra -Werror -I. -std=c++98 -fsanitize=address
 
 NAME			= megaphone
 

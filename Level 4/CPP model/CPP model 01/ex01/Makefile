@@ -1,13 +1,16 @@
 SRCS			= Zombie.cpp main.cpp zombieHorde.cpp
 OBJS			= $(SRCS:.cpp=.o)
 
-CPP				= g++
+CPP				= c++
 RM				= rm -f
 CPPFLAGS		= -Wall -Wextra -Werror -I. -fsanitize=address
 
 NAME			= Zombie
 
 all:			$(NAME)
+
+%.o:			%.cpp
+				$(CPP) $(CPPFLAGS) -c -o $@ $<
 
 $(NAME):		$(OBJS)
 				$(CPP) $(CPPFLAGS) -o $(NAME) $(OBJS)

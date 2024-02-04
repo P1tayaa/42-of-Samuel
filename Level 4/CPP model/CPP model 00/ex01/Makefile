@@ -6,7 +6,7 @@
 #    By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/16 22:33:48 by sboulain          #+#    #+#              #
-#    Updated: 2024/02/02 12:08:54 by sboulain         ###   ########.fr        #
+#    Updated: 2024/02/04 13:27:26 by sboulain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ OBJS			= $(SRCS:.cpp=.o)
 
 CPP				= c++
 RM				= rm -f
-CPPFLAGS		= -Wall -Wextra -Werror -I. -std=c++98
+CPPFLAGS		= -Wall -Wextra -Werror -I. -fsanitize=address
 
 NAME			= phonebook
 
