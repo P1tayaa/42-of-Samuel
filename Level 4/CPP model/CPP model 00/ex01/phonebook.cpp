@@ -6,13 +6,13 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 12:09:12 by sboulain          #+#    #+#             */
-/*   Updated: 2024/02/02 16:22:34 by sboulain         ###   ########.fr       */
+/*   Updated: 2024/03/29 16:00:20 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "phonebook.hpp"
 
-void	contact::make_contact(std::string new_first_name, std::string new_last_name,
+void	Contact::make_contact(std::string new_first_name, std::string new_last_name,
 				 std::string new_nickname, std::string new_phone_number,
 				 std::string new_darkest_secret)
 {
@@ -23,7 +23,7 @@ void	contact::make_contact(std::string new_first_name, std::string new_last_name
 	darkest_secret.assign(new_darkest_secret);
 }
 
-contact::contact()
+Contact::Contact()
 {
 	this->first_name = "tom";
 	this->last_name = "Jerry";
@@ -33,27 +33,27 @@ contact::contact()
 }
 
 
-contact::~contact() 
+Contact::~Contact() 
 {
 	std::cout << "Contact successfully removed\n";
 }
 
-std::string	contact::get_first_name()
+std::string	Contact::get_first_name()
 {
 	return (this->first_name);
 }
 
-std::string	contact::get_last_name()
+std::string	Contact::get_last_name()
 {
 	return (this->last_name);
 }
 
-std::string	contact::get_nickname()
+std::string	Contact::get_nickname()
 {
 	return (this->nickname);
 }
 
-void	contact::print_contact_detail()
+void	Contact::print_contact_detail()
 {
 	std::cout << std::endl << "first name: " << this->first_name << std::endl;
 	std::cout << "last name: " << this->last_name << std::endl;
@@ -63,19 +63,19 @@ void	contact::print_contact_detail()
 }
 
 
-phonebook::phonebook() 
+Phonebook::Phonebook() 
 {
 	this->current_index = 0;
 }
 
 
-phonebook::~phonebook() 
+Phonebook::~Phonebook() 
 {
 	std::cout << "phonebook power off\n";
 }
 
 
-int phonebook::add_contact() 
+int Phonebook::add_contact() 
 {
 	std::string	user_input[5];
 
@@ -98,10 +98,13 @@ int phonebook::add_contact()
 
 std::string	format_sting_with_dots(std::string input, int trun_size)
 {
-	if (input.length() == (unsigned long)trun_size)
-		return (input);
 	if (input.length() < (unsigned long)trun_size)
-		return (input + std::string(trun_size - input.length(), '.'));
+		return (input + std::string(trun_size - input.length(), ' '));
+	input[trun_size - 1] = '.';
+	if (input.length() == (unsigned long)trun_size)
+	{
+		return (input);
+	}
 	// if (input.length() > trun_size)
 	return (input.substr(0, trun_size));
 }
@@ -118,7 +121,7 @@ int	is_valid_index(std::string	user_input)
 	return (-1);
 }
 
-int phonebook::search_contact() 
+int Phonebook::search_contact() 
 {
 	int i;
 
@@ -166,7 +169,7 @@ int phonebook::search_contact()
 }
 
 
-int phonebook::exit_prgram() 
+int Phonebook::exit_prgram() 
 {
 	return 0; 
 }
@@ -174,7 +177,7 @@ int phonebook::exit_prgram()
 int main()
 {
 	std::string	user_input;
-	phonebook	the_phonebook;
+	Phonebook	the_phonebook;
 	std::cout << "| ADD, SEARCH or EXIT |\n";
 	while (user_input.compare("EXIT") != 0)
 	{

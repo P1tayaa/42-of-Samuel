@@ -6,15 +6,15 @@
 #include <string>
 #include <sstream>
 
-class contact
+class Contact
 {
 	public:
 	
-	contact();
+	Contact();
 	void	make_contact(std::string first_name, std::string last_name,
 			std::string nickname, std::string phone_number,
 			std::string darkest_secret);
-	~contact();
+	~Contact();
 	std::string	get_first_name();
 	std::string	get_last_name();
 	std::string	get_nickname();
@@ -28,11 +28,11 @@ class contact
 	std::string	darkest_secret;
 };
 
-class phonebook
+class Phonebook
 {
 	public:
-		phonebook(void);
-		~phonebook(void);
+		Phonebook(void);
+		~Phonebook(void);
 
 		int	add_contact(void);
 		int	search_contact(void);
@@ -40,7 +40,7 @@ class phonebook
 	
 	private:
 	static const int	max_contontac = 8;
-	contact		contacts[max_contontac + 1];
+	Contact		contacts[max_contontac + 1];
 	int			current_index;
 };
 
