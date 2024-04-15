@@ -17,7 +17,8 @@ int main(int argc, char **argv)
 		std::cout << "the file does not exit\n";
 		return (1);
 	}
-
+    if (s1 == s2)
+        return 0;
     size_t  index_found;
     std::string line;
     std::string	finish_replaces;
@@ -28,7 +29,7 @@ int main(int argc, char **argv)
         {
             line.erase(index_found, s1.length());
             line.insert(index_found, s2);
-           index_found = line.find(s1);
+            index_found = line.find(s1, index_found + 1);
         }
 		finish_replaces.append(line + '\n');
     }

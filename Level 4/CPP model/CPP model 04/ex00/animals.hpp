@@ -20,7 +20,7 @@ class Dog : public Animal
 {
     public:
     Dog();
-    virtual ~Dog();
+    ~Dog();
     void        makeSound() const;
 };
 
@@ -28,7 +28,7 @@ class Cat : public Animal
 {
     public:
     Cat();
-    virtual ~Cat();
+    ~Cat();
     void        makeSound() const;
 };
 

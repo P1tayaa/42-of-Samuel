@@ -1,7 +1,7 @@
-SRCS			= main.cpp animals.cpp brain.cpp
+SRCS			= main.cpp Bureaucrat.cpp
 OBJS			= $(SRCS:.cpp=.o)
 
-CPP				= c++
+CC				= c++
 RM				= rm -f
 STDCPP			= -std=c++98
 CPPFLAGS		= -Wall -Wextra -Werror -I. -fsanitize=address
