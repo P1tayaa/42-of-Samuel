@@ -2,9 +2,9 @@
 SRCS			= main.cpp Weapon.cpp HumanA.cpp HumanB.cpp 
 OBJS			= $(SRCS:.cpp=.o)
 
-CPP				= g++
+CPP				= c++
 RM				= rm -f
-CPPFLAGS		= -Wall -Wextra -Werror -I. -fsanitize=address
+CPPFLAGS		= -Wall -Wextra -Werror -I. -std=c++98 -fsanitize=address
 
 NAME			= WarSimS
 

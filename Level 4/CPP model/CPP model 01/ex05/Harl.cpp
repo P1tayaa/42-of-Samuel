@@ -1,23 +1,35 @@
 #include "Harl.hpp"
 
+#include <cstdlib>
+
+
+// * og work but not with codam Standards
+// void Harl::complain(std::string level)
+// {
+// 	std::map<std::string, Harl::Level_function>	commands = {
+// 		{"debug", &Harl::debug}, {"info", &Harl::info}, {"warning", &Harl::warning}, {"error", &Harl::error}, 
+// 	};
+// 	if (level != "debug" && level != "info" && level != "warning" && level != "errorm") {
+// 		std::cout << "wrong debug string\n";
+// 		exit(1);
+// 	}
+// 	auto combo = commands.find(level); 
+// 	Harl::Level_function function = combo->second;
+// 	(this->*function)();
+// }
+
 void Harl::complain(std::string level)
 {
-	std::map<std::string, Harl::Level_function>	commands = {
-		{"debug", &Harl::debug}, {"info", &Harl::info}, {"warning", &Harl::warning}, {"error", &Harl::error}, 
-	};
-	// std::string	levels[] = {"debug", "info", "warning", "error"};
-	// Harl::Level_function function[] = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
-	// for (size_t i = 0; i < 4; i++)
-	// {
-	// 	if (levels[i] == level)
-	// 		(this->*function[i])();
-	// }
-	if (level != "debug" && level != "info" && level != "warning" && level != "errorm") {
+	std::map<std::string, Harl::Level_function>	commands;
+	commands["debug"] = &Harl::debug;
+    commands["info"] = &Harl::info;
+    commands["warning"] = &Harl::warning;
+    commands["error"] = &Harl::error;
+	if (commands.find(level) == commands.end()) {
 		std::cout << "wrong debug string\n";
 		exit(1);
 	}
-	auto combo = commands.find(level); 
-	Harl::Level_function function = combo->second;
+	Harl::Level_function function = commands.find(level)->second;
 	(this->*function)();
 }
 

@@ -12,8 +12,9 @@ class Harl
     Harl() {};
     ~Harl() {};
 	void complain(std::string level);
-	using Level_function = void (Harl::*)(void);
 	
+	typedef void (Harl::*Level_function)(void);
+
 	private:
     void debug(void);
 	void info(void);

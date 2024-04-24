@@ -1,9 +1,9 @@
 SRCS			= main.cpp
 OBJS			= $(SRCS:.cpp=.o)
 
-CPP				= g++
+CPP				= c++
 RM				= rm -f
-CPPFLAGS		= -Wall -Wextra -Werror -I. -fsanitize=address
+CPPFLAGS		= -Wall -Wextra -Werror -I. -std=c++98 -fsanitize=address
 
 NAME			= bad_sed
 
