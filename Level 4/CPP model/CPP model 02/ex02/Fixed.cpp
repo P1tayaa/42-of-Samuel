@@ -149,25 +149,25 @@ const Fixed&	Fixed::max(const Fixed& a, const  Fixed& b)
 
 Fixed&	Fixed::operator++()
 {
-	this->fixed_value++;
+	this->fixed_value += (1 << fixed_value_size);
 	return (*this);
 }
 
 Fixed&	Fixed::operator++(int)
 {
-	++this->fixed_value;
+	this->fixed_value += (1 << fixed_value_size);
 	return (*this);
 }
 
 Fixed&	Fixed::operator--()
 {
-	this->fixed_value--;
+	this->fixed_value -= (1 << fixed_value_size);
 	return (*this);
 }
 
 Fixed&	Fixed::operator--(int)
 {
-	--this->fixed_value;
+	this->fixed_value -= (1 << fixed_value_size);
 	return (*this);
 }
 
