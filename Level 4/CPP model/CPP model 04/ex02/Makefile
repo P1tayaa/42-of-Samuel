@@ -11,7 +11,7 @@ NAME			= Animals
 all:			$(NAME)
 
 $(NAME):		$(OBJS)
-				$(CPP) $(CPPFLAGS) -o $(NAME) $(OBJS)
+				$(CC) $(CPPFLAGS) -o $(NAME) $(OBJS)
 
 clean:
 				$(RM) $(OBJS)

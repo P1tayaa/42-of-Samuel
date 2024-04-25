@@ -2,7 +2,7 @@
 
 int main()
 {
-    const Animal* meta = new Animal();
+    // const Animal* meta = new Animal();
     Dog* j = new Dog();
     Cat* i = new Cat();
 
@@ -10,11 +10,11 @@ int main()
     std::cout << i->getType() << " " << std::endl;
     i->makeSound(); //will output the cat sound!
     j->makeSound();
-    meta->makeSound();
+    // meta->makeSound();
     j->get_access_brain()->set_idea(3, "test");
     std::cout << j->get_access_brain()->get_idea(3) << std::endl;
 
-    delete meta;
+    // delete meta;
     delete j;
     delete i;
     return 0;
