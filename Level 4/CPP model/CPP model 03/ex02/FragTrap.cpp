@@ -18,6 +18,6 @@ void FragTrap::highFivesGuys(void)
 {
     if (energy_point <= 0)
             return ;
-        this->energy_point--;
+    this->energy_point--;
     std::cout << this->name << " is requesting a high five\n";
 }

@@ -20,3 +20,9 @@ void ScavTrap::guardGate()
     this->energy_point--;
     std::cout << this->name << " uses his quardGate abillity\n";
 }
+
+void ScavTrap::attack(const std::string& target)
+{
+    std::cout << "ScavTrap " << this->name << " attacks " << target << ", causing " << this->attack_damage << " points of damage!\n";
+}
+

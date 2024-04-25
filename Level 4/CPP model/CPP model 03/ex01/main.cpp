@@ -8,6 +8,9 @@ int main(void)
 
     Bob.attack("Michel");
     Michel.takeDamage(0);
-    Michel.beRepaired(2);
+    Michel.attack("Bob");
+    Bob.takeDamage(20);
+    Michel.guardGate();
+    Bob.beRepaired(2);
     return (0);
 }

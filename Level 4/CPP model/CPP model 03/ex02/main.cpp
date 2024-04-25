@@ -13,5 +13,6 @@ int main(void)
     Michel.beRepaired(2);
 	Michel.attack("Toby");
 	Toby.takeDamage(20);
+    Toby.highFivesGuys();
     return (0);
 }

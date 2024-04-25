@@ -10,6 +10,7 @@ class ScavTrap : public ClapTrap
     ScavTrap(std::string name);
     ~ScavTrap();
     void guardGate();
+	void attack(const std::string& target) override;
 };
 
 # endif
