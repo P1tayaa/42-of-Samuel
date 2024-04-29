@@ -22,6 +22,7 @@ int main()
 
     i2->makeSound();
     meta2->makeSound();
+    ((WrongCat *)meta2)->makeSound();
     delete meta2;
     delete i2;
     return 0;

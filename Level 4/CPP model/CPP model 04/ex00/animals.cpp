@@ -6,6 +6,21 @@ Animal::Animal()
     std::cout << "constructed an Animal\n";
 }
 
+Animal::Animal(const Animal &other) : type(other.type)
+{
+    std::cout << "copy const called\n";
+}
+
+Animal &Animal::operator=(const Animal &other)
+{
+    if (this->type != other.type)
+    {
+        this->type = other.type;
+    }
+    std::cout << "assigne Animal called\n";
+    return (*this);
+}
+
 Animal::~Animal()
 {
     std::cout << "destructed an Animal\n";

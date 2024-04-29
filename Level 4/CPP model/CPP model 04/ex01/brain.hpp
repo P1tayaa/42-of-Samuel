@@ -9,6 +9,8 @@ class Brain
 
 public:
     Brain();
+    Brain(const Brain &other);
+    Brain & operator = (const Brain &other);
     ~Brain();
     std::string get_idea(int x);
     void    set_idea(int x, std::string new_idea);

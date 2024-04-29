@@ -10,7 +10,9 @@ class Animal
 {
     protected:
     Animal();
+    Animal(const Animal &other);
     public:
+    virtual Animal & operator = (const Animal &other);
     virtual ~Animal();
     virtual std::string getType() const;
     virtual void    makeSound()  const;
@@ -23,6 +25,8 @@ class Dog : public Animal
 {
     public:
     Dog();
+    Dog(const Dog &other);
+    Dog & operator = (const Dog &other);
     virtual ~Dog();
     void        makeSound() const;
     Brain*      get_access_brain();
@@ -35,6 +39,8 @@ class Cat : public Animal
 {
     public:
     Cat();
+    Cat(const Cat &other);
+    Cat & operator = (const Cat &other);
     virtual ~Cat();
     void        makeSound() const;
     Brain*      get_access_brain();

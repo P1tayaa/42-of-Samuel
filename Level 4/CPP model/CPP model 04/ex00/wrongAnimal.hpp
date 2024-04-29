@@ -8,6 +8,8 @@ class WrongAnimal
 {
     public:
     WrongAnimal();
+    WrongAnimal(const WrongAnimal &other);
+    WrongAnimal & operator = (const WrongAnimal &other);
     virtual ~WrongAnimal();
     void        makeSound()  const;
 
@@ -20,7 +22,7 @@ class WrongCat : public WrongAnimal
     public:
     WrongCat();
     virtual ~WrongCat();
-    // void        makeSound() const;
+    void        makeSound() const;
 };
 
-# endif
+#endif

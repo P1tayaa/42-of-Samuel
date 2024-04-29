@@ -6,6 +6,22 @@ Animal::Animal()
     std::cout << "constructed an Animal\n";
 }
 
+Animal::Animal(const Animal &other) : type(other.type)
+{
+    std::cout << "copy const called\n";
+}
+
+Animal &Animal::operator=(const Animal &other)
+{
+    if (this->type != other.type)
+    {
+        this->type = other.type;
+    }
+    std::cout << "assigne Animal called\n";
+    return (*this);
+}
+
+
 Animal::~Animal()
 {
     std::cout << "destructed an Animal\n";
@@ -33,6 +49,18 @@ Dog::Dog() : Animal()
     this->type = "Dog";
 }
 
+Dog::Dog(const Dog &other) : Animal(other)
+{
+    this->my_brain = new Brain(*other.my_brain);
+}
+
+Dog &Dog::operator=(const Dog &other)
+{
+    this->my_brain = new Brain(*other.my_brain);
+    std::cout << "assigne Dog called\n";
+    return (*this);
+}
+
 Dog::~Dog()
 {
     delete my_brain;
@@ -49,6 +77,18 @@ Cat::Cat() : Animal()
     std::cout << "constructed an Cat\n";
     my_brain = new Brain();
     this->type = "Cat";
+}
+
+Cat::Cat(const Cat &other) : Animal(other)
+{
+    this->my_brain = new Brain(*other.my_brain);
+}
+
+Cat &Cat::operator=(const Cat &other)
+{
+    this->my_brain = new Brain(*other.my_brain);
+    std::cout << "assigne Dog called\n";
+    return (*this);
 }
 
 Cat::~Cat()
