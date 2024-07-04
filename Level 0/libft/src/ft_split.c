@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 22:36:55 by sboulain          #+#    #+#             */
-/*   Updated: 2022/11/02 17:55:24 by sboulain         ###   ########.fr       */
+/*   Updated: 2024/07/04 13:37:25 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,8 @@ static unsigned int	get_work_count(char const *s, char c)
 {
 	size_t			i;
 	unsigned int	number_of_words;
-	int				has_space;
 
 	number_of_words = 0;
-	has_space = 0;
 	i = 0;
 	while (s[i] && s[i] == c)
 		i++;
