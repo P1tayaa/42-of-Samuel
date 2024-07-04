@@ -6,11 +6,11 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:37:09 by sboulain          #+#    #+#             */
-/*   Updated: 2022/12/10 18:45:00 by sboulain         ###   ########.fr       */
+/*   Updated: 2024/07/04 14:05:21 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../header/get_next_line.h"
 #include <unistd.h>
 
 char	*free_and_return_dup_buffer(char **buffer, int i)

@@ -6,11 +6,11 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:35:30 by sboulain          #+#    #+#             */
-/*   Updated: 2022/12/10 18:47:14 by sboulain         ###   ########.fr       */
+/*   Updated: 2024/07/04 14:05:15 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../header/get_next_line.h"
 
 char	*free_those(char **char_rd, char **char_rding)
 {
