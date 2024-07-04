@@ -1,25 +1,55 @@
+# Source files
 SRCS			= ft_printf.c ft_printf_utils.c
 
-OBJS			= $(SRCS:%.c=%.o)
+# Directories
+SRCSPATH		= src/
+BINPATH			= bin/
 
+# Object files
+OBJS			= $(addprefix $(BINPATH), $(SRCS:.c=.o))
+OBJS_BONUS		= $(addprefix $(BINPATH), $(SRCS_BONUS:.c=.o))
+
+# Compiler and flags
 CC				= gcc
-
 CFLAGS			= -Wall -Werror -Wextra -I.
 
-NAME			= libftprintf.a
+# Names
+NAME			= ft_printf.a
+TEST_NAME		= test_demo
 
+# Default target
 all:			$(NAME)
 
-$(NAME):
-				$(CC) $(CFLAGS) -c $(SRCS)
-				ar -rs $(NAME) $(OBJS)
-				@echo   :white_check_mark:Done!
-clean:
-				@rm -f $(OBJS)
+# Create the library
+$(NAME):		$(OBJS)
+				@ar -crs $(NAME) $(OBJS)
 
+# Compile source files into object files
+$(BINPATH)%.o: $(SRCSPATH)%.c | $(BINPATH)
+				$(CC) $(CFLAGS) -c $< -o $@
+
+# Create bin directory if it doesn't exist
+$(BINPATH):
+				@mkdir -p $(BINPATH)
+
+# Clean object files
+clean:
+				@rm -f $(OBJS) $(OBJS_BONUS) test_demo
+				@rm -rf $(BINPATH)
+
+# Clean object files and the library
 fclean:			clean
 				@rm -f $(NAME)
 
-re:				fclean $(NAME)
+# Recompile everything
+re:				fclean all
 
-.PHONY:			all clean fclean re
+# Compile with bonus files
+bonus:			$(OBJS) $(OBJS_BONUS)
+				@ar -crs $(NAME) $(OBJS) $(OBJS_BONUS)
+
+test:			all
+				$(CC) $(CFLAGS) -o $(TEST_NAME) test/main.c $(NAME) 	
+				./$(TEST_NAME) this is a test
+
+.PHONY:			all clean fclean re bonus

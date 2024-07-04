@@ -6,7 +6,7 @@
 /*   By: sboulain <sboulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 13:17:11 by sboulain          #+#    #+#             */
-/*   Updated: 2023/01/28 16:09:12 by sboulain         ###   ########.fr       */
+/*   Updated: 2024/07/04 14:00:05 by sboulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,11 +106,9 @@ int	ft_atoull_base(unsigned long long number, unsigned long long base,
 
 int	manage_print(char const *input, size_t *i, va_list arg)
 {
-	int		numer_of_char_print;
 	char	*string;
 
 	*i = *i + 2;
-	numer_of_char_print = 0;
 	if (input[*i - 1] == 'c')
 		return (ft_putchar_int(va_arg(arg, int)));
 	if (input[*i - 1] == 's')
