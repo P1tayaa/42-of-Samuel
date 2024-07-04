@@ -9,5 +9,4 @@ int main(void) {
         str = get_next_line(0);
         printf("%s", str);
     }
-    
 }
