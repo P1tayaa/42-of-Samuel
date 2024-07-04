@@ -8,14 +8,14 @@ Welcome to the repository for my 42 School project, [Project Name]. This README 
 
 ### Level 0
 - **libft**
-  - **Archived:** [more info]("Level 0/libft/README.md")
+  - **Archived:** [["more info"](Level 0/libft/README.md)](https://github.com/P1tayaa/42-of-Samuel/tree/main/Level%200/libft)
 
 ### Level 1
 - **ft_printf**
-  - **Archived:** [more info]("Level 1/ft_printf/README.md")
+  - **Archived:** [[more info]("Level 1/ft_printf/README.md")](https://github.com/P1tayaa/42-of-Samuel/tree/main/Level%201/ft_printf)
 
 - **get_next_line**
-  - **Archived:** [more info]("Level 1/get_next_line/README.md")
+  - **Archived:** [[more info]("Level 1/get_next_line/README.md")](https://github.com/P1tayaa/42-of-Samuel/tree/main/Level%201/get_next_line)
 
 ### Level 2
 - **fdf**
