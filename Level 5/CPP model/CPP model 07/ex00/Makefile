@@ -1,6 +1,5 @@
-
 # Source files
-SRCS			= main.cpp Bureaucrat.cpp Form.cpp
+SRCS			= main.cpp
 
 # Directories
 SRCSPATH		= src/
@@ -14,7 +13,7 @@ CC				= c++
 CFLAGS			= -Wall -Wextra -Werror -I. -fsanitize=address
 
 # Names
-NAME			= Bureaucrate
+NAME			=	Tfunction
 
 # Default target
 all:			$(NAME)

@@ -1,25 +1,45 @@
+# Source files
 SRCS			= main.cpp Base.cpp
-OBJS			= $(SRCS:.cpp=.o)
 
+# Directories
+SRCSPATH		= src/
+BINPATH			= bin/
+
+# Object files
+OBJS			= $(addprefix $(BINPATH), $(SRCS:.cpp=.o))
+
+# Compiler and flags
 CC				= c++
-RM				= rm -f
-STDCPP			= -std=c++98
-CPPFLAGS		= -Wall -Wextra -Werror -I. -fsanitize=address
+CFLAGS			= -Wall -Wextra -Werror -I. -fsanitize=address
 
+# Names
 NAME			= Identifie
 
+# Default target
 all:			$(NAME)
 
+# Create the library
 $(NAME):		$(OBJS)
-				$(CC) $(CPPFLAGS) -o $(NAME) $(OBJS)
+				$(CC) $(CFLAGS) $(OBJS) -o $(NAME) 	
 
+# Compile source files into object files
+$(BINPATH)%.o: $(SRCSPATH)%.cpp | $(BINPATH)
+				$(CC) $(CFLAGS) -c $< -o $@
+
+# Create bin directory if it doesn't exist
+$(BINPATH):
+				@mkdir -p $(BINPATH)
+
+# Clean object files
 clean:
-				$(RM) $(OBJS)
+				@rm -f $(OBJS) $(OBJS_BONUS) test_demo
+				@rm -rf $(BINPATH)
 
+# Clean object files and the library
 fclean:			clean
-				$(RM) $(NAME)
+				@rm -f $(NAME)
 
-re:				fclean $(NAME)
+# Recompile everything
+re:				fclean all
 
-.PHONY:			all clean fclean re test
-	
+.PHONY:			all clean fclean re bonus
