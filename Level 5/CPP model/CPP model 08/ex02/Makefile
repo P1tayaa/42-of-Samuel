@@ -1,5 +1,5 @@
 # Source files
-SRCS			= main.cpp Span.cpp
+SRCS			= main.cpp
 
 # Directories
 SRCSPATH		= src/
@@ -13,7 +13,7 @@ CC				= c++
 CFLAGS			= -Wall -Wextra -Werror -I. -fsanitize=address
 
 # Names
-NAME			=	Span
+NAME			=	MutantStack
 
 # Default target
 all:			$(NAME)
