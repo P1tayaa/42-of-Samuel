@@ -25,8 +25,7 @@ void ScalarConverter::convert(const std::string &arg) {
     int temp_int;
     char temp_char;
 
-    try
-    {
+    try {
         temp_float = std::stof(arg);
         temp_double = std::stod(arg);
     }
@@ -35,17 +34,21 @@ void ScalarConverter::convert(const std::string &arg) {
         std::cout << "not valid input\n";
         return ;
     }
-    temp_int = temp_double;
-    temp_char = temp_int;
-    std::cout << std::fixed << std::setprecision(get_pressision(arg));
-    if (std::isprint(temp_char))
-        std::cout << "char: " << temp_char << std::endl;
-    else
+    try
+    {
+        temp_int = std::stoi(arg);
+        temp_char = temp_int;
+        if (std::isprint(temp_char))
+            std::cout << "char: " << temp_char << std::endl;
+        else
+            std::cout << "char: impossible\n";
+        std::cout << "int: " << temp_int << std::endl;
+    }
+    catch(const std::exception& e) {
         std::cout << "char: impossible\n";
-    if (INT32_MAX > temp_double || temp_double > -INT32_MAX - 1)
-        std::cout << "int: " << temp_int<< std::endl;
-    else
         std::cout << "int: impossible\n";
+    }
+    std::cout << std::fixed << std::setprecision(get_pressision(arg));
     std::cout << "float: " << temp_float << "f"  << std::endl;
     std::cout << "double: " << temp_double << std::endl;
 }
