@@ -7,7 +7,10 @@
 # include <sys/select.h>
 # include <arpa/inet.h>
 # include <netinet/in.h>
-#include <fstream>
+# include <fstream>
+# include <sstream>
+# include <string>
+
 
 struct server
 {
@@ -25,12 +28,14 @@ struct server
     std::string index;
     std::string access_log;
     std::string error_log;
+    std::map<std::string, std::map<std::string, std::string>> loc_method;
 };
 
 struct Parse
 {
     std::map<std::string, std::string> basic;
     std::vector<Parse *> servers;
+    std::string loc_name;
 };
 
 std::vector<server> *make_all_server(std::ifstream &fileToRead);

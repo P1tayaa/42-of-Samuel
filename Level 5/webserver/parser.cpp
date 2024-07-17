@@ -28,6 +28,7 @@ std::size_t find_true_space(std::string line) {
     return i;
 }
 
+const std::string loc_triger = "location";
 
 Parse *make_parse(std::ifstream &fileToRead) {
     Parse *my_parse = new Parse;
@@ -50,6 +51,12 @@ Parse *make_parse(std::ifstream &fileToRead) {
 
         if (no_commants.find('{') != std::string::npos) {
             (*my_parse).servers.push_back(make_parse(fileToRead)); // make a new child parse and added it to the vector
+            if (no_commants.find(loc_triger) != std::string::npos) {
+            size_t start = no_commants.find(loc_triger) + loc_triger.size();
+            size_t len = start - no_commants.find('{');
+                (*my_parse).servers.back()->loc_name =
+                    no_commants.substr(start, len);
+            }
         }
         else if (no_commants.find(';')!= std::string::npos) {
             true_start = find_true_start(no_commants);
@@ -88,6 +95,8 @@ void print_parse(Parse *my_parse, int num_tab) {
     // run for loop from 0 to vecSize
     for(unsigned int i = 0; i < vecSize; i++)
     {
+        if (!(*my_parse).servers[i]->loc_name.empty())
+            std::cout << "location name is (" << (*my_parse).servers[i]->loc_name << ")\n";
         print_parse((*my_parse).servers[i], num_tab + 1);
     }
 
@@ -113,10 +122,12 @@ std::ostream& operator<<(std::ostream& o, const server& s) {
     o << "Name: " << s.name << "\n";
     o << "Root: " << s.root << "\n";
     o << "Autoindex: " << (s.autoindex ? "true" : "false") << "\n";
-    o << "Error Pages:\n";
-    // for (const auto& ep : s.error_pages) {
-    //     o << "  " << ep.first << ": " << ep.second << "\n";
-    // }
+    o << "Error Pages: | ";
+    for (auto it = s.error_pages.begin(); it != s.error_pages.end(); it++)
+    {
+        o << it->first << ": " << it->second << " | ";
+    }
+    o << std::endl;
     o << "Index: " << s.index << "\n";
     o << "Access Log: " << s.access_log << "\n";
     o << "Error Log: " << s.error_log << "\n";
@@ -124,20 +135,122 @@ std::ostream& operator<<(std::ostream& o, const server& s) {
 }
 
 // Overloading the << operator for vector of servers
-std::ostream& operator<<(std::ostream& o, const std::vector<server>& to_printf) {
-    for (size_t i = 0; i < to_printf.size(); ++i) {
+std::ostream& operator<<(std::ostream& o, const std::vector<server>* to_printf) {
+    for (size_t i = 0; i < to_printf->size(); ++i) {
         o << "Server " << i + 1 << ":\n";
-        o << to_printf[i] << "\n";
+        o << (*to_printf)[i] << "\n";
     }
     return o;
+}
+
+std::vector<std::string> my_strsplit(std::string src, char delemiter) {
+    std::vector<std::string> to_return;// = std::vector<std::string>;
+    size_t start = 0;
+    // size_t end = src.find(delemiter);
+    // while (end == start && end != src.size()) {
+    //         start = end + 1;
+    //         end = src.find(delemiter, start);
+    // }
+    // while (end < src.size() && start < end) {
+    //     // std::cout << "alive and did \n";
+    //     to_return.push_back(src.substr(start, end - start));
+    //     start = end + 1;
+    //     end = src.find(delemiter, start);
+    //     while (end == start && end != src.size()) {
+    //         start = end + 1;
+    //         end = src.find(delemiter, start);
+    //     }
+    //     // if (end == std::npo)
+    // }
+    std::string arg;
+    std::istringstream iss(src);
+    int i;
+    while (std::getline(iss, arg, delemiter)) {
+        for (i = 0; i < arg.size(); i++) {
+            if (arg[i] != delemiter)
+                break;
+        }
+        if (i == arg.size())
+            continue ;
+        to_return.push_back(arg);
+    }
+    return to_return;
+}
+
+std::map<int, std::string> treat_error_pages(std::string all) {
+    std::vector<std::string> all_config = my_strsplit(all, ';');
+    std::vector<std::string> cur_config;
+    std::map<int, std::string> to_return;
+    int key;
+    std::string value;
+    for (size_t i = 0; i < all_config.size(); i++) {
+        std::cout << "doint this config error page rn (" << all_config[i] << ")\n";
+        cur_config = my_strsplit(all_config[i], ' ');
+        if (cur_config.size() == 2) {
+            try {
+                key = std::stoi(cur_config[0]);
+                if (to_return.find(key) != to_return.end()) {
+                    std::cout << "nooooon don't\n";
+                    std::stoi("no!!!!!");
+                }
+                to_return[key] = cur_config[1];
+            }
+            catch(const std::exception& e)
+            {
+                std::cerr << "error_page not a num or dup: ()" << cur_config[0] <<  ") and other value is :" << cur_config[1] <<'\n';
+                std::cin >> value;
+            }
+        } else {
+            std::string template_file;
+            template_file = cur_config[cur_config.size() - 1];
+            size_t loc_x = template_file.find('x'); 
+            if (loc_x == template_file.size()) {
+                std::cerr << "error_page template doesn't have a x: " << template_file << '\n';
+                std::cin >> value;
+            }
+            for (size_t i = 0; i < cur_config.size() - 1; i++) {
+                try {
+                    key = std::stoi(cur_config[i]);
+                    to_return[key] =
+                    template_file.substr(0, template_file.size());
+                    to_return[key] = to_return[key].erase(loc_x, 1);
+                    to_return[key] = to_return[key].insert(loc_x, cur_config[i]);
+                }
+                catch(const std::exception& e) {
+                    std::cerr << "this error_page isn't a num: (" << cur_config[i] << ") with index of: " << i << '\n';
+                    std::cin >> value;
+                }
+            }
+        }
+    }
+    
+    return to_return;
+}
+
+std::map<std::string, std::map<std::string, std::string>>  treat_loc_method(std::vector<Parse *> method) {
+    std::map<std::string, std::map<std::string, std::string>>  to_return;
+    std::string temp;
+    std::map<std::string, std::string> temp_rules;
+    for (size_t i = 0; i < method.size(); i++) {
+        if (method[i]->loc_name.empty()) {
+            std::cout << "missing location\n";
+            std::cin >> temp;
+        }
+        for (size_t i = 0; i < count; i++)
+        {
+            /* code */
+        }
+        
+        to_return[method[i]->loc_name] = temp_rules; 
+    }
+    return to_return;
 }
 
 std::vector<server > *make_all_server(std::ifstream &fileToRead) {
     Parse *parser = make_parse(fileToRead);
     std::string useless;
-    print_parse(parser, 1);
+    // print_parse(parser, 1);
     // pause();
-    std::cin >> useless;
     std::vector<server> *all_server = new std::vector<server>;
     size_t i;
     server temp;
@@ -146,10 +259,14 @@ std::vector<server > *make_all_server(std::ifstream &fileToRead) {
         temp.name = (parser->servers[i]->basic)["server_name"];
         temp.root = (parser->servers[i]->basic)["root"];
         temp.autoindex = parser->servers[i]->basic["autoindex"] == "on";
-        // temp.error_log need a function for that one
+        temp.error_pages = treat_error_pages(parser->servers[i]->basic["error_page"]);
+        // std::cout << "did one errorpage\n";
+        // std::cin >> useless;
         temp.index = parser->servers[i]->basic["index"];
         temp.access_log = parser->servers[i]->basic["access_log"];
         temp.error_log = parser->servers[i]->basic["error_log"];
+        temp.loc_method = treat_loc_method(parser->servers[i]->servers);
+        all_server->push_back(temp);
     }
     std::cout << all_server;
     
