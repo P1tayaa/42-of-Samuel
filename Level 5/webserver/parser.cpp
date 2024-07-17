@@ -236,7 +236,7 @@ std::map<std::string, std::map<std::string, std::string>>  treat_loc_method(std:
             std::cout << "missing location\n";
             std::cin >> temp;
         }
-        for (size_t i = 0; i < count; i++)
+        for (it)
         {
             /* code */
         }
