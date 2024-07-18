@@ -115,6 +115,31 @@ void    free_parse(Parse *my_parse) {
     delete my_parse;
 }
 
+const char* MethodToS(method_type v)
+{
+    switch (v)
+    {
+        case GET:   return "GET";
+        case POST:   return "POST";
+        case DELETE: return "DELETE";
+        case HEADER: return "HEADER";
+        default:      return "[Unknown OS_type]";
+    }
+}
+
+
+std::ostream& operator<<(std::ostream& o, const std::map<method_type, bool>& s) {
+    method_type temp;
+    for (int i = GET; i != HEADER; i++) {
+        temp = static_cast<method_type>(i); 
+        if (s.find(temp)->second) {
+            o << "|" << MethodToS(temp) << "|";
+        }
+    }
+    o << std::endl;
+    return o;
+}
+
 // Overloading the << operator for server struct
 std::ostream& operator<<(std::ostream& o, const server& s) {
     o << "Server details:\n";
@@ -131,6 +156,13 @@ std::ostream& operator<<(std::ostream& o, const server& s) {
     o << "Index: " << s.index << "\n";
     o << "Access Log: " << s.access_log << "\n";
     o << "Error Log: " << s.error_log << "\n";
+    for (size_t i = 0; i < s.loc_method.size(); i++)
+    {
+        o << "Location Method:  path: " << s.loc_method[i].path << " alias: " << s.loc_method[i].alias << std::endl
+            << "            auto index: " << s.loc_method[i].autoindex << " method: " << s.loc_method[i].method_type_allowed;
+    }
+    
+
     return o;
 }
 
@@ -227,21 +259,41 @@ std::map<int, std::string> treat_error_pages(std::string all) {
     return to_return;
 }
 
-std::map<std::string, std::map<std::string, std::string>>  treat_loc_method(std::vector<Parse *> method) {
-    std::map<std::string, std::map<std::string, std::string>>  to_return;
+std::vector<method_path_option>  treat_loc_method(std::vector<Parse *> method, bool autoindex) {
+    std::vector<method_path_option> to_return;
+    method_path_option methot_temp;
     std::string temp;
     std::map<std::string, std::string> temp_rules;
     for (size_t i = 0; i < method.size(); i++) {
+        methot_temp.autoindex = autoindex;
         if (method[i]->loc_name.empty()) {
             std::cout << "missing location\n";
             std::cin >> temp;
         }
-        for (it)
-        {
-            /* code */
+        methot_temp.path = method[i]->loc_name;
+        methot_temp.path.erase(methot_temp.path.size() - 2,methot_temp.path.size());
+        if (!method[i]->basic["alias"].empty()) {
+            methot_temp.alias = method[i]->basic["alias"];
         }
-        
-        to_return[method[i]->loc_name] = temp_rules; 
+        else {
+            methot_temp.alias.clear();
+        }
+        if (!method[i]->basic["autoindex"].empty()) {
+            methot_temp.autoindex = method[i]->basic["autoindex"].find("on") != std::string::npos;
+        }
+        if (!method[i]->basic["allow"].empty()) {
+            methot_temp.method_type_allowed[GET] = (method[i]->basic["allow"]).find("GET") != std::string::npos;
+            methot_temp.method_type_allowed[POST] = (method[i]->basic["allow"]).find("POST") != std::string::npos;
+            methot_temp.method_type_allowed[DELETE] = (method[i]->basic["allow"]).find("DELETE") != std::string::npos;
+            methot_temp.method_type_allowed[HEADER] = (method[i]->basic["allow"]).find("HEADER") != std::string::npos;
+        }
+        else {
+            methot_temp.method_type_allowed[GET] = false;
+            methot_temp.method_type_allowed[POST] = false;
+            methot_temp.method_type_allowed[DELETE] = false;
+            methot_temp.method_type_allowed[HEADER] = false;
+        }
+        to_return.push_back(methot_temp);
     }
     return to_return;
 }
@@ -249,7 +301,7 @@ std::map<std::string, std::map<std::string, std::string>>  treat_loc_method(std:
 std::vector<server > *make_all_server(std::ifstream &fileToRead) {
     Parse *parser = make_parse(fileToRead);
     std::string useless;
-    // print_parse(parser, 1);
+    print_parse(parser, 1);
     // pause();
     std::vector<server> *all_server = new std::vector<server>;
     size_t i;
@@ -258,14 +310,14 @@ std::vector<server > *make_all_server(std::ifstream &fileToRead) {
         // temp.port = std::stoi((parser->servers[i]->basic)["listen"]);
         temp.name = (parser->servers[i]->basic)["server_name"];
         temp.root = (parser->servers[i]->basic)["root"];
-        temp.autoindex = parser->servers[i]->basic["autoindex"] == "on";
+        temp.autoindex = parser->servers[i]->basic["autoindex"].find("on");
         temp.error_pages = treat_error_pages(parser->servers[i]->basic["error_page"]);
         // std::cout << "did one errorpage\n";
         // std::cin >> useless;
         temp.index = parser->servers[i]->basic["index"];
         temp.access_log = parser->servers[i]->basic["access_log"];
         temp.error_log = parser->servers[i]->basic["error_log"];
-        temp.loc_method = treat_loc_method(parser->servers[i]->servers);
+        temp.loc_method = treat_loc_method(parser->servers[i]->servers, temp.autoindex);
         all_server->push_back(temp);
     }
     std::cout << all_server;

@@ -11,15 +11,24 @@
 # include <sstream>
 # include <string>
 
+enum method_type {
+    GET,
+    POST,
+    DELETE,
+    HEADER,
+};
+
+struct method_path_option {
+    public:
+        std::string path;
+        std::string alias;
+        bool autoindex;
+        std::map<method_type, bool> method_type_allowed;
+};
 
 struct server
 {
     public:
-    // std::map<long, std::string>    requests;
-    // sockaddr_in    addr;
-    // long        fd;
-    // long        newSocket;
-    // int            addrLen;
     int port;
     std::string name;
     std::string root;
@@ -28,7 +37,7 @@ struct server
     std::string index;
     std::string access_log;
     std::string error_log;
-    std::map<std::string, std::map<std::string, std::string>> loc_method;
+    std::vector<method_path_option> loc_method;
 };
 
 struct Parse
