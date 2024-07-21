@@ -26,17 +26,17 @@ void ScalarConverter::convert(const std::string &arg) {
     char temp_char;
 
     try {
-        temp_float = std::stof(arg);
         temp_double = std::stod(arg);
+        temp_float = static_cast<float>(temp_double);
     }
     catch(const std::exception& e)
     {
         std::cout << "not valid input\n";
         return ;
     }
-    try
+    if (temp_double >= -2147483648 && temp_double <= 2147483647)
     {
-        temp_int = std::stoi(arg);
+        temp_int = static_cast<int>(temp_double);;
         temp_char = temp_int;
         if (std::isprint(temp_char))
             std::cout << "char: " << temp_char << std::endl;
@@ -44,7 +44,7 @@ void ScalarConverter::convert(const std::string &arg) {
             std::cout << "char: impossible\n";
         std::cout << "int: " << temp_int << std::endl;
     }
-    catch(const std::exception& e) {
+    else {
         std::cout << "char: impossible\n";
         std::cout << "int: impossible\n";
     }
