@@ -1,5 +1,8 @@
 # include "../include/Span.hpp"
 
+const char *SpanSizeExecess::what() const throw(){
+    return ("Span can't have more than max_size");
+}
 
 Span::Span(unsigned int size) : size(0), max_size(size) {}
 
@@ -17,9 +20,20 @@ Span &Span::operator=(Span &dup) {
 }
 
 void Span::addNumber(int num) {
-    (storage).push_back(num);
-    size++;
+    if (size < max_size) {
+        (storage).push_back(num);
+        size++;
+    } else
+        throw this->error;
 }
+
+void Span::addNumber(std::list<int>::iterator begin, std::list<int>::iterator end) {
+    if (size + std::distance(begin, end) > max_size)
+        throw this->error;
+    std::cout << "testea\n";
+    storage.insert(storage.end(), begin, end);
+}
+
 
 int Span::shortestSpan() {
     if (size < 2)
