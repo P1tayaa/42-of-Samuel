@@ -52,7 +52,6 @@ void merge_sort(int size, int extra_num, std::vector<int> &small, std::vector<in
     }
     if (size % 2 == 1) {
         temp = binary_search(big, 0, big.size(), extra_num);
-        std::cout << "extra num added at index of " << temp << std::endl;
         if (temp > int(big.size()))
             big.push_back(extra_num);
         else
@@ -60,40 +59,55 @@ void merge_sort(int size, int extra_num, std::vector<int> &small, std::vector<in
     }
 }
 
-void Pmerge(std::vector<int> &list_num, int size) {
+void Pmerge(std::vector<int> &list_num, int size, bool first) {
     int extra_num = 0;
     int temp;
+    auto first_part = std::chrono::system_clock::now();
+    auto second_part = std::chrono::system_clock::now();
+    auto start = std::chrono::system_clock::now();
     std::vector<int> small;
     std::vector<int> big;
     if (size % 2 == 1) {
         extra_num = list_num[0];
         pair_up_and_compare(1, size, small, big, list_num);
-        std::cout << "extra_num is " << extra_num << std::endl;
     } else
         pair_up_and_compare(0, size, small, big, list_num);
+    if (first) {
+        first_part = std::chrono::system_clock::now();
+        std::chrono::duration<double> elapsed_seconds = first_part-start;
+        std::cout << "Time to process a range of " << size << " elements with std::pairs : " << elapsed_seconds.count() << std::endl;
+    }
     if (big.size() == 2) {
         if (big[0] > big[1]){
-            std::cout << "big swap hgappen\n";
             temp = big[0];
             big[0] = big[1];
             big[1] = temp;
         }
     } else if (big.size() > 1) {
-        Pmerge(big, big.size());
+        Pmerge(big, big.size(), false);
+    }
+    if (first) {
+        second_part = std::chrono::system_clock::now();
+        std::chrono::duration<double> elapsed_seconds = second_part-first_part;
+        std::cout << "Time to process a range of " << size << " elements with std::vectors : " << elapsed_seconds.count() << std::endl;
     }
     merge_sort(size, extra_num, small, big);
-    
-    for (size_t i = 0; i < big.size(); i++)
-    {
-        std::cout << big[i] << ", ";
-    }
-    std::cout << std::endl << std::endl;
     list_num = big;
+}
+
+void print_vector(std::vector<int> &to_print, std::string message) {
+    std::cout << message;
+    for (size_t i = 0; i < to_print.size(); i++)
+    {
+        
+        std::cout << to_print[i] << " | ";
+    }    
+    std::cout << std::endl;
 }
 
 int main(int argc, char **argv) {
     std::vector<int> list_num;
-
+    
     try {
         list_num = get_list_num(argc, argv);
     }
@@ -101,5 +115,7 @@ int main(int argc, char **argv) {
         std::cout << "invalid input\n";
         return 1;
     }
-    Pmerge(list_num, argc - 1);
+    print_vector(list_num, "Before: ");
+    Pmerge(list_num, argc - 1, true);
+    print_vector(list_num, "After: ");
 }
