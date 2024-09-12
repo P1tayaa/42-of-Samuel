@@ -30,8 +30,8 @@ void Span::addNumber(int num) {
 void Span::addNumber(std::list<int>::iterator begin, std::list<int>::iterator end) {
     if (size + std::distance(begin, end) > max_size)
         throw this->error;
-    std::cout << "testea\n";
     storage.insert(storage.end(), begin, end);
+    size += std::distance(begin, end);
 }
 
 

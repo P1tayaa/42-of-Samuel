@@ -116,6 +116,8 @@ int main(int argc, char **argv) {
         return 1;
     }
     print_vector(list_num, "Before: ");
+
     Pmerge(list_num, argc - 1, true);
+    
     print_vector(list_num, "After: ");
 }

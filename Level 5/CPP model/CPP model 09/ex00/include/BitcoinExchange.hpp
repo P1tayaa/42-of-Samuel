@@ -13,6 +13,8 @@ private:
     void LoadData();
 public:
     BitcoinExchange();
+    BitcoinExchange(BitcoinExchange &dup);
+    BitcoinExchange  &operator=(const BitcoinExchange &other);
     ~BitcoinExchange();
     void PrintData();
     float get_BTC_value_for(std::string date);

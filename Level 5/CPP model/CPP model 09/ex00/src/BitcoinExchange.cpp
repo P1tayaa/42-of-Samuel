@@ -33,7 +33,7 @@ void BitcoinExchange::PrintData() {
 float BitcoinExchange::get_BTC_value_for(std::string date) {
     size_t dash_pos = date.find('-');
     size_t dash_pos_sec = date.find_last_of('-');
-    if (dash_pos == date.size() || dash_pos_sec == date.size()) {
+    if (dash_pos == std::string::npos || dash_pos_sec == std::string::npos) {
         throw std::out_of_range("Error: Bad Input");
     }
     std::string year = date.substr(0, dash_pos);
@@ -100,4 +100,13 @@ void BitcoinExchange::print_data_of_file(std::string file_src) {
         }
         std::cout << cur_date << " => " << BTC_quantity << " = " << BTC_quantity * BTC_val << std::endl;
     }
+}
+
+BitcoinExchange::BitcoinExchange(BitcoinExchange &dup) {
+    this->data = dup.data;
+}
+
+BitcoinExchange  &BitcoinExchange::operator=(const BitcoinExchange &other) {
+    this->data = other.data;
+    return *this;
 }

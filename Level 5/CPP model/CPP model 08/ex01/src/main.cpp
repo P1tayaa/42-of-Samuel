@@ -1,7 +1,7 @@
 # include "../include/Span.hpp"
 
 int main(void) {
-    Span test(505);
+    Span test(501);
     std::list<int> temp;
     try {
         test.addNumber(15);

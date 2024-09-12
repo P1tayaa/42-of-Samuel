@@ -1,44 +1,62 @@
 # include "../Include/RPN.hpp"
 
 int operate(int a, int b, std::string operation) {
+    // std::cout << a << " == a and b == " << b << std::endl;
     if (operation == "*") {
         a *= b;
     } else if (operation == "/") {
+        if (b == 0) {
+            throw std::exception();
+        }
         a /= b;
     } else if (operation == "+") {
         a += b;
     } else if (operation == "-") {
         a -= b;
     }
+    // std::cout << "result is :" << a << " and operator is |" << operation << "|\n";
     return a;
 }
 
 void RPN(std::string input) {
-    int size_input = input.size();
     std::deque<std::string> operation_list;
-    for (int i = 0; i < size_input; i++) {
-        if (isspace(input[i]))
-            continue;
-        operation_list.push_back(input.substr(i, input.find(' ', i) - i));
+    // std::cout << input << " == input\n";
+    std::stringstream src_fd(input);
+    std::string temp_s;
+    while (std::getline(src_fd, temp_s, ' '))
+    {
+        operation_list.push_back(temp_s);
+        // std::cout << operation_list.front() << "\n";
     }
+    
+    // for (int i = 0; i < size_input; i++) {
+    //     if (isspace(input[i]))
+    //         continue;
+    //     operation_list.push_back(input.substr(i, input.find(' ', i) - i));
+    // }
     std::deque<int> temp;
-    while (!operation_list.empty()) {
-        if (operation_list.front() == "*" || operation_list.front() == "-"
-            || operation_list.front() == "/" || operation_list.front() == "+") {
-                int b = temp.front(); temp.pop_front();
-                int a = temp.front(); temp.pop_front();
-                temp.push_back(operate(a, b, operation_list.front())); operation_list.pop_front();
-            }
-        else {
-            try {
-                temp.push_front(std::stoi(operation_list.front()));
-                operation_list.pop_front();
-            }
-            catch(const std::exception& e) {
-                std::cerr << "Error\n";
-                return ;
+    try {
+        while (!operation_list.empty()) {
+            if (operation_list.front() == "*" || operation_list.front() == "-"
+                || operation_list.front() == "/" || operation_list.front() == "+") {
+                    if (temp.size() != 2)
+                        throw std::exception();
+                    int b = temp.front(); temp.pop_front();
+                    int a = temp.front(); temp.pop_front();
+
+                    temp.push_back(operate(a, b, operation_list.front())); operation_list.pop_front();
+                }
+            else {
+                    temp.push_front(std::stoi(operation_list.front()));
+                    operation_list.pop_front();
             }
         }
+        if (temp.size() != 1) 
+            throw std::exception();
+    }
+    catch(const std::exception& e) {
+        std::cerr << "Error\n";
+        return ;
     }
     std::cout << temp.front() << std::endl;
 }

@@ -4,8 +4,11 @@
 #include <algorithm>
 
 template<typename T>
-bool easyfind(T container, int search) { 
-    if (std::find(container.begin(), container.end(), search) == container.end())
-        return false;
+bool easyfind(T &container, int search, typename T::iterator &t) {
+    typename T::iterator temp_t = std::find(container.begin(), container.end(), search);  
+    if (t == container.end()){
+        return false;      
+    }
+    t = temp_t;
     return true;
 }
