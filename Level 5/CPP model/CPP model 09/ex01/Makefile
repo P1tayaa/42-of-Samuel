@@ -6,7 +6,7 @@ BINPATH			= bin/
 OBJS			= $(addprefix $(BINPATH), $(SRCS:.cpp=.o))
 
 CC				= c++
-CFLAGS			= -I. -fsanitize=address #-Werror -Wall -Wextra
+CFLAGS			= -I. -fsanitize=address -Werror -Wall -Wextra
 
 
 NAME			=	RPN

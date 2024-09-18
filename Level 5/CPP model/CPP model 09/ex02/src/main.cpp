@@ -59,12 +59,24 @@ void merge_sort(int size, int extra_num, std::vector<int> &small, std::vector<in
     }
 }
 
+void print_vector(std::vector<int> &to_print, std::string message) {
+    std::cout << message;
+    for (size_t i = 0; i < to_print.size(); i++)
+    {
+        
+        std::cout << to_print[i] << " | ";
+    }    
+    std::cout << std::endl;
+}
+
 void Pmerge(std::vector<int> &list_num, int size, bool first) {
     int extra_num = 0;
     int temp;
     auto first_part = std::chrono::system_clock::now();
     auto second_part = std::chrono::system_clock::now();
     auto start = std::chrono::system_clock::now();
+    std::chrono::duration<double> first_elapsed_seconds;
+    std::chrono::duration<double> second_elapsed_seconds;
     std::vector<int> small;
     std::vector<int> big;
     if (size % 2 == 1) {
@@ -74,8 +86,7 @@ void Pmerge(std::vector<int> &list_num, int size, bool first) {
         pair_up_and_compare(0, size, small, big, list_num);
     if (first) {
         first_part = std::chrono::system_clock::now();
-        std::chrono::duration<double> elapsed_seconds = first_part-start;
-        std::cout << "Time to process a range of " << size << " elements with std::pairs : " << elapsed_seconds.count() << std::endl;
+        first_elapsed_seconds = first_part-start;
     }
     if (big.size() == 2) {
         if (big[0] > big[1]){
@@ -88,21 +99,16 @@ void Pmerge(std::vector<int> &list_num, int size, bool first) {
     }
     if (first) {
         second_part = std::chrono::system_clock::now();
-        std::chrono::duration<double> elapsed_seconds = second_part-first_part;
-        std::cout << "Time to process a range of " << size << " elements with std::vectors : " << elapsed_seconds.count() << std::endl;
+        second_elapsed_seconds = second_part-first_part;
     }
     merge_sort(size, extra_num, small, big);
     list_num = big;
-}
-
-void print_vector(std::vector<int> &to_print, std::string message) {
-    std::cout << message;
-    for (size_t i = 0; i < to_print.size(); i++)
-    {
-        
-        std::cout << to_print[i] << " | ";
-    }    
-    std::cout << std::endl;
+    if (first) {
+        print_vector(list_num, "After: ");
+        std::cout << std::fixed << std::setprecision(7);
+        std::cout << "Time to process a range of " << size << " elements with std::pairs : " << first_elapsed_seconds.count() * size * std::log(size) << std::endl;
+        std::cout << "Time to process a range of " << size << " elements with std::vectors : " << second_elapsed_seconds.count()  * size * std::log(size) << std::endl;
+    }
 }
 
 int main(int argc, char **argv) {
@@ -111,7 +117,7 @@ int main(int argc, char **argv) {
     try {
         list_num = get_list_num(argc, argv);
     }
-    catch(const std::invalid_argument& e) {
+    catch(const std::out_of_range &e) {
         std::cout << "invalid input\n";
         return 1;
     }
@@ -119,5 +125,4 @@ int main(int argc, char **argv) {
 
     Pmerge(list_num, argc - 1, true);
     
-    print_vector(list_num, "After: ");
 }
